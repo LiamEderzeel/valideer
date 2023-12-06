@@ -1,0 +1,14 @@
+{
+  "name": "@koa/valideer",
+  "version": "0.1.0",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "author": "Liam Ederzeel",
+  "license": "MIT",
+  "dependencies": {
+    "valideer": "^0.1.0"
+  }
+}

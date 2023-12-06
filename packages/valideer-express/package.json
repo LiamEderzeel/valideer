@@ -1,0 +1,17 @@
+{
+  "name": "valideer-express",
+  "version": "0.1.0",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "author": "Liam Ederzeel",
+  "license": "MIT",
+  "dependencies": {
+    "valideer": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "valideer-monorepo",
+  "version": "0.1.0",
+  "description": "Middleware for validating and parsing express and koa request body, url and query parameters",
+  "author": "Liam Ederzeel",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "tsc --build --verbose"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.13.12",
+    "@types/node": "^20.10.3",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "eslint": "^8.55.0",
+    "lerna": "^8.0.0",
+    "prettier": "^3.1.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,16 @@
+{
+  "name": "valideer",
+  "version": "0.1.0",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "keywords": [],
+  "author": "Liam Ederzeel",
+  "license": "MIT",
+  "dependencies": {
+    "class-transformer-validator": "^0.9.1",
+    "class-validator": "^0.14.0"
+  }
+}
