@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "description": "",
   "main": "build/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiamEderzee/valideer.git"
+  },
+  "private": true,
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/LiamEderzeel"
+  },
   "scripts": {
     "build": "tsc --build"
   },
@@ -12,5 +20,9 @@
   "dependencies": {
     "class-transformer-validator": "^0.9.1",
     "class-validator": "^0.14.0"
+  },
+  "devDependencies": {
+    "semantic-release": "^22.0.10",
+    "semantic-release-monorepo": "^7.0.5"
   }
 }

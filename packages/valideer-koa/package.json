@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "description": "",
   "main": "build/index.js",
+  "repository": "https://github.com/LiamEderzee/valideer",
+  "private": true,
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/LiamEderzeel"
+  },
   "scripts": {
     "build": "tsc --build"
   },
@@ -10,5 +15,9 @@
   "license": "MIT",
   "dependencies": {
     "valideer": "^0.1.0"
+  },
+  "devDependencies": {
+    "semantic-release": "^22.0.10",
+    "semantic-release-monorepo": "^7.0.5"
   }
 }
