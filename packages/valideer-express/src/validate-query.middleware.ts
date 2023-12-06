@@ -10,7 +10,7 @@ import {
   isValidationError,
   validate,
   IParsedQueryState,
-} from "valideer";
+} from "@liamederzeel/valideer";
 import { ReqHandler } from "./req-handler";
 
 export const validateQuery = <T extends IValidationClass>(

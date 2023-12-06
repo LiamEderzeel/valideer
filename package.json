@@ -4,7 +4,6 @@
   "description": "Middleware for validating and parsing express and koa request body, url and query parameters",
   "author": "Liam Ederzeel",
   "license": "MIT",
-  "private": true,
   "repository": "https://github.com/LiamEderzeel/valideer",
   "workspaces": [
     "packages/*"
@@ -37,12 +36,13 @@
       "next-major",
       {
         "name": "beta",
+        "channel": "beta",
         "prerelease": true
       },
       {
         "name": "alpha",
         "channel": "alpha",
-        "prerelease": "alpha"
+        "prerelease": true
       }
     ]
   }

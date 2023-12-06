@@ -1,12 +1,11 @@
 {
-  "name": "valideer-express",
-  "version": "0.1.0",
+  "name": "@liamederzeel/valideer-express",
+  "version": "0.1.0-alpha.0",
   "description": "",
   "main": "build/index.js",
   "repository": "https://github.com/LiamEderzee/valideer",
-  "private": true,
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/LiamEderzeel"
+    "@liamederzeel:registry": "https://npm.pkg.github.com/LiamEderzeel"
   },
   "scripts": {
     "build": "tsc --build"
@@ -14,7 +13,7 @@
   "author": "Liam Ederzeel",
   "license": "MIT",
   "dependencies": {
-    "valideer": "^0.1.0"
+    "@liamederzeel/valideer": "^0.1.0-alpha.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",

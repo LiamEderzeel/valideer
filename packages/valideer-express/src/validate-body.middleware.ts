@@ -11,7 +11,7 @@ import {
   isValidationError,
   validate,
   IParsedBodyState,
-} from "valideer";
+} from "@liamederzeel/valideer";
 
 export const validateBody = <T extends IValidationClass>(
   paramClass: ClassType<T>,
