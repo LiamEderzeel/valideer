@@ -16,8 +16,6 @@
     "@liamederzeel/valideer": "^0.1.0-alpha.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21",
-    "semantic-release": "^22.0.10",
-    "semantic-release-monorepo": "^7.0.5"
+    "@types/express": "^4.17.21"
   }
 }

@@ -14,9 +14,5 @@
   "license": "MIT",
   "dependencies": {
     "@liamederzeel/valideer": "^0.1.0-alpha.0"
-  },
-  "devDependencies": {
-    "semantic-release": "^22.0.10",
-    "semantic-release-monorepo": "^7.0.5"
   }
 }
