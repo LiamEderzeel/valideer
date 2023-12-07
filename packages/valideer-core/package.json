@@ -1,8 +1,15 @@
 {
-  "name": "valideer",
-  "version": "0.1.0",
+  "name": "@liamederzeel/valideer",
+  "version": "0.1.0-alpha.0",
   "description": "",
   "main": "build/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiamEderzee/valideer.git"
+  },
+  "publishConfig": {
+    "@LiamEderzeel:registry": "https://npm.pkg.github.com/LiamEderzeel"
+  },
   "scripts": {
     "build": "tsc --build"
   },
@@ -12,5 +19,26 @@
   "dependencies": {
     "class-transformer-validator": "^0.9.1",
     "class-validator": "^0.14.0"
+  },
+  "devDependencies": {
+    "semantic-release": "^22.0.10",
+    "semantic-release-monorepo": "^7.0.5"
+  },
+  "release": {
+    "branches": [
+      "+([0-9])?(.{+([0-9]),x}).x",
+      "main",
+      "next",
+      "next-major",
+      {
+        "name": "beta",
+        "prerelease": true
+      },
+      {
+        "name": "alpha",
+        "channel": "alpha",
+        "prerelease": "alpha"
+      }
+    ]
   }
 }

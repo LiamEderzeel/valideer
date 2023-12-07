@@ -3,3 +3,4 @@ build
 .buildcache
 .env
 tsconfig.tsbuildinfo
+.npmrc
