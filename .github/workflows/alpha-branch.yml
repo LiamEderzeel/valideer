@@ -1,0 +1,39 @@
+name: release alpha
+
+on:
+  workflow_dispatch:
+    # branches:
+    #   - main
+
+# on:
+# push:
+#   branches:
+#     - alpha
+# - feat/alpha-build-workflow
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Use checkout"
+        uses: actions/checkout@v4
+      - name: "Use npm"
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: "Set up npm"
+        run: |
+          npm set @liamederzeel:registry=https://npm.pkg.github.com/LiamEderzeel
+          npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}"
+      - name: Set up git
+        run: |
+          git status
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor}}@users.noreply.github.com"
+      - name: Build
+        run: |
+          npm ci
+          npx lerna run build
+          npx lerna version --create-release=github --conventional-commits --conventional-prerelease --yes
+          npx lerna publish from-git -m "chore: publish" --yes
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
