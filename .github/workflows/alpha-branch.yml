@@ -20,10 +20,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-      - name: "Set up npm"
-        run: |
-          npm set @liamederzeel:registry=https://npm.pkg.github.com/LiamEderzeel
-          npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}"
+      # - name: "Set up npm"
+      #   run: |
+      #     npm set @liamederzeel:registry=https://npm.pkg.github.com/LiamEderzeel
+      #     npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}"
       - name: Set up git
         run: |
           git status
@@ -37,3 +37,4 @@ jobs:
           npx lerna publish from-git -m "chore: publish" --yes
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
