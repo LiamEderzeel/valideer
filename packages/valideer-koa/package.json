@@ -1,18 +1,15 @@
 {
-  "name": "@liamederzeel/valideer-koa",
+  "name": "@valideer/koa",
   "version": "0.1.0-alpha.0",
   "description": "",
   "main": "build/index.js",
   "repository": "https://github.com/LiamEderzee/valideer",
-  "publishConfig": {
-    "@liamederzeel:registry": "https://npm.pkg.github.com/LiamEderzeel"
-  },
   "scripts": {
     "build": "tsc --build"
   },
   "author": "Liam Ederzeel",
   "license": "MIT",
   "dependencies": {
-    "@liamederzeel/valideer": "^0.1.0-alpha.0"
+    "@valideer/core": "^0.1.0-alpha.0"
   }
 }

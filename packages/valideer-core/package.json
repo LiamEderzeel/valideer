@@ -1,14 +1,11 @@
 {
-  "name": "@liamederzeel/valideer",
+  "name": "@valideer/core",
   "version": "0.1.0-alpha.0",
   "description": "",
   "main": "build/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LiamEderzee/valideer.git"
-  },
-  "publishConfig": {
-    "@LiamEderzeel:registry": "https://npm.pkg.github.com/LiamEderzeel"
   },
   "scripts": {
     "build": "tsc --build"
