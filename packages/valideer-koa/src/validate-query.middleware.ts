@@ -11,7 +11,7 @@ import {
   ValidationMiddlwareError,
   isValidationError,
   validate,
-} from "@liamederzeel/valideer";
+} from "@valideer/core";
 
 export const validateQuery = <T extends IValidationClass>(
   queryClass: ClassType<T>,
