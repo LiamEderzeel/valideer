@@ -11,7 +11,7 @@ import {
   IParsedParamsState,
   isValidationError,
   validate,
-} from "@liamederzeel/valideer";
+} from "@valideer/core";
 
 export const validateParams = <T extends IValidationClass>(
   paramClass: ClassType<T>,
