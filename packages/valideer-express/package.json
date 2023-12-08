@@ -1,6 +1,6 @@
 {
   "name": "@valideer/express",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.1",
   "description": "",
   "main": "build/index.js",
   "publishConfig": {
@@ -13,7 +13,7 @@
   "author": "Liam Ederzeel",
   "license": "MIT",
   "dependencies": {
-    "@valideer/core": "^0.1.0-alpha.0"
+    "@valideer/core": "^0.1.0-alpha.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.21"
