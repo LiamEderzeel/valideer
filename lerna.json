@@ -5,7 +5,6 @@
   "command": {
     "publish": {
       "conventionalCommits": true,
-      "registry": "https://npm.pkg.github.com/LiamEderzeel",
       "message": "chore(release): publish [skip-ci]"
     }
   }
