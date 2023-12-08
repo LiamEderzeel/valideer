@@ -30,6 +30,12 @@ export abstract class BaseParseValidationClass<T extends IValidationClass> {
   }
 }
 
+export interface IBaseParseValidationClassConstructor<
+  T extends IValidationClass,
+> {
+  new (params: T): BaseParseValidationClass<T>;
+}
+
 export const validate = async <T extends IValidationClass>(
   classType: ClassType<T>,
   data: Record<string, string> | object,
