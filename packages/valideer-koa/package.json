@@ -3,6 +3,9 @@
   "version": "0.1.0-alpha.0",
   "description": "",
   "main": "build/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": "https://github.com/LiamEderzee/valideer",
   "scripts": {
     "build": "tsc --build"
