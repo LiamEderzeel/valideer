@@ -1,6 +1,6 @@
 {
   "name": "@valideer/koa",
-  "version": "0.1.0-alpha.9",
+  "version": "0.1.0-alpha.10",
   "description": "",
   "main": "build/index.js",
   "publishConfig": {
@@ -14,6 +14,6 @@
   "license": "MIT",
   "dependencies": {
     "@koa/bodyparser": "^5.0.0",
-    "@valideer/core": "^0.1.0-alpha.9"
+    "@valideer/core": "^0.1.0-alpha.10"
   }
 }

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.10 (2023-12-09)
+
+### Bug Fixes
+
+- **core:** validation error ([ba55af6](https://github.com/LiamEderzee/valideer/commit/ba55af69eb800d363f6a9e447c07ed4a3eafb582))
+
 # 0.1.0-alpha.9 (2023-12-09)
 
 ### Bug Fixes
