@@ -20,7 +20,7 @@ export const validateParams = <T extends object>(
     try {
       ctx.state.params = await validate<T>(
         validateionClass,
-        ctx.query,
+        ctx.params,
         options,
       );
 
@@ -46,7 +46,7 @@ export const validateAndParseParams = <T extends object, U>(
     try {
       ctx.state.params = await validateAndParse<T, U>(
         validateionClass,
-        ctx.query,
+        ctx.params,
         parse,
         options,
       );
