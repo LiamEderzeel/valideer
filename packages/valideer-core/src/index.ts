@@ -16,6 +16,8 @@ export class ValidationMiddlwareError extends Error {
   constructor(errors: ValidationError[], message: string = "") {
     super(message);
     this.errors = errors;
+
+    Object.setPrototypeOf(this, ValidationMiddlwareError.prototype);
   }
 }
 
