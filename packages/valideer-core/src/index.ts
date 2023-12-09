@@ -19,24 +19,23 @@ export class ValidationMiddlwareError extends Error {
   }
 }
 
-export interface IValidationClass {
-  parse(): BaseParseValidationClass<IValidationClass>;
-}
+export const validateAndParse = async <T extends object, U>(
+  classType: ClassType<T>,
+  data: Record<string, string> | object,
+  parse: (data: T) => U,
+  options: TransformValidationOptions = {
+    validator: {
+      skipMissingProperties: true,
+      validationError: { target: false },
+    },
+  },
+): Promise<U> => {
+  const validator = await validate<T>(classType, data, options);
 
-export abstract class BaseParseValidationClass<T extends IValidationClass> {
-  rawParams: T;
-  constructor(params: T) {
-    this.rawParams = params;
-  }
-}
+  return parse(validator);
+};
 
-export interface IBaseParseValidationClassConstructor<
-  T extends IValidationClass,
-> {
-  new (params: T): BaseParseValidationClass<T>;
-}
-
-export const validate = async <T extends IValidationClass>(
+export const validate = async <T extends object>(
   classType: ClassType<T>,
   data: Record<string, string> | object,
   options: TransformValidationOptions = {
@@ -45,8 +44,6 @@ export const validate = async <T extends IValidationClass>(
       validationError: { target: false },
     },
   },
-): Promise<BaseParseValidationClass<T>> => {
-  const validator: T = await transformAndValidate<T>(classType, data, options);
-
-  return validator.parse() as BaseParseValidationClass<T>;
+): Promise<T> => {
+  return await transformAndValidate<T>(classType, data, options);
 };
