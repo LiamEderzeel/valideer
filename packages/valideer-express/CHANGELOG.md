@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.4 (2023-12-09)
+
+### Features
+
+- simplefy type structure of raw and parsed types ([94dfa47](https://github.com/LiamEderzee/valideer/commit/94dfa47ab12229739d06d4c0c0584e8c26bf23ba))
+
 # 0.1.0-alpha.3 (2023-12-08)
 
 ### Features
