@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.8 (2023-12-09)
+
+### Bug Fixes
+
+- **koa:** get body from body parser ([a1ef04b](https://github.com/LiamEderzee/valideer/commit/a1ef04b3686759476c19dd5ebc7ffb259eea4f61))
+
 # 0.1.0-alpha.7 (2023-12-09)
 
 ### Bug Fixes
