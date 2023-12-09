@@ -23,7 +23,7 @@ export const validateBody = <T extends object>(
       options.validator.skipMissingProperties =
         options?.validator?.skipMissingProperties ?? true;
 
-      res.locals.body = await validate<T>(validateionClass, req.params);
+      res.locals.body = await validate<T>(validateionClass, req.body);
 
       next();
     } catch (err) {
@@ -52,7 +52,7 @@ export const validateAndParseBody = <T extends object, U>(
 
       res.locals.body = await validateAndParse<T, U>(
         validateionClass,
-        req.params,
+        req.body,
         parse,
         options,
       );
