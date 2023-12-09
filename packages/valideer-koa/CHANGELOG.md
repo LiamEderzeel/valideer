@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.7 (2023-12-09)
+
+### Bug Fixes
+
+- **koa:** add missing validation option defaults ([f70fdc7](https://github.com/LiamEderzee/valideer/commit/f70fdc757e5c0ea00b94439cc8ff024ded4d3594))
+
 # 0.1.0-alpha.6 (2023-12-09)
 
 ### Bug Fixes
