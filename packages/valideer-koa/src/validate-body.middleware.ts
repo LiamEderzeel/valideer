@@ -18,7 +18,7 @@ export const validateBody = <T extends object>(
 ): Middleware<IParsedBodyState<T>> => {
   return async (ctx, next) => {
     try {
-      ctx.state.body = await validate<T>(validateionClass, ctx.query, options);
+      ctx.state.body = await validate<T>(validateionClass, ctx.body, options);
 
       await next();
     } catch (err) {
@@ -40,9 +40,9 @@ export const validateAndParseBody = <T extends object, U>(
 ): Middleware<IParsedBodyState<U>> => {
   return async (ctx, next) => {
     try {
-      ctx.state.body = ctx.state.body = await validateAndParse<T, U>(
+      ctx.state.body = await validateAndParse<T, U>(
         validationClass,
-        ctx.query,
+        ctx.body,
         parse,
         options,
       );
