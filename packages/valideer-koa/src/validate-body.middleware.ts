@@ -12,29 +12,23 @@ import {
   validateAndParse,
 } from "@valideer/core";
 import { bodyParser } from "@koa/bodyparser";
-import { BodyParserOptions } from "@koa/bodyparser/dist/body-parser.types";
 
 export const validateBody = <T extends object>(
   validateionClass: ClassType<T>,
-  transformValidationOptions?: TransformValidationOptions,
-  bodyparserOptions?: BodyParserOptions,
+  options?: TransformValidationOptions,
 ): Middleware<IParsedBodyState<T>> => {
   return async (ctx, next) => {
-    await bodyParser(bodyparserOptions)(ctx, next);
-
     try {
-      if (!transformValidationOptions) transformValidationOptions = {};
-      transformValidationOptions.validator =
-        transformValidationOptions?.validator ?? {};
-      transformValidationOptions.validator.whitelist =
-        transformValidationOptions?.validator?.whitelist ?? false;
-      transformValidationOptions.validator.skipMissingProperties =
-        transformValidationOptions?.validator?.skipMissingProperties ?? true;
+      if (!options) options = {};
+      options.validator = options?.validator ?? {};
+      options.validator.whitelist = options?.validator?.whitelist ?? false;
+      options.validator.skipMissingProperties =
+        options?.validator?.skipMissingProperties ?? true;
 
       ctx.state.body = await validate<T>(
         validateionClass,
         ctx.request.body,
-        transformValidationOptions,
+        options,
       );
 
       await next();
@@ -53,26 +47,21 @@ export const validateBody = <T extends object>(
 export const validateAndParseBody = <T extends object, U>(
   validationClass: ClassType<T>,
   parse: (data: T) => U,
-  transformValidationOptions?: TransformValidationOptions,
-  bodyparserOptions?: BodyParserOptions,
+  options?: TransformValidationOptions,
 ): Middleware<IParsedBodyState<U>> => {
   return async (ctx, next) => {
-    await bodyParser(bodyparserOptions)(ctx, next);
-
     try {
-      if (!transformValidationOptions) transformValidationOptions = {};
-      transformValidationOptions.validator =
-        transformValidationOptions?.validator ?? {};
-      transformValidationOptions.validator.whitelist =
-        transformValidationOptions?.validator?.whitelist ?? false;
-      transformValidationOptions.validator.skipMissingProperties =
-        transformValidationOptions?.validator?.skipMissingProperties ?? true;
+      if (!options) options = {};
+      options.validator = options?.validator ?? {};
+      options.validator.whitelist = options?.validator?.whitelist ?? false;
+      options.validator.skipMissingProperties =
+        options?.validator?.skipMissingProperties ?? true;
 
       ctx.state.body = await validateAndParse<T, U>(
         validationClass,
         ctx.request.body,
         parse,
-        transformValidationOptions,
+        options,
       );
 
       await next();
