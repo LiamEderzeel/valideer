@@ -33,7 +33,7 @@ export const validateQuery = <T extends object>(
   };
 };
 
-export const validateAndPasrseQuery = <T extends object, U>(
+export const validateAndParseQuery = <T extends object, U>(
   validateionClass: ClassType<T>,
   parse: (data: T) => U,
   options: TransformValidationOptions = {},
