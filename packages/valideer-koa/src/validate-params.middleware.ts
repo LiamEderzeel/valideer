@@ -12,7 +12,7 @@ import {
   validateAndParse,
 } from "@valideer/core";
 
-export const validateParams = <T extends Record<string, unknown>>(
+export const validateParams = <T extends object>(
   validateionClass: ClassType<T>,
   options: TransformValidationOptions = {},
 ): Middleware<IParsedParamsState<T>> => {
@@ -37,7 +37,7 @@ export const validateParams = <T extends Record<string, unknown>>(
   };
 };
 
-export const validateAndParseParams = <T extends Record<string, unknown>, U>(
+export const validateAndParseParams = <T extends object, U>(
   validateionClass: ClassType<T>,
   parse: (data: T) => U,
   options: TransformValidationOptions = {},
