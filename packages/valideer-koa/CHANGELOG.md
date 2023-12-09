@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.5 (2023-12-09)
+
+### Bug Fixes
+
+- **koa:** generic type params middleware ([f3795df](https://github.com/LiamEderzee/valideer/commit/f3795df6112bb8eac93b02191d092954ba78e097))
+
 # 0.1.0-alpha.4 (2023-12-09)
 
 ### Features
