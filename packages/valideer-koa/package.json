@@ -13,6 +13,7 @@
   "author": "Liam Ederzeel",
   "license": "MIT",
   "dependencies": {
+    "@koa/bodyparser": "^5.0.0",
     "@valideer/core": "^0.1.0-alpha.7"
   }
 }
