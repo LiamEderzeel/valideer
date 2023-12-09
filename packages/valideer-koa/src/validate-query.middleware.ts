@@ -18,6 +18,11 @@ export const validateQuery = <T extends object>(
 ): Middleware<IParsedQueryState<T>> => {
   return async (ctx, next) => {
     try {
+      options.validator = options?.validator ?? {};
+      options.validator.whitelist = options?.validator?.whitelist ?? false;
+      options.validator.skipMissingProperties =
+        options?.validator?.skipMissingProperties ?? true;
+
       ctx.state.query = await validate<T>(validateionClass, ctx.query, options);
 
       await next();
@@ -40,6 +45,11 @@ export const validateAndParseQuery = <T extends object, U>(
 ): Middleware<IParsedQueryState<U>> => {
   return async (ctx, next) => {
     try {
+      options.validator = options?.validator ?? {};
+      options.validator.whitelist = options?.validator?.whitelist ?? false;
+      options.validator.skipMissingProperties =
+        options?.validator?.skipMissingProperties ?? true;
+
       ctx.state.query = await validateAndParse<T, U>(
         validateionClass,
         ctx.query,

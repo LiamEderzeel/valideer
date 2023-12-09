@@ -18,6 +18,11 @@ export const validateParams = <T extends object>(
 ): Middleware<IParsedParamsState<T>> => {
   return async (ctx, next) => {
     try {
+      options.validator = options?.validator ?? {};
+      options.validator.whitelist = options?.validator?.whitelist ?? false;
+      options.validator.skipMissingProperties =
+        options?.validator?.skipMissingProperties ?? true;
+
       ctx.state.params = await validate<T>(
         validateionClass,
         ctx.params,
@@ -44,6 +49,11 @@ export const validateAndParseParams = <T extends object, U>(
 ): Middleware<IParsedParamsState<U>> => {
   return async (ctx, next) => {
     try {
+      options.validator = options?.validator ?? {};
+      options.validator.whitelist = options?.validator?.whitelist ?? false;
+      options.validator.skipMissingProperties =
+        options?.validator?.skipMissingProperties ?? true;
+
       ctx.state.params = await validateAndParse<T, U>(
         validateionClass,
         ctx.params,

@@ -18,6 +18,11 @@ export const validateBody = <T extends object>(
 ): Middleware<IParsedBodyState<T>> => {
   return async (ctx, next) => {
     try {
+      options.validator = options?.validator ?? {};
+      options.validator.whitelist = options?.validator?.whitelist ?? false;
+      options.validator.skipMissingProperties =
+        options?.validator?.skipMissingProperties ?? true;
+
       ctx.state.body = await validate<T>(validateionClass, ctx.body, options);
 
       await next();
@@ -40,6 +45,11 @@ export const validateAndParseBody = <T extends object, U>(
 ): Middleware<IParsedBodyState<U>> => {
   return async (ctx, next) => {
     try {
+      options.validator = options?.validator ?? {};
+      options.validator.whitelist = options?.validator?.whitelist ?? false;
+      options.validator.skipMissingProperties =
+        options?.validator?.skipMissingProperties ?? true;
+
       ctx.state.body = await validateAndParse<T, U>(
         validationClass,
         ctx.body,
