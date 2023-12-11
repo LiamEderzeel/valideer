@@ -9,6 +9,10 @@ describe("ValidationMiddlwareError", () => {
       "message",
     );
 
+    expect(err instanceof Error).toEqual(true);
     expect(err instanceof ValidationMiddlwareError).toEqual(true);
+    expect(err instanceof ValidationError).toEqual(false);
+    expect(err.name).toEqual("ValidationMiddlwareError");
+    expect(err.message).toEqual("message");
   });
 });
