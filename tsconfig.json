@@ -23,5 +23,9 @@
     {
       "path": "./packages/valideer-express"
     }
+  ],
+  "exclude": [
+    "**/build/**",
+    "**/vitest.config.ts"
   ]
 }
