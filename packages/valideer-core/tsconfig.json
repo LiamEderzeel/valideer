@@ -11,7 +11,9 @@
     "forceConsistentCasingInFileNames": true,
     "rootDir": "./src",
     "outDir": "./build",
-    "composite": true
+    "composite": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "exclude": [
     "**/*.test.ts",
