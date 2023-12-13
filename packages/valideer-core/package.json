@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LiamEderzee/valideer.git"
+    "url": "git+https://github.com/LiamEderzeel/valideer.git"
   },
   "scripts": {
     "build": "tsc --build"

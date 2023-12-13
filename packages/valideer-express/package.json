@@ -6,7 +6,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/LiamEderzee/valideer",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiamEderzeel/valideer.git"
+  },
   "scripts": {
     "build": "tsc --build"
   },
