@@ -4,7 +4,7 @@ export default defineWorkspace([
   {
     test: {
       include: ["packages/**/*.test.ts"],
-      exclude: [...defaultExclude, "**/build/**"],
+      exclude: [...defaultExclude, "**/lib/**"],
     },
   },
 ]);

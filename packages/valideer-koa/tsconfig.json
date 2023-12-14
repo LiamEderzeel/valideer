@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2022",
-    "module": "es6",
+    "target": "es2015",
+    "module": "es2022",
     "moduleResolution": "node",
     "declaration": true,
     "strict": true,
@@ -10,11 +10,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "rootDir": "./src",
-    "outDir": "./build",
+    "outDir": "./lib/esm",
     "composite": true
   },
   "exclude": [
     "**/*.test.ts",
-    "**/build"
+    "**/lib"
   ]
 }

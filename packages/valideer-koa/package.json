@@ -2,7 +2,11 @@
   "name": "@valideer/koa",
   "version": "0.1.0-alpha.11",
   "description": "",
-  "main": "build/index.js",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/ems.index.js",
+  "files": [
+    "lib/"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -11,7 +15,7 @@
     "url": "git+https://github.com/LiamEderzeel/valideer.git"
   },
   "scripts": {
-    "build": "tsc --build"
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json"
   },
   "author": "Liam Ederzeel",
   "license": "MIT",
