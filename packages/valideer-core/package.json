@@ -17,6 +17,7 @@
   "author": "Liam Ederzeel",
   "license": "MIT",
   "dependencies": {
+    "bson": "^6.2.0",
     "class-transformer": "^0.5.1",
     "class-transformer-validator": "^0.9.1",
     "class-validator": "0.13.0",

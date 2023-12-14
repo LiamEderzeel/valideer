@@ -9,6 +9,7 @@ export * from "./parsed-query-state";
 export * from "./parsed-params-state";
 export * from "./parsed-body-state";
 export * from "./is-validation-error";
+export * from "./validation";
 
 export class ValidationMiddlwareError extends Error {
   errors: ValidationError[];
