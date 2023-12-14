@@ -1,6 +1,6 @@
 {
   "name": "@valideer/koa",
-  "version": "0.1.0-alpha.11",
+  "version": "0.1.0-alpha.12",
   "description": "",
   "main": "./lib/cjs/index.js",
   "module": "./lib/ems.index.js",
@@ -21,6 +21,6 @@
   "license": "MIT",
   "dependencies": {
     "@koa/bodyparser": "^5.0.0",
-    "@valideer/core": "^0.1.0-alpha.11"
+    "@valideer/core": "^0.1.0-alpha.12"
   }
 }
