@@ -12,7 +12,7 @@ export const parseObjectIdList = (value: string | string[]): string[] => {
 };
 
 export const IsObjectId = (validationOptions?: ValidationOptions) => {
-  return (object: Record<string, unknown>, propertyName: string): void => {
+  return (object: Record<string, any>, propertyName: string): void => {
     registerDecorator({
       name: "isObjectId",
       target: object.constructor,
@@ -24,7 +24,7 @@ export const IsObjectId = (validationOptions?: ValidationOptions) => {
         each: validationOptions?.each || false,
       },
       validator: {
-        validate: (value: unknown) => {
+        validate: (value: any) => {
           if (typeof value !== "string") return false;
           return ObjectId.isValid(value);
         },
@@ -34,7 +34,7 @@ export const IsObjectId = (validationOptions?: ValidationOptions) => {
 };
 
 export const IsObjectIdList = () => {
-  return (object: Record<string, unknown>, propertyName: string): void => {
+  return (object: Record<string, any>, propertyName: string): void => {
     registerDecorator({
       name: "isObjectIdList",
       target: object.constructor,
@@ -44,7 +44,7 @@ export const IsObjectIdList = () => {
         message: `${propertyName} is not a comma separated list of ObjectId`,
       },
       validator: {
-        validate: (value: unknown) => {
+        validate: (value: any) => {
           if (typeof value === "string" || Array.isArray(value)) {
             const res = parseStringList(value);
             const listOfStrings = Array.isArray(res) ? res : [res];
