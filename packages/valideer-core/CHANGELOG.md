@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.13 (2023-12-15)
+
+### Bug Fixes
+
+- **core:** validation exports ([e5ac0de](https://github.com/LiamEderzeel/valideer/commit/e5ac0de03645bcb04dc59051a6f9c97ccd4bd32a))
+
 # 0.1.0-alpha.12 (2023-12-14)
 
 **Note:** Version bump only for package @valideer/core
