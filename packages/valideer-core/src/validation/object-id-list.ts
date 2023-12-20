@@ -11,12 +11,17 @@ export const parseObjectIdList = (value: string | string[]): string[] => {
   return listOfObjectIdStrings;
 };
 
-export const IsObjectId = (validationOptions?: ValidationOptions) => {
-  return (object: Record<string, any>, propertyName: string): void => {
+export function IsObjectId(
+  validationOptions?: ValidationOptions,
+): PropertyDecorator {
+  return (target: object, propertyKey: string | symbol): void => {
+    const propertyName =
+      typeof propertyKey === "string" ? propertyKey : propertyKey.toString();
+
     registerDecorator({
       name: "isObjectId",
-      target: object.constructor,
-      propertyName,
+      target: target.constructor,
+      propertyName: propertyName,
       constraints: [],
       options: {
         message:
@@ -24,17 +29,20 @@ export const IsObjectId = (validationOptions?: ValidationOptions) => {
         each: validationOptions?.each || false,
       },
       validator: {
-        validate: (value: any) => {
+        validate: (value: unknown) => {
           if (typeof value !== "string") return false;
           return ObjectId.isValid(value);
         },
       },
     });
   };
-};
+}
 
-export const IsObjectIdList = () => {
-  return (object: Record<string, any>, propertyName: string): void => {
+export function IsObjectIdList(): PropertyDecorator {
+  return (object: object, propertyKey: string | symbol): void => {
+    const propertyName =
+      typeof propertyKey === "string" ? propertyKey : propertyKey.toString();
+
     registerDecorator({
       name: "isObjectIdList",
       target: object.constructor,
@@ -44,7 +52,7 @@ export const IsObjectIdList = () => {
         message: `${propertyName} is not a comma separated list of ObjectId`,
       },
       validator: {
-        validate: (value: any) => {
+        validate: (value: unknown) => {
           if (typeof value === "string" || Array.isArray(value)) {
             const res = parseStringList(value);
             const listOfStrings = Array.isArray(res) ? res : [res];
@@ -59,4 +67,4 @@ export const IsObjectIdList = () => {
       },
     });
   };
-};
+}
