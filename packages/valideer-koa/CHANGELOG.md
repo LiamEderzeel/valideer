@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.16 (2023-12-20)
+
+### Bug Fixes
+
+- **core:** IsObjectId type issues ([33198cb](https://github.com/LiamEderzeel/valideer/commit/33198cbbde5546d0fb005e4abf4d18dbed136947))
+
 # 0.1.0-alpha.15 (2023-12-20)
 
 **Note:** Version bump only for package @valideer/koa
