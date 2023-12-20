@@ -1,6 +1,6 @@
 {
   "name": "@valideer/express",
-  "version": "0.1.0-alpha.14",
+  "version": "0.1.0-alpha.15",
   "description": "",
   "main": "./lib/cjs/index.js",
   "module": "./lib/ems.index.js",
@@ -25,7 +25,7 @@
   "author": "Liam Ederzeel",
   "license": "MIT",
   "dependencies": {
-    "@valideer/core": "^0.1.0-alpha.14"
+    "@valideer/core": "^0.1.0-alpha.15"
   },
   "devDependencies": {
     "@types/express": "^4.17.21"
