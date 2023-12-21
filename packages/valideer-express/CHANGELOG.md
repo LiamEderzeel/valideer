@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.17 (2023-12-21)
+
+### Bug Fixes
+
+- build target esm ([3490cda](https://github.com/LiamEderzeel/valideer/commit/3490cda6f5d4cd59fd4afd791e15265a7fff4e67))
+
 # 0.1.0-alpha.16 (2023-12-20)
 
 ### Bug Fixes
