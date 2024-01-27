@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.19 (2024-01-27)
+
+**Note:** Version bump only for package @valideer/express
+
 # 0.1.0-alpha.18 (2024-01-27)
 
 **Note:** Version bump only for package @valideer/express
