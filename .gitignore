@@ -2,5 +2,7 @@ node_modules
 lib
 .buildcache
 .env
-tsconfig.tsbuildinfo
+**/tsconfig.tsbuildinfo
 .npmrc
+docs/.vitepress/cache
+docs/.vitepress/dist
