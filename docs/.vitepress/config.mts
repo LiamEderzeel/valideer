@@ -2,6 +2,7 @@ import { defineConfig } from "vitepress";
 
 export default defineConfig({
   title: "Valideer",
+  base: "/valideer/",
   description:
     "Valideer `válədɪ́ː` is a wrapper for [class-transformer-validator](https://github.com/MichalLytek/class-transformer-validator) providing validation and parsing middleware and helper types for [Express](https://github.com/expressjs/express) and [Koa](https://github.com/koajs/koa)",
   themeConfig: {
