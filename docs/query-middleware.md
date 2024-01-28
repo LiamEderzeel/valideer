@@ -104,7 +104,6 @@ router.get<null, IParsedQueryState<UserParsedQuery>(
 
 ```
 
-And the last example showing how to type the request handler and extract the query from the request state/locals.
 ```ts [express]
 import { Router } from "express";
 import { validateAndParseQuery } from "@valideer/express";
@@ -121,6 +120,8 @@ router.get(
 
 ```
 :::
+
+And the last example showing how to type the request handler and extract the query from the request state/locals.
 
 :::code-group
 ```ts [koa]
