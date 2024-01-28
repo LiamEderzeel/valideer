@@ -7,10 +7,10 @@ hero:
   tagline: Valideer `válədɪ́ː` is a wrapper for class-transformer-validator providing validation and parsing middleware and helper types for Express and Koa
   actions:
     - theme: brand
-      text: Getting started
+      text: Get Started
       link: /getting-started
     - theme: alt
-      text: Github
+      text: View on GitHub
       link: https://github.com/liamederzeel/valideer
   image:
     src: img/logo.webp
