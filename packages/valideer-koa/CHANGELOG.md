@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.20 (2024-04-05)
+
+### Features
+
+- add validation group selection based on data to be validated ([88da1a0](https://github.com/LiamEderzeel/valideer/commit/88da1a0e7eecc9bd44d88b447379e7463f192ed7))
+
 # 0.1.0-alpha.19 (2024-01-27)
 
 **Note:** Version bump only for package @valideer/koa
