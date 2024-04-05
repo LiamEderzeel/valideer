@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.21 (2024-04-05)
+
+### Bug Fixes
+
+- options optional ([f1873c0](https://github.com/LiamEderzeel/valideer/commit/f1873c0b03507fe626d2dcdd4d2558c336cb9c5e))
+
 # 0.1.0-alpha.20 (2024-04-05)
 
 ### Features
