@@ -12,7 +12,7 @@ import {
 
 export const validateQuery = <T extends object>(
   validateionClass: ClassType<T>,
-  options: TransformValidationOptions,
+  options?: TransformValidationOptions,
 ): Middleware<IParsedQueryState<T>> => {
   return async (ctx, next) => {
     try {
@@ -40,7 +40,7 @@ export const validateQuery = <T extends object>(
 export const validateAndParseQuery = <T extends object, U>(
   validateionClass: ClassType<T>,
   parse: (data: T) => U,
-  options: TransformValidationOptions,
+  options?: TransformValidationOptions,
 ): Middleware<IParsedQueryState<U>> => {
   return async (ctx, next) => {
     try {

@@ -12,7 +12,7 @@ import {
 
 export const validateParams = <T extends object>(
   validateionClass: ClassType<T>,
-  options: TransformValidationOptions,
+  options?: TransformValidationOptions,
 ): Middleware<IParsedParamsState<T>> => {
   return async (ctx, next) => {
     try {
@@ -44,7 +44,7 @@ export const validateParams = <T extends object>(
 export const validateAndParseParams = <T extends object, U>(
   validateionClass: ClassType<T>,
   parse: (data: T) => U,
-  options: TransformValidationOptions,
+  options?: TransformValidationOptions,
 ): Middleware<IParsedParamsState<U>> => {
   return async (ctx, next) => {
     try {
