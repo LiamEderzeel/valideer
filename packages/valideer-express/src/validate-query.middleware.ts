@@ -14,10 +14,11 @@ import { ReqHandler } from "./req-handler";
 
 export const validateQuery = <T extends object>(
   validateionClass: ClassType<T>,
-  options: TransformValidationOptions = {},
+  options: TransformValidationOptions,
 ): ReqHandler<IParsedQueryState<T>> => {
   return async (req, res, next) => {
     try {
+      if (!options) options = {};
       options.validator = options?.validator ?? {};
       options.validator.whitelist = options?.validator?.whitelist ?? false;
       options.validator.skipMissingProperties =
@@ -45,10 +46,11 @@ export const validateQuery = <T extends object>(
 export const validateAndParseQuery = <T extends object, U>(
   validateionClass: ClassType<T>,
   parse: (data: T) => U,
-  options: TransformValidationOptions = {},
+  options: TransformValidationOptions,
 ): ReqHandler<IParsedQueryState<U>> => {
   return async (req, res, next) => {
     try {
+      if (!options) options = {};
       options.validator = options?.validator ?? {};
       options.validator.whitelist = options?.validator?.whitelist ?? false;
       options.validator.skipMissingProperties =

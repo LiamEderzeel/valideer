@@ -1,7 +1,4 @@
-import {
-  ClassType,
-  TransformValidationOptions,
-} from "class-transformer-validator";
+import { ClassType } from "class-transformer-validator";
 import { ValidationError } from "class-validator";
 import { Middleware } from "koa";
 import {
@@ -10,14 +7,16 @@ import {
   isValidationError,
   validate,
   validateAndParse,
+  TransformValidationOptions,
 } from "@valideer/core";
 
 export const validateQuery = <T extends object>(
   validateionClass: ClassType<T>,
-  options: TransformValidationOptions = {},
+  options: TransformValidationOptions,
 ): Middleware<IParsedQueryState<T>> => {
   return async (ctx, next) => {
     try {
+      if (!options) options = {};
       options.validator = options?.validator ?? {};
       options.validator.whitelist = options?.validator?.whitelist ?? false;
       options.validator.skipMissingProperties =
@@ -41,10 +40,11 @@ export const validateQuery = <T extends object>(
 export const validateAndParseQuery = <T extends object, U>(
   validateionClass: ClassType<T>,
   parse: (data: T) => U,
-  options: TransformValidationOptions = {},
+  options: TransformValidationOptions,
 ): Middleware<IParsedQueryState<U>> => {
   return async (ctx, next) => {
     try {
+      if (!options) options = {};
       options.validator = options?.validator ?? {};
       options.validator.whitelist = options?.validator?.whitelist ?? false;
       options.validator.skipMissingProperties =

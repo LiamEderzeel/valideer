@@ -1,7 +1,4 @@
-import {
-  ClassType,
-  TransformValidationOptions,
-} from "class-transformer-validator";
+import { ClassType } from "class-transformer-validator";
 import { ValidationError } from "class-validator";
 import { Middleware } from "koa";
 import {
@@ -10,8 +7,9 @@ import {
   isValidationError,
   validate,
   validateAndParse,
+  TransformValidationOptions,
 } from "@valideer/core";
-import { bodyParser } from "@koa/bodyparser";
+import "@koa/bodyparser";
 
 export const validateBody = <T extends object>(
   validateionClass: ClassType<T>,

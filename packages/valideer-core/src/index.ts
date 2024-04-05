@@ -1,9 +1,13 @@
+import { ClassTransformOptions } from "class-transformer";
 import {
   ClassType,
-  TransformValidationOptions,
+  TransformValidationOptions as ClassTransformValidationOptions,
   transformAndValidate,
 } from "class-transformer-validator";
-import { ValidationError } from "class-validator";
+import {
+  ValidationError,
+  ValidatorOptions as ClassValidatorOptions,
+} from "class-validator";
 
 export * from "./parsed-query-state";
 export * from "./parsed-params-state";
@@ -23,17 +27,47 @@ export class ValidationMiddlwareError extends Error {
   }
 }
 
+export type ValidatorOptions = Omit<ClassValidatorOptions, "groups"> & {
+  groups?:
+    | ((data: string[] | Record<string, string> | object) => string[])
+    | string[]
+    | undefined;
+};
+
+export type TransformValidationOptions = {
+  validator?: ValidatorOptions;
+  transformer?: ClassTransformOptions;
+};
+
+const valideerTransformValidationOptionsToTransformValidationOptions = (
+  data: Record<string, string> | object,
+  options: TransformValidationOptions,
+): ClassTransformValidationOptions => {
+  if (options?.validator?.groups) {
+    options.validator.groups =
+      typeof options.validator.groups === "function"
+        ? options.validator.groups(data)
+        : options.validator.groups;
+    options.validator?.groups;
+  }
+
+  return options as ClassTransformValidationOptions;
+};
+
 export const validateAndParse = async <T extends object, U>(
   classType: ClassType<T>,
   data: Record<string, string> | object,
   parse: (data: T) => U,
-  options: TransformValidationOptions = {
-    validator: {
-      skipMissingProperties: true,
-      validationError: { target: false },
-    },
-  },
+  options?: TransformValidationOptions,
 ): Promise<U> => {
+  if (!options)
+    options = {
+      validator: {
+        skipMissingProperties: true,
+        validationError: { target: false },
+      },
+    };
+
   const validator = await validate<T>(classType, data, options);
 
   return parse(validator);
@@ -42,12 +76,22 @@ export const validateAndParse = async <T extends object, U>(
 export const validate = async <T extends object>(
   classType: ClassType<T>,
   data: Record<string, string> | object,
-  options: TransformValidationOptions = {
-    validator: {
-      skipMissingProperties: true,
-      validationError: { target: false },
-    },
-  },
+  options?: TransformValidationOptions,
 ): Promise<T> => {
-  return await transformAndValidate<T>(classType, data, options);
+  if (!options)
+    options = {
+      validator: {
+        skipMissingProperties: true,
+        validationError: { target: false },
+      },
+    };
+
+  return await transformAndValidate<T>(
+    classType,
+    data,
+    valideerTransformValidationOptionsToTransformValidationOptions(
+      data,
+      options,
+    ),
+  );
 };
