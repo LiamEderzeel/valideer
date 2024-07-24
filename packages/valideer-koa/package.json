@@ -29,6 +29,9 @@
   "license": "MIT",
   "dependencies": {
     "@koa/bodyparser": "^5.0.0",
-    "@valideer/core": "^0.1.0-alpha.21"
+    "@valideer/core": "^0.1.0-alpha.21",
+    "class-transformer": "^0.5.1",
+    "class-transformer-validator": "^0.9.1",
+    "class-validator": "^0.14.0"
   }
 }

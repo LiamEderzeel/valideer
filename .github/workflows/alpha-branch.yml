@@ -16,14 +16,20 @@ jobs:
     steps:
       - name: "Use checkout"
         uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          run_install: false
       - name: "Use npm"
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "pnpm"
+      - run: corepack enable
       - name: "Set up npm"
         run: |
-          npm set @valideer:registry=https://registry.npmjs.org
-          npm set "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}"
+          pnpm config set @valideer:registry=https://registry.npmjs.org
+          pnpm config set -- "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}"
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - name: Set up git
@@ -33,9 +39,10 @@ jobs:
           git config user.email "${{ github.actor}}@users.noreply.github.com"
       - name: Build
         run: |
-          npm ci
-          npx lerna run build
-          npx lerna version --create-release=github --conventional-commits --conventional-prerelease --yes
-          npx lerna publish from-git -m "chore: publish" --yes
+          pnpm install
+          pnpm exec lerna run build
+          rm -rf node_modules
+          pnpm exec lerna version --create-release=github --conventional-commits --conventional-prerelease --yes
+          pnpm exec lerna publish from-git -m "chore: publish" --yes
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
