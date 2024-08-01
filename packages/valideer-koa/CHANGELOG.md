@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.23 (2024-08-01)
+
+### Bug Fixes
+
+- ReqHandler export ([2facf64](https://github.com/LiamEderzeel/valideer/commit/2facf646126018b3313cbb648435930ed5244285))
+
 # 0.1.0-alpha.22 (2024-07-25)
 
 **Note:** Version bump only for package @valideer/koa
