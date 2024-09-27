@@ -48,7 +48,7 @@ describe("Boolean parser tests", () => {
       expect(res).toEqual([true, false]);
     });
 
-    it("should parse comma seperated boolean strings", () => {
+    it("should parse comma separated boolean strings", () => {
       const queryValue = "true,false";
 
       const res = parseBooleanList(queryValue);
@@ -66,7 +66,7 @@ describe("Boolean parser tests", () => {
       expect(res).toEqual([true, false]);
     });
 
-    it("should parse comma seperated boolean numbers", () => {
+    it("should parse comma separated boolean numbers", () => {
       const queryValue = "1,0";
 
       const res = parseBooleanList(queryValue);

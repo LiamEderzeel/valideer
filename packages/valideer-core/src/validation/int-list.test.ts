@@ -10,7 +10,7 @@ describe("parseIntList tests", () => {
     expect(res).toEqual([1, 2, 200, 1, 3, 2]);
   });
 
-  it("should parse comma seperated string to array of ints", () => {
+  it("should parse comma separated string to array of ints", () => {
     const queryValues = "1,2,200, 1.3, 3.5, 2.8";
 
     const res = parseIntList(queryValues);
@@ -26,7 +26,7 @@ describe("parseIntList tests", () => {
     expect(res).toEqual([]);
   });
 
-  it("should not parse comma seperated string of strings", () => {
+  it("should not parse comma separated string of strings", () => {
     const queryValues = "not,a,number";
 
     const res = parseIntList(queryValues);

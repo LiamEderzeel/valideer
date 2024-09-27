@@ -10,7 +10,7 @@ describe("parseStringList tests", () => {
     expect(res).toEqual(["foo", "bar"]);
   });
 
-  it("should parse comma seperated string to array of strings", () => {
+  it("should parse comma separated string to array of strings", () => {
     const value = "foo,bar";
 
     const res = parseStringList(value);

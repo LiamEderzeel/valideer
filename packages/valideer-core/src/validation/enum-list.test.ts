@@ -15,7 +15,7 @@ describe("isEnumList tests", () => {
     expect(res).toEqual(true);
   });
 
-  it("should validate comma seperated string", () => {
+  it("should validate comma separated string", () => {
     const value = "red,blue";
 
     const res = isEnumList(value, Color);
@@ -31,7 +31,7 @@ describe("isEnumList tests", () => {
     expect(res).toEqual(false);
   });
 
-  it("should not validate comma seperated string", () => {
+  it("should not validate comma separated string", () => {
     const value = "green,blue";
 
     const res = isEnumList(value, Color);
@@ -49,7 +49,7 @@ describe("parseEnumList tests", () => {
     expect(res).toEqual([Color.Red, Color.Blue]);
   });
 
-  it("should parse comma seperated string to array of strings", () => {
+  it("should parse comma separated string to array of strings", () => {
     const value = "red,blue";
 
     const res = parseEnumList(value, Color);

@@ -14,7 +14,7 @@ describe("parseSortByConstraint tests", () => {
     ]);
   });
 
-  it("should parse comma seperated string to array of sort filter", () => {
+  it("should parse comma separated string to array of sort filter", () => {
     const queryValues = "-createdAt,updatedAt,1";
 
     const res = parseSortByConstraint(queryValues);

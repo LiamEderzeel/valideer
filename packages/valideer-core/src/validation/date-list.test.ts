@@ -36,7 +36,7 @@ describe("parseDateList tests", () => {
     expect(res).toEqual([]);
   });
 
-  it("should not parse comma seperated string of strings", () => {
+  it("should not parse comma separated string of strings", () => {
     const queryValues = "not,a,number";
 
     const res = parseDateList(queryValues);
