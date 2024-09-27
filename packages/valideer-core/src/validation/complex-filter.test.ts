@@ -3,7 +3,7 @@ import { parseComplexFilter } from "./complex-filter";
 
 describe("parseComplexFilter tests", () => {
   describe("parse int", () => {
-    it("shoult parse array of strings to array of ints", () => {
+    it("should parse array of strings to array of ints", () => {
       const queryValue = ["1", "2", "3"];
 
       const res = parseComplexFilter(queryValue, "int");
@@ -11,7 +11,7 @@ describe("parseComplexFilter tests", () => {
       expect(res).toEqual({ $in: [1, 2, 3] });
     });
 
-    it("shoult parse Record<string, any> to array of query object of type 'in' and ints", () => {
+    it("should parse Record<string, any> to array of query object of type 'in' and ints", () => {
       const queryValue = { in: ["1", "2", "3"] };
 
       const res = parseComplexFilter(queryValue, "int");
@@ -21,7 +21,7 @@ describe("parseComplexFilter tests", () => {
   });
 
   describe("parse boolean", () => {
-    it("shoult parse array of strings to array of booleans", () => {
+    it("should parse array of strings to array of booleans", () => {
       const queryValue = ["true", "false", "1", "0"];
 
       const res = parseComplexFilter(queryValue, "boolean");
@@ -29,7 +29,7 @@ describe("parseComplexFilter tests", () => {
       expect(res).toEqual({ $in: [true, false, true, false] });
     });
 
-    it("shoult parse Record<string, any> to array of query object of type 'in' and booleans", () => {
+    it("should parse Record<string, any> to array of query object of type 'in' and booleans", () => {
       const queryValue = { in: ["true", "false", "1", "0"] };
 
       const res = parseComplexFilter(queryValue, "boolean");
@@ -39,7 +39,7 @@ describe("parseComplexFilter tests", () => {
   });
 
   describe("parse string", () => {
-    it("shoult parse array of strings to array of string", () => {
+    it("should parse array of strings to array of string", () => {
       const queryValue = ["foo", "bar", "foobar"];
 
       const res = parseComplexFilter(queryValue, "string");
@@ -47,7 +47,7 @@ describe("parseComplexFilter tests", () => {
       expect(res).toEqual({ $in: ["foo", "bar", "foobar"] });
     });
 
-    it("shoult parse Record<string, any> to array of query object of type 'in' and booleans", () => {
+    it("should parse Record<string, any> to array of query object of type 'in' and booleans", () => {
       const queryValue = { in: ["foo", "bar", "foobar"] };
 
       const res = parseComplexFilter(queryValue, "string");

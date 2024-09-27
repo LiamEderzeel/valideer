@@ -2,7 +2,7 @@ import { ClassType } from "class-transformer-validator";
 import { ValidationError } from "class-validator";
 import { ReqHandler } from "./req-handler";
 import {
-  ValidationMiddlwareError,
+  ValidationMiddlewareError,
   isValidationError,
   validate,
   validateAndParse,
@@ -27,9 +27,9 @@ export const validateBody = <T extends object>(
       next();
     } catch (err) {
       if (Array.isArray(err) && err.every(isValidationError)) {
-        return next(new ValidationMiddlwareError(err));
+        return next(new ValidationMiddlewareError(err));
       } else if (err instanceof ValidationError) {
-        return next(new ValidationMiddlwareError([err]));
+        return next(new ValidationMiddlewareError([err]));
       } else {
         return next(err);
       }
@@ -60,9 +60,9 @@ export const validateAndParseBody = <T extends object, U>(
       next();
     } catch (err) {
       if (Array.isArray(err) && err.every(isValidationError)) {
-        return next(new ValidationMiddlwareError(err));
+        return next(new ValidationMiddlewareError(err));
       } else if (err instanceof ValidationError) {
-        return next(new ValidationMiddlwareError([err]));
+        return next(new ValidationMiddlewareError([err]));
       } else {
         return next(err);
       }

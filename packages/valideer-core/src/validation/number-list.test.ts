@@ -10,7 +10,7 @@ describe("parseNumberList tests", () => {
     expect(res).toEqual([1.2, 2, 3.5, 1]);
   });
 
-  it("should parse comma seperated string to array of numbers", () => {
+  it("should parse comma separated string to array of numbers", () => {
     const queryValues = "1.2,2,3.5,1";
 
     const res = parseNumberList(queryValues);

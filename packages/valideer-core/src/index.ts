@@ -15,15 +15,15 @@ export * from "./parsed-body-state";
 export * from "./is-validation-error";
 export * from "./validation";
 
-export class ValidationMiddlwareError extends Error {
+export class ValidationMiddlewareError extends Error {
   errors: ValidationError[];
 
   constructor(errors: ValidationError[], message: string = "") {
     super(message);
     this.errors = errors;
-    this.name = "ValidationMiddlwareError";
+    this.name = "ValidationMiddlewareError";
 
-    Object.setPrototypeOf(this, ValidationMiddlwareError.prototype);
+    Object.setPrototypeOf(this, ValidationMiddlewareError.prototype);
   }
 }
 

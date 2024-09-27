@@ -3,7 +3,7 @@ import { ValidationError } from "class-validator";
 import { Middleware } from "koa";
 import {
   IParsedBodyState,
-  ValidationMiddlwareError,
+  ValidationMiddlewareError,
   isValidationError,
   validate,
   validateAndParse,
@@ -32,9 +32,9 @@ export const validateBody = <T extends object>(
       await next();
     } catch (err) {
       if (Array.isArray(err) && err.every(isValidationError)) {
-        throw new ValidationMiddlwareError(err);
+        throw new ValidationMiddlewareError(err);
       } else if (err instanceof ValidationError) {
-        throw new ValidationMiddlwareError([err]);
+        throw new ValidationMiddlewareError([err]);
       } else {
         throw err;
       }
@@ -65,9 +65,9 @@ export const validateAndParseBody = <T extends object, U>(
       await next();
     } catch (err) {
       if (Array.isArray(err) && err.every(isValidationError)) {
-        throw new ValidationMiddlwareError(err);
+        throw new ValidationMiddlewareError(err);
       } else if (err instanceof ValidationError) {
-        throw new ValidationMiddlwareError([err]);
+        throw new ValidationMiddlewareError([err]);
       } else {
         throw err;
       }

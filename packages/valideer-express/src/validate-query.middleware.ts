@@ -4,7 +4,7 @@ import {
 } from "class-transformer-validator";
 import { ValidationError } from "class-validator";
 import {
-  ValidationMiddlwareError,
+  ValidationMiddlewareError,
   isValidationError,
   validate,
   IParsedQueryState,
@@ -33,9 +33,9 @@ export const validateQuery = <T extends object>(
       next();
     } catch (err) {
       if (Array.isArray(err) && err.every(isValidationError)) {
-        return next(new ValidationMiddlwareError(err));
+        return next(new ValidationMiddlewareError(err));
       } else if (err instanceof ValidationError) {
-        return next(new ValidationMiddlwareError([err]));
+        return next(new ValidationMiddlewareError([err]));
       } else {
         return next(err);
       }
@@ -66,9 +66,9 @@ export const validateAndParseQuery = <T extends object, U>(
       next();
     } catch (err) {
       if (Array.isArray(err) && err.every(isValidationError)) {
-        return next(new ValidationMiddlwareError(err));
+        return next(new ValidationMiddlewareError(err));
       } else if (err instanceof ValidationError) {
-        return next(new ValidationMiddlwareError([err]));
+        return next(new ValidationMiddlewareError([err]));
       } else {
         return next(err);
       }
