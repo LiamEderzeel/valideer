@@ -5,7 +5,6 @@ import { parseStringList } from "./string-list";
 import { parseDateList } from "./date-list";
 import { parseObjectIdList } from "./object-id-list";
 import { parseEnumList } from "./enum-list";
-import { IsNumberList } from ".";
 
 export const parseComplexFilter = (
   value: Record<string, string | string[]> | string | string[],
