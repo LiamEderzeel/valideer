@@ -48,7 +48,6 @@ const valideerTransformValidationOptionsToTransformValidationOptions = (
       typeof options.validator.groups === "function"
         ? options.validator.groups(data)
         : options.validator.groups;
-    options.validator?.groups;
   }
 
   return options as ClassTransformValidationOptions;
