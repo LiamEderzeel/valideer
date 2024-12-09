@@ -28,6 +28,6 @@
     "@valideer/core": "^0.1.0-alpha.24"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21"
+    "@types/express": "^5.0.0"
   }
 }
