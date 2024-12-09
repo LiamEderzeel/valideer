@@ -3,6 +3,14 @@ import { parseComplexFilter } from "./complex-filter";
 
 describe("parseComplexFilter tests", () => {
   describe("parse int", () => {
+    it("should parse string to array of ints", () => {
+      const queryValue = "1";
+
+      const res = parseComplexFilter(queryValue, "int");
+
+      expect(res).toEqual({ $in: [1] });
+    });
+
     it("should parse array of strings to array of ints", () => {
       const queryValue = ["1", "2", "3"];
 
