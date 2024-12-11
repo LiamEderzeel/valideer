@@ -11,7 +11,9 @@
     "forceConsistentCasingInFileNames": true,
     "rootDir": "./src",
     "outDir": "./lib/esm",
-    "composite": true
+    "composite": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "exclude": [
     "**/*.test.ts",

@@ -7,3 +7,4 @@ export * from "./number-list";
 export * from "./object-id-list";
 export * from "./sort-by-constraint";
 export * from "./string-list";
+export * from "./object-filter";

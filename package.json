@@ -18,13 +18,17 @@
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
+    "@koa/router": "^13.1.0",
     "@types/koa": "^2.13.12",
+    "@types/koa__router": "^12.0.4",
     "@types/node": "^22.10.1",
+    "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^8.17.0",
     "@typescript-eslint/parser": "^8.17.0",
     "eslint": "^9.16.0",
     "lerna": "^8.0.0",
     "prettier": "^3.1.0",
+    "supertest": "^7.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.2",
     "typescript-eslint": "^8.17.0",
