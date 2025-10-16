@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.25 (2025-10-16)
+
+### Bug Fixes
+
+- express req handler ([1711a08](https://github.com/LiamEderzeel/valideer/commit/1711a08f6a28a3f4aa77dcfb7e69b01ff49d9a9c))
+
 # 0.1.0-alpha.24 (2024-09-27)
 
 **Note:** Version bump only for package @valideer/express
