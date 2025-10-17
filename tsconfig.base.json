@@ -15,7 +15,7 @@
     "emitDecoratorMetadata": true,
     "useDefineForClassFields": false,
     "rootDir": "./src",
-    "outDir": "./build",
+    "outDir": "./lib/ems",
     "baseUrl": ".",
     "paths": {
       "@valideer/core/*": [
