@@ -9,7 +9,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npx lerna run build",
+    "build": "pnpm -r build",
     "build:tsc": "tsc --build --verbose",
     "test": "vitest",
     "lint": "eslint .",
@@ -18,6 +18,7 @@
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
+    "@changesets/cli": "catalog:",
     "@types/koa": "^2.13.12",
     "@types/node": "^22.10.1",
     "@typescript-eslint/eslint-plugin": "^8.17.0",
@@ -31,5 +32,5 @@
     "vitepress": "^1.0.0-rc.40",
     "vitest": "^2.1.8"
   },
-  "packageManager": "npm@10.9.1+sha512.c89530d37c4baa38afd43e76a077a84b9aa63840b986426584fd5c5a54ab0a0b21bb1595c851042b733784b0b43706d36a494b4d8ae1a086a762cb8d3f95942a"
+  "packageManager": "pnpm@10.17.1+sha512.17c560fca4867ae9473a3899ad84a88334914f379be46d455cbf92e5cf4b39d34985d452d2583baf19967fa76cb5c17bc9e245529d0b98745721aa7200ecaf7a"
 }

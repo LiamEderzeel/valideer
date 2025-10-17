@@ -1,31 +1,14 @@
 {
-  "compilerOptions": {
-    "incremental": true,
-    "target": "es2022",
-    "module": "es6",
-    "declaration": true,
-    "strict": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "rootDir": "./src",
-    "outDir": "./build"
-  },
   "files": [],
   "references": [
     {
-      "path": "./packages/valideer-core"
+      "path": "packages/valideer-core"
     },
     {
-      "path": "./packages/valideer-koa"
+      "path": "packages/valideer-express"
     },
     {
-      "path": "./packages/valideer-express"
+      "path": "packages/valideer-koa"
     }
-  ],
-  "exclude": [
-    "**/lib/**",
-    "**/vitest.config.ts"
   ]
 }
