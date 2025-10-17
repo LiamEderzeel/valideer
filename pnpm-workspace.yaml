@@ -2,11 +2,11 @@ packages:
   - packages/*
 
 catalog:
-  '@changesets/cli': ^2.29.7
-  '@types/koa': ^2.13.12
-  '@types/node': ^22.10.1
-  '@typescript-eslint/eslint-plugin': ^8.17.0
-  '@typescript-eslint/parser': ^8.17.0
+  "@changesets/cli": ^2.29.7
+  "@types/koa": ^2.13.12
+  "@types/node": ^22.10.1
+  "@typescript-eslint/eslint-plugin": ^8.17.0
+  "@typescript-eslint/parser": ^8.17.0
   bson: ^6.2.0
   class-transformer: ^0.5.1
   class-transformer-validator: ^0.9.1
@@ -19,6 +19,7 @@ catalog:
   typescript-eslint: ^8.17.0
   vitepress: ^1.0.0-rc.40
   vitest: ^2.1.8
+  reflect-metadata: ^0.2.2
 
 catalogMode: prefer
 

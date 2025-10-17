@@ -18,6 +18,7 @@
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
+    "reflect-metadata": "catalog:",
     "@changesets/cli": "catalog:",
     "@types/koa": "^2.13.12",
     "@types/node": "^22.10.1",
