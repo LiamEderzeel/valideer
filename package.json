@@ -18,15 +18,15 @@
     "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
-    "reflect-metadata": "catalog:",
     "@changesets/cli": "catalog:",
-    "@types/koa": "catalog:",
+    "@types/koa": "^3.0.0",
     "@types/node": "catalog:",
     "@typescript-eslint/eslint-plugin": "catalog:",
     "@typescript-eslint/parser": "catalog:",
     "eslint": "catalog:",
     "lerna": "catalog:",
     "prettier": "catalog:",
+    "reflect-metadata": "catalog:",
     "ts-node": "catalog:",
     "typescript": "catalog:",
     "typescript-eslint": "catalog:",

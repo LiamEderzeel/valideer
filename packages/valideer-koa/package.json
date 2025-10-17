@@ -28,11 +28,20 @@
   "author": "Liam Ederzeel",
   "license": "MIT",
   "dependencies": {
-    "@koa/bodyparser": "^5.0.0",
     "@valideer/core": "workspace:*",
     "bson": "catalog:",
     "class-transformer": "catalog:",
     "class-transformer-validator": "catalog:",
     "class-validator": "catalog:"
+  },
+  "devDependencies": {
+    "@koa/bodyparser": "catalog:",
+    "@koa/router": "catalog:",
+    "@types/koa": "catalog:",
+    "@types/koa__router": "catalog:",
+    "@types/supertest": "catalog:",
+    "koa": "catalog:",
+    "supertest": "catalog:",
+    "vitest": "catalog:"
   }
 }
