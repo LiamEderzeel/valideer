@@ -4,11 +4,13 @@
   "commit": "chore(release): publish [skip-ci]",
   "fixed": [
     [
-      "*"
+      "@valideer/core",
+      "@valideer/express",
+      "@valideer/koa"
     ]
   ],
   "linked": [],
-  "access": "restricted",
+  "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": []
