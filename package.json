@@ -20,18 +20,18 @@
   "devDependencies": {
     "reflect-metadata": "catalog:",
     "@changesets/cli": "catalog:",
-    "@types/koa": "^2.13.12",
-    "@types/node": "^22.10.1",
-    "@typescript-eslint/eslint-plugin": "^8.17.0",
-    "@typescript-eslint/parser": "^8.17.0",
-    "eslint": "^9.16.0",
-    "lerna": "^8.0.0",
-    "prettier": "^3.1.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.3.2",
-    "typescript-eslint": "^8.17.0",
-    "vitepress": "^1.0.0-rc.40",
-    "vitest": "^2.1.8"
+    "@types/koa": "catalog:",
+    "@types/node": "catalog:",
+    "@typescript-eslint/eslint-plugin": "catalog:",
+    "@typescript-eslint/parser": "catalog:",
+    "eslint": "catalog:",
+    "lerna": "catalog:",
+    "prettier": "catalog:",
+    "ts-node": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:",
+    "vitepress": "catalog:",
+    "vitest": "catalog:"
   },
   "packageManager": "pnpm@10.17.1+sha512.17c560fca4867ae9473a3899ad84a88334914f379be46d455cbf92e5cf4b39d34985d452d2583baf19967fa76cb5c17bc9e245529d0b98745721aa7200ecaf7a"
 }
