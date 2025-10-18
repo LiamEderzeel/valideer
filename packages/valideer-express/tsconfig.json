@@ -1,20 +1,15 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "target": "es2022",
-    "module": "node16",
-    "moduleResolution": "node16",
-    "declaration": true,
-    "strict": true,
-    "incremental": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "rootDir": "./src",
-    "outDir": "./lib/esm",
-    "composite": true
+    "outDir": "lib/esm",
+    "rootDir": "src"
   },
-  "exclude": [
-    "**/*.test.ts",
-    "**/lib"
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "../valideer-core"
+    }
   ]
 }

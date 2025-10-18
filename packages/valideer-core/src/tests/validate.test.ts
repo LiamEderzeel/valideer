@@ -12,12 +12,12 @@ import { Type } from "class-transformer";
 
 class TestValidationNestedClass {
   @IsString()
-  test: string;
+  test?: string;
 }
 
 class TestValidationClass {
   @IsString()
-  test: string;
+  test?: string;
 
   @IsOptional()
   @ValidateNested()
@@ -107,13 +107,14 @@ describe("Validate", () => {
 
 class ValidateObject {
   @IsDateString()
-  date: string;
+  date?: string;
 }
 
 class ParsedObject {
   date: Date;
 
   constructor(validateObject: ValidateObject) {
+    if (validateObject.date == null) throw new Error();
     this.date = new Date(validateObject.date);
   }
 }

@@ -6,3 +6,4 @@ lib
 .npmrc
 docs/.vitepress/cache
 docs/.vitepress/dist
+**/dist/

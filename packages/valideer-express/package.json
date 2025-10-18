@@ -25,7 +25,12 @@
   "author": "Liam Ederzeel",
   "license": "MIT",
   "dependencies": {
-    "@valideer/core": "^0.1.0-alpha.25"
+    "@types/express-serve-static-core": "^5.1.0",
+    "@valideer/core": "workspace:*",
+    "bson": "catalog:",
+    "class-transformer": "catalog:",
+    "class-transformer-validator": "catalog:",
+    "class-validator": "catalog:"
   },
   "devDependencies": {
     "@types/express": "^5.0.0"

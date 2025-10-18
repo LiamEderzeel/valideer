@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "composite": true, // ✅ Required for project references
+    "declaration": true, // ✅ Usually used with composite
+    "declarationMap": true, // Optional but recommended
+    "incremental": true,
+    "target": "es2022",
+    "module": "es6",
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "useDefineForClassFields": false,
+    "rootDir": "./src",
+    "outDir": "./lib/ems",
+    "baseUrl": ".",
+    "paths": {
+      "@valideer/core/*": [
+        "packages/valideer-core/src/*"
+      ],
+      "@valideer/express/*": [
+        "packages/valideer-express/src/*"
+      ],
+      "@valideer/koa/*": [
+        "packages/valideer-koa/src/*"
+      ]
+    }
+  },
+  "files": [],
+  "exclude": [
+    "**/lib/**",
+    "**/vitest.config.ts"
+  ]
+}
