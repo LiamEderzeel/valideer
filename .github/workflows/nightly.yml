@@ -1,4 +1,4 @@
-name: release alpha
+name: nightly
 
 on:
   push:
