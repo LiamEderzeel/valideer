@@ -1,12 +1,9 @@
 name: release alpha
 
 on:
-  workflow_dispatch:
-    # manual trigger
-  # You can also enable branch push triggers if desired
-  # push:
-  #   branches:
-  #     - alpha
+  push:
+    branches:
+      - main
 
 jobs:
   release:
