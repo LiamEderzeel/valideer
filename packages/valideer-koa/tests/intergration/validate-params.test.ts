@@ -1,4 +1,4 @@
-import { describe, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import Koa from "koa";
 import bodyParsesr from "@koa/bodyparser";
 import Router from "@koa/router";
@@ -6,7 +6,7 @@ import { IParsedParamsState, ValidationMiddlewareError } from "@valideer/core";
 import { IsDefined, IsNumberString, ValidationError } from "class-validator";
 import { Middleware } from "koa";
 import request from "supertest";
-import { validateAndParseParams } from "../validate-params.middleware";
+import { validateAndParseParams } from "../../src/validate-params.middleware";
 
 class TestParams {
   @IsDefined()
@@ -36,7 +36,6 @@ export const ErrorMiddleware: Middleware = async (ctx, next) => {
   try {
     await next();
   } catch (err) {
-    console.log(err);
     if (err instanceof ValidationMiddlewareError) {
       const { errors, message } = err;
       err.errors.forEach((x) => logError(x));
@@ -63,7 +62,8 @@ describe("params", () => {
       ctx.body = ctx.state.params.id;
     };
 
-    router.get<null, IParsedParamsState<TestParams>>(
+    router.get(
+      "reqHandler",
       "/:id",
       validateAndParseParams(TestParams, parseTestParams),
       reqHandler,
@@ -74,5 +74,48 @@ describe("params", () => {
     const res: request.Response = await request(app.listen())
       .get("/1")
       .expect(200);
+
+    expect(res.body).toEqual(1);
+  });
+
+  it("should fail", async () => {
+    const app = new Koa();
+
+    app.use(ErrorMiddleware);
+    app.use(bodyParsesr());
+
+    const router = new Router();
+
+    const reqHandler: Middleware<IParsedParamsState<TestParams>> = (ctx) => {
+      ctx.body = ctx.state.params.id;
+    };
+
+    router.get(
+      "reqHandler",
+      "/:id",
+      validateAndParseParams(TestParams, parseTestParams),
+      reqHandler,
+    );
+
+    app.use(router.routes());
+
+    const res: request.Response = await request(app.listen())
+      .get("/test")
+      .expect(400);
+
+    const err = new ValidationError();
+    err.children = [];
+    expect(res.body).toEqual({
+      errors: [
+        {
+          children: [],
+          constraints: { isNumberString: "id must be a number string" },
+          property: "id",
+          target: { id: "test" },
+          value: "test",
+        },
+      ],
+      message: "",
+    });
   });
 });
