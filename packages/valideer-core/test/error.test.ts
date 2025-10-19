@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { ValidationError } from "class-validator";
-import { ValidationMiddlewareError } from "..";
+import { ValidationMiddlewareError } from "../src/";
 
 describe("ValidationMiddlewareError", () => {
   it("Is instanceof ValidationMiddlewareError", async () => {
