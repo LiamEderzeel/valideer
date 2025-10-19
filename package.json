@@ -12,6 +12,7 @@
     "build": "pnpm -r build",
     "build:tsc": "tsc --build --verbose",
     "test": "vitest",
+    "test:types": "tsc --noEmit",
     "lint": "eslint .",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
