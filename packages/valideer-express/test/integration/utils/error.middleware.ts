@@ -13,7 +13,6 @@ export const errorMiddleware: ErrorRequestHandler = async (
   error,
   _req,
   res,
-  _next,
 ) => {
   console.log(error);
   if (error instanceof ValidationMiddlewareError) {

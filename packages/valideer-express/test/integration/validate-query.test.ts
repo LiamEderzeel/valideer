@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import express, { RequestHandler, Router } from "express";
-import { IParsedParamsState, IParsedQueryState } from "@valideer/core";
-import { validateAndParseParams } from "../../src/validate-params.middleware";
+import { IParsedQueryState } from "@valideer/core";
 import { IsDefined, IsNumberString, ValidationError } from "class-validator";
 import request from "supertest";
 import { ParamsDictionary, Query } from "express-serve-static-core";
@@ -37,17 +36,12 @@ describe("query", () => {
       any,
       Query,
       IParsedQueryState<TestQueryParsed>
-    > = (_req, res, next) => {
+    > = (_req, res) => {
       res.json(res.locals.query.id);
-      next();
     };
 
     router.get(
       "/",
-      (req, res, next) => {
-        console.log(req.query);
-        next();
-      },
       validateAndParseQuery(TestQuery, parseTestQuery),
       reqHandler,
     );
@@ -74,7 +68,7 @@ describe("query", () => {
       any,
       Query,
       IParsedQueryState<TestQueryParsed>
-    > = (_req, res, _next) => {
+    > = (_req, res) => {
       res.json(res.locals.query.id);
     };
 

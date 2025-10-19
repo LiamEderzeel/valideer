@@ -36,7 +36,7 @@ describe("params", () => {
       any,
       Query,
       IParsedParamsState<TestParamsParsed>
-    > = (_req, res, _next) => {
+    > = (_req, res) => {
       res.json(res.locals.params.id);
     };
 

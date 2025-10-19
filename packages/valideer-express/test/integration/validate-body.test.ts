@@ -36,7 +36,7 @@ describe("body", () => {
       any,
       Query,
       IParsedBodyState<TestBodyParsed>
-    > = (_req, res, _next) => {
+    > = (_req, res) => {
       res.json(res.locals.body.id);
     };
 
@@ -69,7 +69,7 @@ describe("body", () => {
       any,
       Query,
       IParsedBodyState<TestBodyParsed>
-    > = (_req, res, _next) => {
+    > = (_req, res) => {
       res.json(res.locals.body.id);
     };
 
