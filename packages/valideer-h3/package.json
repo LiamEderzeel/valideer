@@ -1,0 +1,44 @@
+{
+  "name": "@valideer/h3",
+  "version": "0.1.0-alpha.25",
+  "description": "",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/ems.index.js",
+  "types": "./lib/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/esm/index.js",
+      "require": "./lib/cjs/index.js",
+      "types": "./lib/esm/index.d.ts"
+    }
+  },
+  "files": [
+    "lib/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiamEderzeel/valideer.git"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepare": "pnpm run build"
+  },
+  "author": "Liam Ederzeel",
+  "license": "MIT",
+  "dependencies": {
+    "@valideer/core": "workspace:*",
+    "bson": "catalog:",
+    "class-transformer": "catalog:",
+    "class-transformer-validator": "catalog:",
+    "class-validator": "catalog:"
+  },
+  "devDependencies": {
+    "@types/supertest": "catalog:",
+    "h3": "catalog:",
+    "supertest": "catalog:",
+    "vitest": "catalog:"
+  }
+}
