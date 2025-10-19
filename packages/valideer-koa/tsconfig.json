@@ -1,12 +1,5 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "outDir": "lib/esm",
-    "rootDir": "src"
-  },
-  "include": [
-    "src"
-  ],
   "references": [
     {
       "path": "../valideer-core"
