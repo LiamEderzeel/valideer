@@ -2,31 +2,31 @@ import { describe, expect, it } from "vitest";
 import Koa from "koa";
 import bodyParsesr from "@koa/bodyparser";
 import Router from "@koa/router";
-import { IParsedParamsState } from "@valideer/core";
+import { IParsedQueryState } from "@valideer/core";
 import { IsDefined, IsNumberString, ValidationError } from "class-validator";
 import { Middleware } from "koa";
 import request from "supertest";
-import { validateAndParseParams } from "../../src/validate-params.middleware";
+import { validateAndParseQuery } from "../../src/validate-query.middleware";
 import { errorMiddleware } from "./utils/error.middleware";
 
-class TestParams {
+class TestQuery {
   @IsDefined()
   @IsNumberString()
   id?: string;
 }
 
-class TestParamsParsed {
+class TestQueryParsed {
   id?: number;
-  constructor(params: TestParams) {
-    if (params.id != null) this.id = parseInt(params.id);
+  constructor(query: TestQuery) {
+    if (query.id != null) this.id = parseInt(query.id);
   }
 }
 
-function parseTestParams(params: TestParams) {
-  return new TestParamsParsed(params);
+function parseTestQuery(params: TestQuery) {
+  return new TestQueryParsed(params);
 }
 
-describe("params", () => {
+describe("query", () => {
   it("should pass", async () => {
     const app = new Koa();
 
@@ -35,21 +35,22 @@ describe("params", () => {
 
     const router = new Router();
 
-    const reqHandler: Middleware<IParsedParamsState<TestParams>> = (ctx) => {
-      ctx.body = ctx.state.params.id;
+    const reqHandler: Middleware<IParsedQueryState<TestQuery>> = (ctx) => {
+      ctx.body = ctx.state.query.id;
     };
 
     router.get(
       "reqHandler",
-      "/:id",
-      validateAndParseParams(TestParams, parseTestParams),
+      "/",
+      validateAndParseQuery(TestQuery, parseTestQuery),
       reqHandler,
     );
 
     app.use(router.routes());
 
     const res: request.Response = await request(app.listen())
-      .get("/1")
+      .get("/")
+      .query({ id: 1 })
       .expect(200);
 
     expect(res.body).toEqual(1);
@@ -63,21 +64,22 @@ describe("params", () => {
 
     const router = new Router();
 
-    const reqHandler: Middleware<IParsedParamsState<TestParams>> = (ctx) => {
-      ctx.body = ctx.state.params.id;
+    const reqHandler: Middleware<IParsedQueryState<TestQuery>> = (ctx) => {
+      ctx.body = ctx.state.query.id;
     };
 
     router.get(
       "reqHandler",
-      "/:id",
-      validateAndParseParams(TestParams, parseTestParams),
+      "/",
+      validateAndParseQuery(TestQuery, parseTestQuery),
       reqHandler,
     );
 
     app.use(router.routes());
 
     const res: request.Response = await request(app.listen())
-      .get("/test")
+      .get("/")
+      .query({ id: "test" })
       .expect(400);
 
     const err = new ValidationError();
