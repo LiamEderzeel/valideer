@@ -9,6 +9,9 @@ catalogs:
     '@changesets/cli':
       specifier: ^2.29.7
       version: 2.29.7
+    '@eslint/js':
+      specifier: ^9.38.0
+      version: 9.38.0
     '@koa/bodyparser':
       specifier: ^6.0.0
       version: 6.0.0
@@ -89,6 +92,9 @@ importers:
       '@changesets/cli':
         specifier: 'catalog:'
         version: 2.29.7(@types/node@22.18.11)
+      '@eslint/js':
+        specifier: 'catalog:'
+        version: 9.38.0
       '@types/koa':
         specifier: ^3.0.0
         version: 3.0.0
