@@ -33,6 +33,10 @@
     "class-validator": "catalog:"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0"
+    "@types/express": "^5.0.0",
+    "@types/supertest": "catalog:",
+    "express": "catalog:",
+    "supertest": "catalog:",
+    "vitest": "catalog:"
   }
 }

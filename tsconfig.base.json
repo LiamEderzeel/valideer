@@ -29,9 +29,13 @@
       ]
     }
   },
+  "include": [
+    "src"
+  ],
   "files": [],
   "exclude": [
     "**/lib/**",
+    "**/test/**",
     "**/vitest.config.ts"
   ]
 }

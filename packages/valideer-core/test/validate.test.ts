@@ -7,7 +7,7 @@ import {
   ValidateNested,
 } from "class-validator";
 import { ClassType } from "class-transformer-validator";
-import { validate, validateAndParse } from "../index";
+import { validate, validateAndParse } from "../src/index";
 import { Type } from "class-transformer";
 
 class TestValidationNestedClass {
