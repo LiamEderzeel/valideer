@@ -58,7 +58,10 @@ jobs:
       - name: Cache dist
         uses: actions/cache@v4
         with:
-          path: dist
+          path: |
+            packages/valideer-core/lib
+            packages/valideer-express/lib
+            packages/valideer-koa/lib
           key: node-v20-${{ github.sha }}
 
   test:
@@ -87,7 +90,10 @@ jobs:
       - name: Restore dist cache
         uses: actions/cache@v4
         with:
-          path: dist
+          path: |
+            packages/valideer-core/lib
+            packages/valideer-express/lib
+            packages/valideer-koa/lib
           key: node-v20-${{ github.sha }}
 
       - name: Testing
