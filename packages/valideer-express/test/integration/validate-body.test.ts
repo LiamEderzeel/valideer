@@ -1,11 +1,9 @@
 import { describe, expect, it } from "vitest";
 import express, { json, RequestHandler, Router } from "express";
-import { IParsedBodyState } from "@valideer/core";
 import { IsDefined, IsNumber, ValidationError } from "class-validator";
 import request from "supertest";
-import { validateAndParseBody } from "../../src/validate-body.middleware";
-import { ParamsDictionary, Query } from "express-serve-static-core";
 import { errorMiddleware } from "./utils/error.middleware";
+import { validateAndParseBody } from "../../src/validate-body";
 
 class TestBody {
   @IsDefined()
@@ -30,22 +28,12 @@ describe("body", () => {
 
     const router = Router();
 
-    const reqHandler: RequestHandler<
-      ParamsDictionary,
-      any,
-      any,
-      Query,
-      IParsedBodyState<TestBodyParsed>
-    > = (_req, res) => {
-      res.json(res.locals.body.id);
+    const reqHandler: RequestHandler = async (req, res) => {
+      const body = await validateAndParseBody(TestBody, req, parseTestBody);
+      res.json(body.id);
     };
 
-    router.post(
-      "/",
-      json(),
-      validateAndParseBody(TestBody, parseTestBody),
-      reqHandler,
-    );
+    router.post("/", json(), reqHandler);
 
     app.use("/", router);
     app.use(errorMiddleware);
@@ -63,22 +51,12 @@ describe("body", () => {
 
     const router = Router();
 
-    const reqHandler: RequestHandler<
-      ParamsDictionary,
-      any,
-      any,
-      Query,
-      IParsedBodyState<TestBodyParsed>
-    > = (_req, res) => {
-      res.json(res.locals.body.id);
+    const reqHandler: RequestHandler = async (req, res) => {
+      const body = await validateAndParseBody(TestBody, req, parseTestBody);
+      res.json(body.id);
     };
 
-    router.post(
-      "/",
-      json(),
-      validateAndParseBody(TestBody, parseTestBody),
-      reqHandler,
-    );
+    router.post("/", json(), reqHandler);
 
     app.use("/", router);
     app.use(errorMiddleware);

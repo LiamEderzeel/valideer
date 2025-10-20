@@ -2,11 +2,12 @@ import { describe, expect, it } from "vitest";
 import Koa from "koa";
 import bodyParsesr from "@koa/bodyparser";
 import Router from "@koa/router";
+import { IParsedQueryState } from "@valideer/core";
 import { IsDefined, IsNumberString, ValidationError } from "class-validator";
 import { Middleware } from "koa";
 import request from "supertest";
+import { validateAndParseQueryMiddleware } from "../../src/validate-query.middleware";
 import { errorMiddleware } from "./utils/error.middleware";
-import { validateAndParseQuery } from "../../src/validate-query";
 
 class TestQuery {
   @IsDefined()
@@ -34,12 +35,16 @@ describe("query middleware", () => {
 
     const router = new Router();
 
-    const reqHandler: Middleware = async (ctx) => {
-      const query = await validateAndParseQuery(TestQuery, ctx, parseTestQuery);
-      ctx.body = query.id;
+    const reqHandler: Middleware<IParsedQueryState<TestQuery>> = (ctx) => {
+      ctx.body = ctx.state.query.id;
     };
 
-    router.get("reqHandler", "/", reqHandler);
+    router.get(
+      "reqHandler",
+      "/",
+      validateAndParseQueryMiddleware(TestQuery, parseTestQuery),
+      reqHandler,
+    );
 
     app.use(router.routes());
 
@@ -59,12 +64,16 @@ describe("query middleware", () => {
 
     const router = new Router();
 
-    const reqHandler: Middleware = async (ctx) => {
-      const query = await validateAndParseQuery(TestQuery, ctx, parseTestQuery);
-      ctx.body = query.id;
+    const reqHandler: Middleware<IParsedQueryState<TestQuery>> = (ctx) => {
+      ctx.body = ctx.state.query.id;
     };
 
-    router.get("reqHandler", "/", reqHandler);
+    router.get(
+      "reqHandler",
+      "/",
+      validateAndParseQueryMiddleware(TestQuery, parseTestQuery),
+      reqHandler,
+    );
 
     app.use(router.routes());
 

@@ -1,75 +1,30 @@
 import { ClassType } from "class-transformer-validator";
-import { ValidationError } from "class-validator";
 import { Middleware } from "koa";
-import {
-  IParsedParamsState,
-  ValidationMiddlewareError,
-  isValidationError,
-  validate,
-  validateAndParse,
-  TransformValidationOptions,
-} from "@valideer/core";
+import { IParsedParamsState, TransformValidationOptions } from "@valideer/core";
+import { validateAndParseParams, validateParams } from "./validate-params";
 
-export const validateParams = <T extends object>(
+export const validateParamsMiddleware = <T extends object>(
   validateionClass: ClassType<T>,
   options?: TransformValidationOptions,
 ): Middleware<IParsedParamsState<T>> => {
   return async (ctx, next) => {
-    try {
-      if (!options) options = {};
-      options.validator = options?.validator ?? {};
-      options.validator.whitelist = options?.validator?.whitelist ?? false;
-      options.validator.skipMissingProperties =
-        options?.validator?.skipMissingProperties ?? true;
-
-      ctx.state.params = await validate<T>(
-        validateionClass,
-        ctx.params,
-        options,
-      );
-
-      await next();
-    } catch (err) {
-      if (Array.isArray(err) && err.every(isValidationError)) {
-        throw new ValidationMiddlewareError(err);
-      } else if (err instanceof ValidationError) {
-        throw new ValidationMiddlewareError([err]);
-      } else {
-        throw err;
-      }
-    }
+    ctx.state.params = await validateParams(validateionClass, ctx, options);
+    await next();
   };
 };
 
-export const validateAndParseParams = <T extends object, U>(
+export const validateAndParseParamsMiddleware = <T extends object, U>(
   validateionClass: ClassType<T>,
   parse: (data: T) => U,
   options?: TransformValidationOptions,
 ): Middleware<IParsedParamsState<U>> => {
   return async (ctx, next) => {
-    try {
-      if (!options) options = {};
-      options.validator = options?.validator ?? {};
-      options.validator.whitelist = options?.validator?.whitelist ?? false;
-      options.validator.skipMissingProperties =
-        options?.validator?.skipMissingProperties ?? true;
-
-      ctx.state.params = await validateAndParse<T, U>(
-        validateionClass,
-        ctx.params,
-        parse,
-        options,
-      );
-
-      await next();
-    } catch (err) {
-      if (Array.isArray(err) && err.every(isValidationError)) {
-        throw new ValidationMiddlewareError(err);
-      } else if (err instanceof ValidationError) {
-        throw new ValidationMiddlewareError([err]);
-      } else {
-        throw err;
-      }
-    }
+    ctx.state.params = await validateAndParseParams(
+      validateionClass,
+      ctx,
+      parse,
+      options,
+    );
+    await next();
   };
 };

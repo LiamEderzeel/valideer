@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest";
 import express, { RequestHandler, Router } from "express";
+import { IParsedQueryState } from "@valideer/core";
 import { IsDefined, IsNumberString, ValidationError } from "class-validator";
 import request from "supertest";
+import { ParamsDictionary, Query } from "express-serve-static-core";
 import { errorMiddleware } from "./utils/error.middleware";
-import { validateAndParseQuery } from "../../src/validate-query";
+import { validateAndParseQueryMiddleware } from "../../src/validate-query.middleware";
 
 class TestQuery {
   @IsDefined()
@@ -28,12 +30,21 @@ describe("query", () => {
 
     const router = Router();
 
-    const reqHandler: RequestHandler = async (req, res) => {
-      const query = await validateAndParseQuery(TestQuery, req, parseTestQuery);
-      res.json(query.id);
+    const reqHandler: RequestHandler<
+      ParamsDictionary,
+      any,
+      any,
+      Query,
+      IParsedQueryState<TestQueryParsed>
+    > = (_req, res) => {
+      res.json(res.locals.query.id);
     };
 
-    router.get("/", reqHandler);
+    router.get(
+      "/",
+      validateAndParseQueryMiddleware(TestQuery, parseTestQuery),
+      reqHandler,
+    );
 
     app.use("/", router);
     app.use(errorMiddleware);
@@ -51,12 +62,21 @@ describe("query", () => {
 
     const router = Router();
 
-    const reqHandler: RequestHandler = async (req, res) => {
-      const query = await validateAndParseQuery(TestQuery, req, parseTestQuery);
-      res.json(query.id);
+    const reqHandler: RequestHandler<
+      ParamsDictionary,
+      any,
+      any,
+      Query,
+      IParsedQueryState<TestQueryParsed>
+    > = (_req, res) => {
+      res.json(res.locals.query.id);
     };
 
-    router.get("/", reqHandler);
+    router.get(
+      "/",
+      validateAndParseQueryMiddleware(TestQuery, parseTestQuery),
+      reqHandler,
+    );
 
     app.use("/", router);
     app.use(errorMiddleware);

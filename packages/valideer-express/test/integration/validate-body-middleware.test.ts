@@ -1,12 +1,11 @@
 import { describe, expect, it } from "vitest";
-import Koa from "koa";
-import bodyParsesr from "@koa/bodyparser";
-import Router from "@koa/router";
+import express, { json, RequestHandler, Router } from "express";
+import { IParsedBodyState } from "@valideer/core";
 import { IsDefined, IsNumber, ValidationError } from "class-validator";
-import { Middleware } from "koa";
 import request from "supertest";
+import { validateAndParseBodyMiddleware } from "../../src/validate-body.middleware";
+import { ParamsDictionary, Query } from "express-serve-static-core";
 import { errorMiddleware } from "./utils/error.middleware";
-import { validateAndParseBody } from "../../src/validate-body";
 
 class TestBody {
   @IsDefined()
@@ -25,23 +24,31 @@ function parseTestBody(params: TestBody) {
   return new TestBodyParsed(params);
 }
 
-describe("body middleware", () => {
+describe("body", () => {
   it("should pass", async () => {
-    const app = new Koa();
+    const app = express();
 
-    app.use(errorMiddleware);
-    app.use(bodyParsesr());
+    const router = Router();
 
-    const router = new Router();
-
-    const reqHandler: Middleware = async (ctx) => {
-      const body = await validateAndParseBody(TestBody, ctx, parseTestBody);
-      ctx.body = body.id;
+    const reqHandler: RequestHandler<
+      ParamsDictionary,
+      any,
+      any,
+      Query,
+      IParsedBodyState<TestBodyParsed>
+    > = (_req, res) => {
+      res.json(res.locals.body.id);
     };
 
-    router.post("reqHandler", "/", reqHandler);
+    router.post(
+      "/",
+      json(),
+      validateAndParseBodyMiddleware(TestBody, parseTestBody),
+      reqHandler,
+    );
 
-    app.use(router.routes());
+    app.use("/", router);
+    app.use(errorMiddleware);
 
     const res: request.Response = await request(app.listen())
       .post("/")
@@ -52,21 +59,29 @@ describe("body middleware", () => {
   });
 
   it("should fail", async () => {
-    const app = new Koa();
+    const app = express();
 
-    app.use(errorMiddleware);
-    app.use(bodyParsesr());
+    const router = Router();
 
-    const router = new Router();
-
-    const reqHandler: Middleware = async (ctx) => {
-      const body = await validateAndParseBody(TestBody, ctx, parseTestBody);
-      ctx.body = body.id;
+    const reqHandler: RequestHandler<
+      ParamsDictionary,
+      any,
+      any,
+      Query,
+      IParsedBodyState<TestBodyParsed>
+    > = (_req, res) => {
+      res.json(res.locals.body.id);
     };
 
-    router.post("reqHandler", "/", reqHandler);
+    router.post(
+      "/",
+      json(),
+      validateAndParseBodyMiddleware(TestBody, parseTestBody),
+      reqHandler,
+    );
 
-    app.use(router.routes());
+    app.use("/", router);
+    app.use(errorMiddleware);
 
     const res: request.Response = await request(app.listen())
       .post("/")

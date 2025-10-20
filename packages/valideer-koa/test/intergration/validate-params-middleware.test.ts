@@ -2,30 +2,31 @@ import { describe, expect, it } from "vitest";
 import Koa from "koa";
 import bodyParsesr from "@koa/bodyparser";
 import Router from "@koa/router";
+import { IParsedParamsState } from "@valideer/core";
 import { IsDefined, IsNumberString, ValidationError } from "class-validator";
 import { Middleware } from "koa";
 import request from "supertest";
+import { validateAndParseParamsMiddleware } from "../../src/validate-params.middleware";
 import { errorMiddleware } from "./utils/error.middleware";
-import { validateAndParseQuery } from "../../src/validate-query";
 
-class TestQuery {
+class TestParams {
   @IsDefined()
   @IsNumberString()
   id?: string;
 }
 
-class TestQueryParsed {
+class TestParamsParsed {
   id?: number;
-  constructor(query: TestQuery) {
-    if (query.id != null) this.id = parseInt(query.id);
+  constructor(params: TestParams) {
+    if (params.id != null) this.id = parseInt(params.id);
   }
 }
 
-function parseTestQuery(params: TestQuery) {
-  return new TestQueryParsed(params);
+function parseTestParams(params: TestParams) {
+  return new TestParamsParsed(params);
 }
 
-describe("query middleware", () => {
+describe("params middleware", () => {
   it("should pass", async () => {
     const app = new Koa();
 
@@ -34,18 +35,21 @@ describe("query middleware", () => {
 
     const router = new Router();
 
-    const reqHandler: Middleware = async (ctx) => {
-      const query = await validateAndParseQuery(TestQuery, ctx, parseTestQuery);
-      ctx.body = query.id;
+    const reqHandler: Middleware<IParsedParamsState<TestParams>> = (ctx) => {
+      ctx.body = ctx.state.params.id;
     };
 
-    router.get("reqHandler", "/", reqHandler);
+    router.get(
+      "reqHandler",
+      "/:id",
+      validateAndParseParamsMiddleware(TestParams, parseTestParams),
+      reqHandler,
+    );
 
     app.use(router.routes());
 
     const res: request.Response = await request(app.listen())
-      .get("/")
-      .query({ id: 1 })
+      .get("/1")
       .expect(200);
 
     expect(res.body).toEqual(1);
@@ -59,18 +63,21 @@ describe("query middleware", () => {
 
     const router = new Router();
 
-    const reqHandler: Middleware = async (ctx) => {
-      const query = await validateAndParseQuery(TestQuery, ctx, parseTestQuery);
-      ctx.body = query.id;
+    const reqHandler: Middleware<IParsedParamsState<TestParams>> = (ctx) => {
+      ctx.body = ctx.state.params.id;
     };
 
-    router.get("reqHandler", "/", reqHandler);
+    router.get(
+      "reqHandler",
+      "/:id",
+      validateAndParseParamsMiddleware(TestParams, parseTestParams),
+      reqHandler,
+    );
 
     app.use(router.routes());
 
     const res: request.Response = await request(app.listen())
-      .get("/")
-      .query({ id: "test" })
+      .get("/test")
       .expect(400);
 
     const err = new ValidationError();

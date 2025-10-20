@@ -1,16 +1,9 @@
 import { ClassType } from "class-transformer-validator";
-import { ValidationError } from "class-validator";
 import { ReqHandler } from "./req-handler";
-import {
-  ValidationMiddlewareError,
-  IParsedParamsState,
-  isValidationError,
-  validate,
-  validateAndParse,
-  TransformValidationOptions,
-} from "@valideer/core";
+import { IParsedParamsState, TransformValidationOptions } from "@valideer/core";
+import { validateAndParseParams, validateParams } from "./validate-params";
 
-export const validateParams = <T extends object>(
+export const validateParamsMiddleware = <T extends object>(
   validateionClass: ClassType<T>,
   options?: TransformValidationOptions,
 ): ReqHandler<IParsedParamsState<T>> => {
@@ -22,26 +15,16 @@ export const validateParams = <T extends object>(
       options.validator.skipMissingProperties =
         options?.validator?.skipMissingProperties ?? true;
 
-      res.locals.params = await validate<T>(
-        validateionClass,
-        req.params,
-        options,
-      );
+      res.locals.params = await validateParams(validateionClass, req, options);
 
       next();
     } catch (err) {
-      if (Array.isArray(err) && err.every(isValidationError)) {
-        return next(new ValidationMiddlewareError(err));
-      } else if (err instanceof ValidationError) {
-        return next(new ValidationMiddlewareError([err]));
-      } else {
-        return next(err);
-      }
+      return next(err);
     }
   };
 };
 
-export const validateAndParseParams = <T extends object, U>(
+export const validateAndParseParamsMiddleware = <T extends object, U>(
   validateionClass: ClassType<T>,
   parse: (data: T) => U,
   options?: TransformValidationOptions,
@@ -54,22 +37,16 @@ export const validateAndParseParams = <T extends object, U>(
       options.validator.skipMissingProperties =
         options?.validator?.skipMissingProperties ?? true;
 
-      res.locals.params = await validateAndParse<T, U>(
+      res.locals.params = await validateAndParseParams(
         validateionClass,
-        req.params,
+        req,
         parse,
         options,
       );
 
       next();
     } catch (err) {
-      if (Array.isArray(err) && err.every(isValidationError)) {
-        return next(new ValidationMiddlewareError(err));
-      } else if (err instanceof ValidationError) {
-        return next(new ValidationMiddlewareError([err]));
-      } else {
-        return next(err);
-      }
+      return next(err);
     }
   };
 };

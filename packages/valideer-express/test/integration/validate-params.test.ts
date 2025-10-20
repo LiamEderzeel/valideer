@@ -1,11 +1,9 @@
 import { describe, expect, it } from "vitest";
 import express, { RequestHandler, Router } from "express";
-import { IParsedParamsState } from "@valideer/core";
-import { validateAndParseParams } from "../../src/validate-params.middleware";
 import { IsDefined, IsNumberString, ValidationError } from "class-validator";
 import request from "supertest";
-import { ParamsDictionary, Query } from "express-serve-static-core";
 import { errorMiddleware } from "./utils/error.middleware";
+import { validateAndParseParams } from "../../src/validate-params";
 
 class TestParams {
   @IsDefined()
@@ -30,21 +28,16 @@ describe("params", () => {
 
     const router = Router();
 
-    const reqHandler: RequestHandler<
-      ParamsDictionary,
-      any,
-      any,
-      Query,
-      IParsedParamsState<TestParamsParsed>
-    > = (_req, res) => {
-      res.json(res.locals.params.id);
+    const reqHandler: RequestHandler = async (req, res) => {
+      const params = await validateAndParseParams(
+        TestParams,
+        req,
+        parseTestParams,
+      );
+      res.json(params.id);
     };
 
-    router.get(
-      "/:id",
-      validateAndParseParams(TestParams, parseTestParams),
-      reqHandler,
-    );
+    router.get("/:id", reqHandler);
 
     app.use("/", router);
     app.use(errorMiddleware);
@@ -61,22 +54,16 @@ describe("params", () => {
 
     const router = Router();
 
-    const reqHandler: RequestHandler<
-      ParamsDictionary,
-      any,
-      any,
-      Query,
-      IParsedParamsState<TestParamsParsed>
-    > = (_req, res, next) => {
-      res.json(res.locals.params.id);
-      next();
+    const reqHandler: RequestHandler = async (req, res) => {
+      const params = await validateAndParseParams(
+        TestParams,
+        req,
+        parseTestParams,
+      );
+      res.json(params.id);
     };
 
-    router.get(
-      "/:id",
-      validateAndParseParams(TestParams, parseTestParams),
-      reqHandler,
-    );
+    router.get("/:id", reqHandler);
 
     app.use("/", router);
     app.use(errorMiddleware);

@@ -2,17 +2,11 @@ import {
   ClassType,
   TransformValidationOptions,
 } from "class-transformer-validator";
-import { ValidationError } from "class-validator";
-import {
-  ValidationMiddlewareError,
-  isValidationError,
-  validate,
-  IParsedQueryState,
-  validateAndParse,
-} from "@valideer/core";
+import { IParsedQueryState } from "@valideer/core";
 import { ReqHandler } from "./req-handler";
+import { validateAndParseQuery, validateQuery } from "./validate-query";
 
-export const validateQuery = <T extends object>(
+export const validateQueryMiddleware = <T extends object>(
   validateionClass: ClassType<T>,
   options?: TransformValidationOptions,
 ): ReqHandler<IParsedQueryState<T>> => {
@@ -24,26 +18,16 @@ export const validateQuery = <T extends object>(
       options.validator.skipMissingProperties =
         options?.validator?.skipMissingProperties ?? true;
 
-      res.locals.query = await validate<T>(
-        validateionClass,
-        req.query,
-        options,
-      );
+      res.locals.query = await validateQuery(validateionClass, req, options);
 
       next();
     } catch (err) {
-      if (Array.isArray(err) && err.every(isValidationError)) {
-        return next(new ValidationMiddlewareError(err));
-      } else if (err instanceof ValidationError) {
-        return next(new ValidationMiddlewareError([err]));
-      } else {
-        return next(err);
-      }
+      return next(err);
     }
   };
 };
 
-export const validateAndParseQuery = <T extends object, U>(
+export const validateAndParseQueryMiddleware = <T extends object, U>(
   validateionClass: ClassType<T>,
   parse: (data: T) => U,
   options?: TransformValidationOptions,
@@ -56,22 +40,16 @@ export const validateAndParseQuery = <T extends object, U>(
       options.validator.skipMissingProperties =
         options?.validator?.skipMissingProperties ?? true;
 
-      res.locals.query = await validateAndParse<T, U>(
+      res.locals.query = await validateAndParseQuery(
         validateionClass,
-        req.query,
+        req,
         parse,
         options,
       );
 
       next();
     } catch (err) {
-      if (Array.isArray(err) && err.every(isValidationError)) {
-        return next(new ValidationMiddlewareError(err));
-      } else if (err instanceof ValidationError) {
-        return next(new ValidationMiddlewareError([err]));
-      } else {
-        return next(err);
-      }
+      return next(err);
     }
   };
 };

@@ -1,71 +1,40 @@
 import { ClassType } from "class-transformer-validator";
-import { ValidationError } from "class-validator";
 import { ReqHandler } from "./req-handler";
-import {
-  ValidationMiddlewareError,
-  isValidationError,
-  validate,
-  validateAndParse,
-  IParsedBodyState,
-  TransformValidationOptions,
-} from "@valideer/core";
+import { IParsedBodyState, TransformValidationOptions } from "@valideer/core";
+import { validateAndParseBody, validateBody } from "./validate-body";
 
-export const validateBody = <T extends object>(
+export const validateBodyMiddleware = <T extends object>(
   validateionClass: ClassType<T>,
   options?: TransformValidationOptions,
 ): ReqHandler<IParsedBodyState<T>> => {
   return async (req, res, next) => {
     try {
-      if (!options) options = {};
-      options.validator = options?.validator ?? {};
-      options.validator.whitelist = options?.validator?.whitelist ?? false;
-      options.validator.skipMissingProperties =
-        options?.validator?.skipMissingProperties ?? true;
-
-      res.locals.body = await validate<T>(validateionClass, req.body, options);
+      res.locals.body = await validateBody(validateionClass, req, options);
 
       next();
     } catch (err) {
-      if (Array.isArray(err) && err.every(isValidationError)) {
-        return next(new ValidationMiddlewareError(err));
-      } else if (err instanceof ValidationError) {
-        return next(new ValidationMiddlewareError([err]));
-      } else {
-        return next(err);
-      }
+      return next(err);
     }
   };
 };
 
-export const validateAndParseBody = <T extends object, U>(
+export const validateAndParseBodyMiddleware = <T extends object, U>(
   validateionClass: ClassType<T>,
   parse: (data: T) => U,
   options?: TransformValidationOptions,
 ): ReqHandler<IParsedBodyState<U>> => {
   return async (req, res, next) => {
     try {
-      if (!options) options = {};
-      options.validator = options?.validator ?? {};
-      options.validator.whitelist = options?.validator?.whitelist ?? false;
-      options.validator.skipMissingProperties =
-        options?.validator?.skipMissingProperties ?? true;
-
-      res.locals.body = await validateAndParse<T, U>(
+      res.locals.body = await validateAndParseBody(
         validateionClass,
-        req.body,
+        req,
         parse,
         options,
       );
 
       next();
     } catch (err) {
-      if (Array.isArray(err) && err.every(isValidationError)) {
-        return next(new ValidationMiddlewareError(err));
-      } else if (err instanceof ValidationError) {
-        return next(new ValidationMiddlewareError([err]));
-      } else {
-        return next(err);
-      }
+      return next(err);
     }
   };
 };
