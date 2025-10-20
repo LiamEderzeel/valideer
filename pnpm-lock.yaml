@@ -19,7 +19,7 @@ catalogs:
       specifier: ^14.0.0
       version: 14.0.0
     '@types/koa':
-      specifier: 3.0.0
+      specifier: ^3.0.0
       version: 3.0.0
     '@types/koa__router':
       specifier: ^12.0.4
@@ -96,7 +96,7 @@ importers:
         specifier: 'catalog:'
         version: 9.38.0
       '@types/koa':
-        specifier: ^3.0.0
+        specifier: 'catalog:'
         version: 3.0.0
       '@types/node':
         specifier: 'catalog:'

@@ -21,7 +21,7 @@
   "devDependencies": {
     "@changesets/cli": "catalog:",
     "@eslint/js": "catalog:",
-    "@types/koa": "^3.0.0",
+    "@types/koa": "catalog:",
     "@types/node": "catalog:",
     "@typescript-eslint/eslint-plugin": "catalog:",
     "@typescript-eslint/parser": "catalog:",
