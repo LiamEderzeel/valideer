@@ -221,6 +221,9 @@ importers:
       '@koa/router':
         specifier: 'catalog:'
         version: 14.0.0
+      '@standard-schema/spec':
+        specifier: 'catalog:'
+        version: 1.0.0
       '@types/koa':
         specifier: 'catalog:'
         version: 3.0.0
