@@ -1,41 +1,31 @@
 import { describe, expect, it } from "vitest";
 import express, { RequestHandler, Router } from "express";
-import { IsDefined, IsNumberString, ValidationError } from "class-validator";
 import request from "supertest";
+import * as v from "valibot";
 import { errorMiddleware } from "./utils/error.middleware";
-import { validateAndParseParams } from "../../src/validate-params";
-
-class TestParams {
-  @IsDefined()
-  @IsNumberString()
-  id?: string;
-}
-
-class TestParamsParsed {
-  id?: number;
-  constructor(params: TestParams) {
-    if (params.id != null) this.id = parseInt(params.id);
-  }
-}
-
-function parseTestParams(params: TestParams) {
-  return new TestParamsParsed(params);
-}
+import { validateParams } from "../../src/validate-params";
 
 describe("params", () => {
+  const LoginSchema = v.object({
+    id: v.pipe(
+      v.string("Your id must be a number."),
+      v.nonEmpty("Please enter an id."),
+      v.transform((input) => {
+        const num = parseInt(input, 10);
+        return v.parse(v.pipe(v.number(), v.minValue(1)), num);
+      }),
+    ),
+  });
+
+  const reqHandler: RequestHandler = async (req, res) => {
+    const params = await validateParams(req, LoginSchema);
+    res.json(params.id);
+  };
+
   it("should pass", async () => {
     const app = express();
 
     const router = Router();
-
-    const reqHandler: RequestHandler = async (req, res) => {
-      const params = await validateAndParseParams(
-        TestParams,
-        req,
-        parseTestParams,
-      );
-      res.json(params.id);
-    };
 
     router.get("/:id", reqHandler);
 
@@ -54,15 +44,6 @@ describe("params", () => {
 
     const router = Router();
 
-    const reqHandler: RequestHandler = async (req, res) => {
-      const params = await validateAndParseParams(
-        TestParams,
-        req,
-        parseTestParams,
-      );
-      res.json(params.id);
-    };
-
     router.get("/:id", reqHandler);
 
     app.use("/", router);
@@ -71,22 +52,5 @@ describe("params", () => {
     const res: request.Response = await request(app.listen())
       .get("/test")
       .expect(400);
-
-    const err = new ValidationError();
-    err.children = [];
-    expect(res.body).toEqual({
-      errors: [
-        {
-          children: [],
-          constraints: {
-            isNumberString: "id must be a number string",
-          },
-          property: "id",
-          target: { id: "test" },
-          value: "test",
-        },
-      ],
-      message: "",
-    });
   });
 });

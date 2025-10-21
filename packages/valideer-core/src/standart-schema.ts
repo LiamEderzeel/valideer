@@ -56,7 +56,7 @@ export type ErrorDetails = Error & { cause?: unknown };
 
 export class ValideerError extends Error {
   override get name(): string {
-    return "HTTPError";
+    return "ValideerError";
   }
 
   constructor(message: string, details?: ErrorDetails);
@@ -71,7 +71,6 @@ export class ValideerError extends Error {
     } else {
       details = arg1;
     }
-
     const message: string =
       messageInput ||
       details?.message ||

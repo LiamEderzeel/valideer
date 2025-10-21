@@ -43,6 +43,7 @@
     "@types/supertest": "catalog:",
     "koa": "catalog:",
     "supertest": "catalog:",
+    "valibot": "catalog:",
     "vitest": "catalog:"
   }
 }

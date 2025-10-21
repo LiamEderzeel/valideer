@@ -38,8 +38,8 @@ describe("Standard schema test", () => {
     // Valibot
     const LoginSchema = v.object({
       id: v.pipe(
-        v.string("Your email must be a string."),
-        v.nonEmpty("Please enter your email."),
+        v.string("Your id must be a string."),
+        v.nonEmpty("Please enter an id."),
         v.transform((input) => {
           const num = parseInt(input, 10);
           return v.parse(v.pipe(v.number(), v.minValue(1)), num);

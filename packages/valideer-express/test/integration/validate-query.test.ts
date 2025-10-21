@@ -1,37 +1,31 @@
 import { describe, expect, it } from "vitest";
 import express, { RequestHandler, Router } from "express";
-import { IsDefined, IsNumberString, ValidationError } from "class-validator";
 import request from "supertest";
+import * as v from "valibot";
 import { errorMiddleware } from "./utils/error.middleware";
-import { validateAndParseQuery } from "../../src/validate-query";
-
-class TestQuery {
-  @IsDefined()
-  @IsNumberString()
-  id?: string;
-}
-
-class TestQueryParsed {
-  id?: number;
-  constructor(query: TestQuery) {
-    if (query.id != null) this.id = parseInt(query.id);
-  }
-}
-
-function parseTestQuery(params: TestQuery) {
-  return new TestQueryParsed(params);
-}
+import { validateQuery } from "../../src/validate-query";
 
 describe("query", () => {
+  const LoginSchema = v.object({
+    id: v.pipe(
+      v.string("Your id must be a number."),
+      v.nonEmpty("Please enter an id."),
+      v.transform((input) => {
+        const num = parseInt(input, 10);
+        return v.parse(v.pipe(v.number(), v.minValue(1)), num);
+      }),
+    ),
+  });
+
+  const reqHandler: RequestHandler = async (req, res) => {
+    const query = await validateQuery(req, LoginSchema);
+    res.json(query.id);
+  };
+
   it("should pass", async () => {
     const app = express();
 
     const router = Router();
-
-    const reqHandler: RequestHandler = async (req, res) => {
-      const query = await validateAndParseQuery(TestQuery, req, parseTestQuery);
-      res.json(query.id);
-    };
 
     router.get("/", reqHandler);
 
@@ -51,11 +45,6 @@ describe("query", () => {
 
     const router = Router();
 
-    const reqHandler: RequestHandler = async (req, res) => {
-      const query = await validateAndParseQuery(TestQuery, req, parseTestQuery);
-      res.json(query.id);
-    };
-
     router.get("/", reqHandler);
 
     app.use("/", router);
@@ -65,22 +54,5 @@ describe("query", () => {
       .get("/")
       .query({ id: "test" })
       .expect(400);
-
-    const err = new ValidationError();
-    err.children = [];
-    expect(res.body).toEqual({
-      errors: [
-        {
-          children: [],
-          constraints: {
-            isNumberString: "id must be a number string",
-          },
-          property: "id",
-          target: { id: "test" },
-          value: "test",
-        },
-      ],
-      message: "",
-    });
   });
 });

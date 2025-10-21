@@ -14,6 +14,7 @@ export * from "./parsed-params-state";
 export * from "./parsed-body-state";
 export * from "./is-validation-error";
 export * from "./validation";
+export * from "./standart-schema";
 
 export class ValidationMiddlewareError extends Error {
   errors: ValidationError[];
