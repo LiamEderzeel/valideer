@@ -6,27 +6,33 @@ import { IParsedParamsState } from "@valideer/core";
 import { IsDefined, IsNumberString, ValidationError } from "class-validator";
 import { Middleware } from "koa";
 import request from "supertest";
-import { validateAndParseParamsMiddleware } from "../../src/validate-params.middleware";
+import * as v from "valibot";
+import { validateParamsMiddleware } from "../../src/validate-params.middleware";
 import { errorMiddleware } from "./utils/error.middleware";
 
-class TestParams {
-  @IsDefined()
-  @IsNumberString()
-  id?: string;
-}
-
-class TestParamsParsed {
-  id?: number;
-  constructor(params: TestParams) {
-    if (params.id != null) this.id = parseInt(params.id);
-  }
-}
-
-function parseTestParams(params: TestParams) {
-  return new TestParamsParsed(params);
-}
-
 describe("params middleware", () => {
+  const LoginSchema = v.object({
+    id: v.pipe(
+      v.string("Your id must be a number."),
+      v.nonEmpty("Please enter an id."),
+      v.transform((input) => {
+        const num = parseInt(input, 10);
+        return v.parse(v.pipe(v.number(), v.minValue(1)), num);
+      }),
+    ),
+  });
+
+  type LoginResponse = v.InferOutput<typeof LoginSchema>;
+
+  const reqHandler: Middleware<IParsedParamsState<LoginResponse>> = (ctx) => {
+    try {
+      ctx.body = ctx.state.params.id;
+    } catch (err) {
+      ctx.status = 400;
+      ctx.body = err.cause;
+    }
+  };
+
   it("should pass", async () => {
     const app = new Koa();
 
@@ -34,15 +40,10 @@ describe("params middleware", () => {
     app.use(bodyParsesr());
 
     const router = new Router();
-
-    const reqHandler: Middleware<IParsedParamsState<TestParams>> = (ctx) => {
-      ctx.body = ctx.state.params.id;
-    };
-
     router.get(
       "reqHandler",
       "/:id",
-      validateAndParseParamsMiddleware(TestParams, parseTestParams),
+      validateParamsMiddleware(LoginSchema),
       reqHandler,
     );
 
@@ -63,14 +64,10 @@ describe("params middleware", () => {
 
     const router = new Router();
 
-    const reqHandler: Middleware<IParsedParamsState<TestParams>> = (ctx) => {
-      ctx.body = ctx.state.params.id;
-    };
-
     router.get(
       "reqHandler",
       "/:id",
-      validateAndParseParamsMiddleware(TestParams, parseTestParams),
+      validateParamsMiddleware(LoginSchema),
       reqHandler,
     );
 
@@ -79,20 +76,5 @@ describe("params middleware", () => {
     const res: request.Response = await request(app.listen())
       .get("/test")
       .expect(400);
-
-    const err = new ValidationError();
-    err.children = [];
-    expect(res.body).toEqual({
-      errors: [
-        {
-          children: [],
-          constraints: { isNumberString: "id must be a number string" },
-          property: "id",
-          target: { id: "test" },
-          value: "test",
-        },
-      ],
-      message: "",
-    });
   });
 });

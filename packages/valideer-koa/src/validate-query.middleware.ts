@@ -1,30 +1,32 @@
-import { ClassType } from "class-transformer-validator";
-import { Middleware } from "koa";
-import { IParsedQueryState, TransformValidationOptions } from "@valideer/core";
-import { validateAndParseQuery, validateQuery } from "./validate-query";
+import { Middleware, ParameterizedContext } from "koa";
+import { IParsedQueryState, ValidateResult } from "@valideer/core";
+import { validateQuery } from "./validate-query";
+import { StandardSchemaV1 } from "@standard-schema/spec";
+import { InferKoaInput } from "./context";
 
-export const validateQueryMiddleware = <T extends object>(
-  validateionClass: ClassType<T>,
-  options?: TransformValidationOptions,
-): Middleware<IParsedQueryState<T>> => {
-  return async (ctx, next) => {
-    await validateQuery(validateionClass, ctx, options);
-    await next();
-  };
-};
+export function validateQueryMiddleware<
+  Context extends ParameterizedContext,
+  S extends StandardSchemaV1,
+>(validate: S): Middleware<IParsedQueryState<StandardSchemaV1.InferOutput<S>>>;
+export function validateQueryMiddleware<
+  Context extends ParameterizedContext,
+  OutputT,
+  InputT = InferKoaInput<"query", Context, OutputT>,
+>(
+  validate: (
+    data: InputT,
+  ) => ValidateResult<OutputT> | Promise<ValidateResult<OutputT>>,
+): Middleware<IParsedQueryState<OutputT>>;
 
-export const validateAndParseQueryMiddleware = <T extends object, U>(
-  validateionClass: ClassType<T>,
-  parse: (data: T) => U,
-  options?: TransformValidationOptions,
-): Middleware<IParsedQueryState<U>> => {
+export function validateQueryMiddleware(
+  validate: any,
+): Middleware<IParsedQueryState<any>> {
   return async (ctx, next) => {
-    ctx.state.query = await validateAndParseQuery(
-      validateionClass,
-      ctx,
-      parse,
-      options,
-    );
-    await next();
+    try {
+      ctx.state.query = await validateQuery(ctx, validate);
+      await next();
+    } catch (err) {
+      throw err;
+    }
   };
-};
+}

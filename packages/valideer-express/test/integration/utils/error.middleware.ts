@@ -1,6 +1,7 @@
-import { ValidationMiddlewareError } from "@valideer/core";
+import { ValidationMiddlewareError, ValideerError } from "@valideer/core";
 import { ValidationError } from "class-validator";
 import { ErrorRequestHandler } from "express";
+import { ValiError } from "valibot";
 
 const logError = (err: ValidationError) => {
   console.log(err);
@@ -15,7 +16,18 @@ export const errorMiddleware: ErrorRequestHandler = async (
   res,
   _next,
 ) => {
-  console.log(error);
+  if (error instanceof ValiError) {
+    const { message } = error;
+    res.status(400);
+    res.json({ message, error });
+    return;
+  }
+  if (error instanceof ValideerError) {
+    const { message } = error;
+    res.status(400);
+    res.json({ message, error });
+    return;
+  }
   if (error instanceof ValidationMiddlewareError) {
     const { errors, message } = error;
     error.errors.forEach((x) => logError(x));

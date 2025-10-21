@@ -1,55 +1,32 @@
-import {
-  ClassType,
-  TransformValidationOptions,
-} from "class-transformer-validator";
-import { IParsedQueryState } from "@valideer/core";
 import { ReqHandler } from "./req-handler";
-import { validateAndParseQuery, validateQuery } from "./validate-query";
+import { IParsedQueryState, ValidateResult } from "@valideer/core";
+import { ExpressRequest, InferExpressInput } from "./request";
+import { StandardSchemaV1 } from "@standard-schema/spec";
+import { validateQuery } from "./validate-query";
 
-export const validateQueryMiddleware = <T extends object>(
-  validateionClass: ClassType<T>,
-  options?: TransformValidationOptions,
-): ReqHandler<IParsedQueryState<T>> => {
+export function validateQueryMiddleware<
+  Req extends ExpressRequest,
+  S extends StandardSchemaV1,
+>(validate: S): ReqHandler<IParsedQueryState<StandardSchemaV1.InferOutput<S>>>;
+export function validateQueryMiddleware<
+  Req extends ExpressRequest,
+  OutputT,
+  InputT = InferExpressInput<"params", Req, OutputT>,
+>(
+  validate: (
+    data: InputT,
+  ) => ValidateResult<OutputT> | Promise<ValidateResult<OutputT>>,
+): ReqHandler<IParsedQueryState<OutputT>>;
+export function validateQueryMiddleware(
+  validate: any,
+): ReqHandler<IParsedQueryState<any>> {
   return async (req, res, next) => {
     try {
-      if (!options) options = {};
-      options.validator = options?.validator ?? {};
-      options.validator.whitelist = options?.validator?.whitelist ?? false;
-      options.validator.skipMissingProperties =
-        options?.validator?.skipMissingProperties ?? true;
-
-      res.locals.query = await validateQuery(validateionClass, req, options);
+      res.locals.query = await validateQuery(req, validate);
 
       next();
     } catch (err) {
       return next(err);
     }
   };
-};
-
-export const validateAndParseQueryMiddleware = <T extends object, U>(
-  validateionClass: ClassType<T>,
-  parse: (data: T) => U,
-  options?: TransformValidationOptions,
-): ReqHandler<IParsedQueryState<U>> => {
-  return async (req, res, next) => {
-    try {
-      if (!options) options = {};
-      options.validator = options?.validator ?? {};
-      options.validator.whitelist = options?.validator?.whitelist ?? false;
-      options.validator.skipMissingProperties =
-        options?.validator?.skipMissingProperties ?? true;
-
-      res.locals.query = await validateAndParseQuery(
-        validateionClass,
-        req,
-        parse,
-        options,
-      );
-
-      next();
-    } catch (err) {
-      return next(err);
-    }
-  };
-};
+}
