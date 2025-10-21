@@ -1,79 +1,23 @@
-import {
-  ClassType,
-  TransformValidationOptions,
-} from "class-transformer-validator";
-import { ValidationError } from "class-validator";
-import {
-  ValidationMiddlewareError,
-  isValidationError,
-  validate,
-  validateAndParse,
-} from "@valideer/core";
 import { Request } from "express";
-import * as core from "express-serve-static-core";
+import { ValidateResult, validateData } from "@valideer/core";
+import { StandardSchemaV1 } from "@standard-schema/spec";
+import { ExpressRequest, InferExpressInput } from "./request";
 
-export const validateQuery = async <T extends object>(
-  validateionClass: ClassType<T>,
-  req: Request<
-    core.ParamsDictionary,
-    any,
-    any,
-    core.Query,
-    Record<string, any>
-  >,
-  options?: TransformValidationOptions,
-) => {
-  try {
-    if (!options) options = {};
-    options.validator = options?.validator ?? {};
-    options.validator.whitelist = options?.validator?.whitelist ?? false;
-    options.validator.skipMissingProperties =
-      options?.validator?.skipMissingProperties ?? true;
-
-    return await validate<T>(validateionClass, req.query, options);
-  } catch (err) {
-    if (Array.isArray(err) && err.every(isValidationError)) {
-      throw new ValidationMiddlewareError(err);
-    } else if (err instanceof ValidationError) {
-      throw new ValidationMiddlewareError([err]);
-    } else {
-      throw err;
-    }
-  }
-};
-
-export const validateAndParseQuery = async <T extends object, U>(
-  validateionClass: ClassType<T>,
-  req: Request<
-    core.ParamsDictionary,
-    any,
-    any,
-    core.Query,
-    Record<string, any>
-  >,
-  parse: (data: T) => U,
-  options?: TransformValidationOptions,
-) => {
-  try {
-    if (!options) options = {};
-    options.validator = options?.validator ?? {};
-    options.validator.whitelist = options?.validator?.whitelist ?? false;
-    options.validator.skipMissingProperties =
-      options?.validator?.skipMissingProperties ?? true;
-
-    return await validateAndParse<T, U>(
-      validateionClass,
-      req.query,
-      parse,
-      options,
-    );
-  } catch (err) {
-    if (Array.isArray(err) && err.every(isValidationError)) {
-      throw new ValidationMiddlewareError(err);
-    } else if (err instanceof ValidationError) {
-      throw new ValidationMiddlewareError([err]);
-    } else {
-      throw err;
-    }
-  }
-};
+export async function validateQuery<
+  Req extends ExpressRequest,
+  S extends StandardSchemaV1,
+>(req: Req, validate: S): Promise<StandardSchemaV1.InferOutput<S>>;
+export async function validateQuery<
+  Req extends ExpressRequest,
+  OutputT,
+  InputT = InferExpressInput<"query", Req, OutputT>,
+>(
+  req: Req,
+  validate: (
+    data: InputT,
+  ) => ValidateResult<OutputT> | Promise<ValidateResult<OutputT>>,
+): Promise<OutputT>;
+export async function validateQuery(req: Request, validate: any): Promise<any> {
+  const t = await validateData(req.query, validate);
+  return t;
+}
