@@ -1,6 +1,6 @@
 {
   "name": "@valideer/core",
-  "version": "0.1.0-alpha.25",
+  "version": "0.1.0-alpha.26",
   "description": "",
   "main": "./lib/cjs/index.js",
   "module": "./lib/ems.index.js",
@@ -29,10 +29,10 @@
   "author": "Liam Ederzeel",
   "license": "MIT",
   "dependencies": {
-    "reflect-metadata": "catalog:",
     "bson": "catalog:",
     "class-transformer": "catalog:",
     "class-transformer-validator": "catalog:",
-    "class-validator": "catalog:"
+    "class-validator": "catalog:",
+    "reflect-metadata": "catalog:"
   }
 }
