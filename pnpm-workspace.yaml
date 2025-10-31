@@ -17,7 +17,7 @@ catalog:
   koa: ^3.0.2
   lerna: ^8.2.4
   oxlint: ^1.23.0
-  oxlint-tsgolint: ^0.2.0
+  oxlint-tsgolint: ^0.3.0
   prettier: ^3.6.2
   reflect-metadata: 0.2.2
   supertest: ^7.1.4
