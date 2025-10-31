@@ -15,6 +15,9 @@ catalogs:
     '@koa/router':
       specifier: ^14.0.0
       version: 14.0.0
+    '@standard-schema/spec':
+      specifier: 1.0.0
+      version: 1.0.0
     '@types/koa':
       specifier: ^3.0.0
       version: 3.0.0
@@ -57,6 +60,9 @@ catalogs:
     prettier:
       specifier: ^3.6.2
       version: 3.6.2
+    qs:
+      specifier: ^6.14.0
+      version: 6.14.0
     reflect-metadata:
       specifier: 0.2.2
       version: 0.2.2
@@ -69,6 +75,9 @@ catalogs:
     typescript:
       specifier: ^5.9.3
       version: 5.9.3
+    valibot:
+      specifier: 1.1.0
+      version: 1.1.0
     vitepress:
       specifier: ^1.6.4
       version: 1.6.4
@@ -134,6 +143,13 @@ importers:
       reflect-metadata:
         specifier: 'catalog:'
         version: 0.2.2
+    devDependencies:
+      '@standard-schema/spec':
+        specifier: 'catalog:'
+        version: 1.0.0
+      valibot:
+        specifier: 'catalog:'
+        version: 1.1.0(typescript@5.9.3)
 
   packages/valideer-express:
     dependencies:
@@ -155,7 +171,13 @@ importers:
       class-validator:
         specifier: 'catalog:'
         version: 0.14.2
+      qs:
+        specifier: 'catalog:'
+        version: 6.14.0
     devDependencies:
+      '@standard-schema/spec':
+        specifier: 'catalog:'
+        version: 1.0.0
       '@types/express':
         specifier: ^5.0.0
         version: 5.0.3
@@ -168,6 +190,9 @@ importers:
       supertest:
         specifier: 'catalog:'
         version: 7.1.4
+      valibot:
+        specifier: 'catalog:'
+        version: 1.1.0(typescript@5.9.3)
       vitest:
         specifier: 'catalog:'
         version: 2.1.9(@types/node@22.18.11)(terser@5.44.0)
@@ -196,6 +221,9 @@ importers:
       '@koa/router':
         specifier: 'catalog:'
         version: 14.0.0
+      '@standard-schema/spec':
+        specifier: 'catalog:'
+        version: 1.0.0
       '@types/koa':
         specifier: 'catalog:'
         version: 3.0.0
@@ -211,6 +239,9 @@ importers:
       supertest:
         specifier: 'catalog:'
         version: 7.1.4
+      valibot:
+        specifier: 'catalog:'
+        version: 1.1.0(typescript@5.9.3)
       vitest:
         specifier: 'catalog:'
         version: 2.1.9(@types/node@22.18.11)(terser@5.44.0)
@@ -1053,6 +1084,9 @@ packages:
 
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
+
+  '@standard-schema/spec@1.0.0':
+    resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
 
   '@tsconfig/node10@1.0.11':
     resolution: {integrity: sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==}
@@ -3762,6 +3796,14 @@ packages:
   v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
 
+  valibot@1.1.0:
+    resolution: {integrity: sha512-Nk8lX30Qhu+9txPYTwM0cFlWLdPFsFr6LblzqIySfbZph9+BFsAHsNvHOymEviUepeIW6KFHzpX8TKhbptBXXw==}
+    peerDependencies:
+      typescript: '>=5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   validate-npm-package-license@3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
 
@@ -4974,6 +5016,8 @@ snapshots:
       '@sigstore/protobuf-specs': 0.3.3
 
   '@sinclair/typebox@0.27.8': {}
+
+  '@standard-schema/spec@1.0.0': {}
 
   '@tsconfig/node10@1.0.11': {}
 
@@ -7946,6 +7990,10 @@ snapshots:
   uuid@10.0.0: {}
 
   v8-compile-cache-lib@3.0.1: {}
+
+  valibot@1.1.0(typescript@5.9.3):
+    optionalDependencies:
+      typescript: 5.9.3
 
   validate-npm-package-license@3.0.4:
     dependencies:

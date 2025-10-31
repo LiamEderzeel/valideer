@@ -1,31 +1,31 @@
-import { ClassType } from "class-transformer-validator";
-import { Middleware } from "koa";
-import { IParsedBodyState, TransformValidationOptions } from "@valideer/core";
-import "@koa/bodyparser";
-import { validateAndParseBody, validateBody } from "./validate-body";
+import { Middleware, ParameterizedContext } from "koa";
+import { IParsedBodyState, ValidateResult } from "@valideer/core";
+import { validateBody } from "./validate-body";
+import { StandardSchemaV1 } from "@standard-schema/spec";
+import { InferKoaInput } from "./context";
 
-export const validateBodyMiddleware = <T extends object>(
-  validateionClass: ClassType<T>,
-  options?: TransformValidationOptions,
-): Middleware<IParsedBodyState<T>> => {
+export function validateBodyMiddleware<
+  Context extends ParameterizedContext,
+  S extends StandardSchemaV1,
+>(validate: S): Middleware<IParsedBodyState<StandardSchemaV1.InferOutput<S>>>;
+export function validateBodyMiddleware<
+  Context extends ParameterizedContext,
+  OutputT,
+  InputT = InferKoaInput<"body", Context, OutputT>,
+>(
+  validate: (
+    data: InputT,
+  ) => ValidateResult<OutputT> | Promise<ValidateResult<OutputT>>,
+): Middleware<IParsedBodyState<OutputT>>;
+export function validateBodyMiddleware(
+  validate: any,
+): Middleware<IParsedBodyState<any>> {
   return async (ctx, next) => {
-    ctx.state.body = await validateBody(validateionClass, ctx, options);
-    await next();
+    try {
+      ctx.state.body = await validateBody(ctx, validate);
+      await next();
+    } catch (err) {
+      throw err;
+    }
   };
-};
-
-export const validateAndParseBodyMiddleware = <T extends object, U>(
-  validationClass: ClassType<T>,
-  parse: (data: T) => U,
-  options?: TransformValidationOptions,
-): Middleware<IParsedBodyState<U>> => {
-  return async (ctx, next) => {
-    ctx.state.body = await validateAndParseBody(
-      validationClass,
-      ctx,
-      parse,
-      options,
-    );
-    await next();
-  };
-};
+}

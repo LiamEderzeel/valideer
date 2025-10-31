@@ -1,40 +1,32 @@
-import { ClassType } from "class-transformer-validator";
 import { ReqHandler } from "./req-handler";
-import { IParsedBodyState, TransformValidationOptions } from "@valideer/core";
-import { validateAndParseBody, validateBody } from "./validate-body";
+import { IParsedBodyState, ValidateResult } from "@valideer/core";
+import { validateBody } from "./validate-body";
+import { ExpressRequest, InferExpressInput } from "./request";
+import { StandardSchemaV1 } from "@standard-schema/spec";
 
-export const validateBodyMiddleware = <T extends object>(
-  validateionClass: ClassType<T>,
-  options?: TransformValidationOptions,
-): ReqHandler<IParsedBodyState<T>> => {
+export function validateBodyMiddleware<
+  Req extends ExpressRequest,
+  S extends StandardSchemaV1,
+>(validate: S): ReqHandler<IParsedBodyState<StandardSchemaV1.InferOutput<S>>>;
+export function validateBodyMiddleware<
+  Req extends ExpressRequest,
+  OutputT,
+  InputT = InferExpressInput<"body", Req, OutputT>,
+>(
+  validate: (
+    data: InputT,
+  ) => ValidateResult<OutputT> | Promise<ValidateResult<OutputT>>,
+): ReqHandler<IParsedBodyState<OutputT>>;
+export function validateBodyMiddleware(
+  validate: any,
+): ReqHandler<IParsedBodyState<any>> {
   return async (req, res, next) => {
     try {
-      res.locals.body = await validateBody(validateionClass, req, options);
+      res.locals.body = await validateBody(req, validate);
 
       next();
     } catch (err) {
       return next(err);
     }
   };
-};
-
-export const validateAndParseBodyMiddleware = <T extends object, U>(
-  validateionClass: ClassType<T>,
-  parse: (data: T) => U,
-  options?: TransformValidationOptions,
-): ReqHandler<IParsedBodyState<U>> => {
-  return async (req, res, next) => {
-    try {
-      res.locals.body = await validateAndParseBody(
-        validateionClass,
-        req,
-        parse,
-        options,
-      );
-
-      next();
-    } catch (err) {
-      return next(err);
-    }
-  };
-};
+}
