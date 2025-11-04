@@ -36,6 +36,7 @@
   "devDependencies": {
     "@standard-schema/spec": "catalog:",
     "@types/express": "^5.0.0",
+    "@types/qs": "catalog:",
     "@types/supertest": "catalog:",
     "express": "catalog:",
     "supertest": "catalog:",

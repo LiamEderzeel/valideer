@@ -1,5 +1,5 @@
 import {
-  Context as KoaContext,
+  Context,
   DefaultContext,
   DefaultState,
   ParameterizedContext,
@@ -7,11 +7,11 @@ import {
 
 type KoaInputMap = {
   // Koa router parameters are usually on ctx.params
-  params: KoaContext["params"];
+  params: Context["params"];
   // Query parameters are on ctx.query
-  query: KoaContext["query"];
+  query: Context["query"];
   // Body is on ctx.request.body (assuming a body parser)
-  body: KoaContext["request"]["body"];
+  body: Context["request"]["body"];
 };
 
 /**
@@ -33,8 +33,8 @@ export type InferKoaInput<
   T = void,
 > = void extends T
   ? Context extends KoaInputContext<infer E> // Check against the new structure
-    ? E[Key]
-    : KoaInputMap[Key] // Fallback to the default type if no specific override
+  ? E[Key]
+  : KoaInputMap[Key] // Fallback to the default type if no specific override
   : T;
 
 export type KoaInputContext<E extends Partial<KoaInputMap> = KoaInputMap> =
