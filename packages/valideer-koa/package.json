@@ -37,11 +37,14 @@
   "devDependencies": {
     "@koa/bodyparser": "catalog:",
     "@koa/router": "catalog:",
+    "@standard-schema/spec": "catalog:",
     "@types/koa": "catalog:",
+    "@types/koa-bodyparser": "catalog:",
     "@types/koa__router": "catalog:",
     "@types/supertest": "catalog:",
     "koa": "catalog:",
     "supertest": "catalog:",
+    "valibot": "catalog:",
     "vitest": "catalog:"
   }
 }

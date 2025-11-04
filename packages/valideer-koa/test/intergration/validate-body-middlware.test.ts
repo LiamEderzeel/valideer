@@ -3,30 +3,30 @@ import Koa from "koa";
 import bodyParsesr from "@koa/bodyparser";
 import Router from "@koa/router";
 import { IParsedBodyState } from "@valideer/core";
-import { IsDefined, IsNumber, ValidationError } from "class-validator";
 import { Middleware } from "koa";
 import request from "supertest";
-import { validateAndParseBodyMiddleware } from "../../src/validate-body.middleware";
+import * as v from "valibot";
+import { validateBodyMiddleware } from "../../src/validate-body.middleware";
 import { errorMiddleware } from "./utils/error.middleware";
 
-class TestBody {
-  @IsDefined()
-  @IsNumber()
-  id?: string;
-}
-
-class TestBodyParsed {
-  id?: number;
-  constructor(body: TestBody) {
-    if (body.id != null) this.id = parseInt(body.id);
-  }
-}
-
-function parseTestBody(params: TestBody) {
-  return new TestBodyParsed(params);
-}
-
 describe("body middleware", () => {
+  const LoginSchema = v.object({
+    id: v.pipe(
+      v.number("id must be a number conforming to the specified constraints"),
+    ),
+  });
+
+  type LoginResponse = v.InferOutput<typeof LoginSchema>;
+
+  const reqHandler: Middleware<IParsedBodyState<LoginResponse>> = (ctx) => {
+    try {
+      ctx.body = ctx.state.body.id;
+    } catch (err) {
+      ctx.status = 400;
+      ctx.body = err.cause;
+    }
+  };
+
   it("should pass", async () => {
     const app = new Koa();
 
@@ -35,14 +35,10 @@ describe("body middleware", () => {
 
     const router = new Router();
 
-    const reqHandler: Middleware<IParsedBodyState<TestBody>> = (ctx) => {
-      ctx.body = ctx.state.body.id;
-    };
-
     router.post(
       "reqHandler",
       "/",
-      validateAndParseBodyMiddleware(TestBody, parseTestBody),
+      validateBodyMiddleware(LoginSchema),
       reqHandler,
     );
 
@@ -64,14 +60,10 @@ describe("body middleware", () => {
 
     const router = new Router();
 
-    const reqHandler: Middleware<IParsedBodyState<TestBody>> = (ctx) => {
-      ctx.body = ctx.state.body.id;
-    };
-
     router.post(
       "reqHandler",
       "/",
-      validateAndParseBodyMiddleware(TestBody, parseTestBody),
+      validateBodyMiddleware(LoginSchema),
       reqHandler,
     );
 
@@ -81,23 +73,5 @@ describe("body middleware", () => {
       .post("/")
       .send({ id: "test" })
       .expect(400);
-
-    const err = new ValidationError();
-    err.children = [];
-    expect(res.body).toEqual({
-      errors: [
-        {
-          children: [],
-          constraints: {
-            isNumber:
-              "id must be a number conforming to the specified constraints",
-          },
-          property: "id",
-          target: { id: "test" },
-          value: "test",
-        },
-      ],
-      message: "",
-    });
   });
 });
