@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.28 (2025-11-26)
+
+### Features
+
+* replace lerna with lerna-lite ([6d17ece](https://github.com/LiamEderzeel/valideer/commit/6d17ece04a0a6289b8fbad0710a8489d58b34eee))
+
 # 0.1.0-alpha.27 (2025-10-31)
 
 **Note:** Version bump only for package @valideer/express

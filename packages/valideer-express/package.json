@@ -1,6 +1,6 @@
 {
   "name": "@valideer/express",
-  "version": "0.1.0-alpha.27",
+  "version": "0.1.0-alpha.28",
   "description": "",
   "main": "./lib/cjs/index.js",
   "module": "./lib/ems.index.js",
