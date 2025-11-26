@@ -55,8 +55,8 @@ jobs:
       # 7️⃣ Version packages (pre-release alpha)
       - name: Version packages
         run: |
-          npx lerna version --create-release=github --conventional-commits --conventional-prerelease --yes
-          npx lerna publish from-git -m "chore: publish" --yes
+          pnpm exec lerna version --create-release=github --conventional-commits --conventional-prerelease --yes
+          pnpm exec lerna publish from-git -m "chore: publish" --yes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

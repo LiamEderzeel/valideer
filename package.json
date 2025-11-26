@@ -20,9 +20,11 @@
   },
   "devDependencies": {
     "@changesets/cli": "catalog:",
+    "@lerna-lite/cli": "catalog:",
+    "@lerna-lite/publish": "catalog:",
+    "@lerna-lite/version": "catalog:",
     "@types/koa": "catalog:",
     "@types/node": "catalog:",
-    "lerna": "catalog:",
     "oxlint": "catalog:",
     "oxlint-tsgolint": "catalog:",
     "prettier": "catalog:",
