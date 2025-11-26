@@ -1,6 +1,6 @@
 {
   "name": "@valideer/koa",
-  "version": "0.1.0-alpha.29",
+  "version": "0.1.0-alpha.30",
   "description": "",
   "main": "./lib/cjs/index.js",
   "module": "./lib/ems.index.js",

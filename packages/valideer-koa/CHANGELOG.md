@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.30 (2025-11-26)
+
+### Features
+
+* export helper functions ([be7b61c](https://github.com/LiamEderzeel/valideer/commit/be7b61c762945c867e8cf7dfc5eec311643121b4))
+
 # 0.1.0-alpha.29 (2025-11-26)
 
 ### Features
