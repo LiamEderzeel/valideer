@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.29 (2025-11-26)
+
+### Features
+
+* force releease ([b431ce6](https://github.com/LiamEderzeel/valideer/commit/b431ce6edabb6bdc5f3b95527c4f96dd8b380fe3))
+
 # 0.1.0-alpha.28 (2025-11-26)
 
 ### Features
