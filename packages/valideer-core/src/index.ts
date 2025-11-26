@@ -29,9 +29,9 @@ export class ValidationMiddlewareError extends Error {
 
 export type ValidatorOptions = Omit<ClassValidatorOptions, "groups"> & {
   groups?:
-    | ((data: string[] | Record<string, string> | object) => string[])
-    | string[]
-    | undefined;
+  | ((data: string[] | Record<string, string> | object) => string[])
+  | string[]
+  | undefined;
 };
 
 export type TransformValidationOptions = {
