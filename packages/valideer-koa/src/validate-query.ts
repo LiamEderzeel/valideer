@@ -1,64 +1,26 @@
-import { ClassType } from "class-transformer-validator";
-import { ValidationError } from "class-validator";
 import { ParameterizedContext } from "koa";
-import {
-  ValidationMiddlewareError,
-  isValidationError,
-  validate,
-  validateAndParse,
-  TransformValidationOptions,
-} from "@valideer/core";
+import { ValidateResult, validateData } from "@valideer/core";
+import { StandardSchemaV1 } from "@standard-schema/spec";
+import { InferKoaInput } from "./context";
 
-export const validateQuery = async <T extends object>(
-  validateionClass: ClassType<T>,
+export async function validateQuery<
+  Context extends ParameterizedContext,
+  S extends StandardSchemaV1,
+>(ctx: Context, validate: S): Promise<StandardSchemaV1.InferOutput<S>>;
+export async function validateQuery<
+  Context extends ParameterizedContext,
+  OutputT,
+  InputT = InferKoaInput<"query", Context, OutputT>,
+>(
+  ctx: Context,
+  validate: (
+    data: InputT,
+  ) => ValidateResult<OutputT> | Promise<ValidateResult<OutputT>>,
+): Promise<OutputT>;
+export async function validateQuery(
   ctx: ParameterizedContext,
-  options?: TransformValidationOptions,
-) => {
-  try {
-    if (!options) options = {};
-    options.validator = options?.validator ?? {};
-    options.validator.whitelist = options?.validator?.whitelist ?? false;
-    options.validator.skipMissingProperties =
-      options?.validator?.skipMissingProperties ?? true;
-
-    return await validate<T>(validateionClass, ctx.query, options);
-  } catch (err) {
-    if (Array.isArray(err) && err.every(isValidationError)) {
-      throw new ValidationMiddlewareError(err);
-    } else if (err instanceof ValidationError) {
-      throw new ValidationMiddlewareError([err]);
-    } else {
-      throw err;
-    }
-  }
-};
-
-export const validateAndParseQuery = async <T extends object, U>(
-  validateionClass: ClassType<T>,
-  ctx: ParameterizedContext,
-  parse: (data: T) => U,
-  options?: TransformValidationOptions,
-) => {
-  try {
-    if (!options) options = {};
-    options.validator = options?.validator ?? {};
-    options.validator.whitelist = options?.validator?.whitelist ?? false;
-    options.validator.skipMissingProperties =
-      options?.validator?.skipMissingProperties ?? true;
-
-    return await validateAndParse<T, U>(
-      validateionClass,
-      ctx.query,
-      parse,
-      options,
-    );
-  } catch (err) {
-    if (Array.isArray(err) && err.every(isValidationError)) {
-      throw new ValidationMiddlewareError(err);
-    } else if (err instanceof ValidationError) {
-      throw new ValidationMiddlewareError([err]);
-    } else {
-      throw err;
-    }
-  }
-};
+  validate: any,
+): Promise<any> {
+  const t = await validateData(ctx.query, validate);
+  return t;
+}

@@ -1,65 +1,46 @@
-import { ClassType } from "class-transformer-validator";
-import { ValidationError } from "class-validator";
+import { ValidateResult, isDataContainer, validateData } from "@valideer/core";
+import { StandardSchemaV1 } from "@standard-schema/spec";
 import { ParameterizedContext } from "koa";
-import {
-  ValidationMiddlewareError,
-  isValidationError,
-  validate,
-  validateAndParse,
-  TransformValidationOptions,
-} from "@valideer/core";
-import "@koa/bodyparser";
+import { InferKoaInput } from "./context";
 
-export const validateBody = async <T extends object>(
-  validateionClass: ClassType<T>,
+export async function validateBody<
+  Context extends ParameterizedContext,
+  S extends StandardSchemaV1,
+>(ctx: Context, validate: S): Promise<StandardSchemaV1.InferOutput<S>>;
+export async function validateBody<
+  Context extends ParameterizedContext,
+  OutputT,
+  InputT = InferKoaInput<"body", Context, OutputT>,
+>(
+  ctx: Context,
+  validate: (
+    data: InputT,
+  ) => ValidateResult<OutputT> | Promise<ValidateResult<OutputT>>,
+): Promise<OutputT>;
+export async function validateBody(
   ctx: ParameterizedContext,
-  options?: TransformValidationOptions,
-) => {
-  try {
-    if (!options) options = {};
-    options.validator = options?.validator ?? {};
-    options.validator.whitelist = options?.validator?.whitelist ?? false;
-    options.validator.skipMissingProperties =
-      options?.validator?.skipMissingProperties ?? true;
+  validate: any,
+): Promise<any> {
+  const t = await validateData(getBodyFromContext(ctx), validate);
+  return t;
+}
 
-    return await validate<T>(validateionClass, ctx.request.body, options);
-  } catch (err) {
-    if (Array.isArray(err) && err.every(isValidationError)) {
-      throw new ValidationMiddlewareError(err);
-    } else if (err instanceof ValidationError) {
-      throw new ValidationMiddlewareError([err]);
-    } else {
-      throw err;
-    }
+function getBodyFromContext(ctx: ParameterizedContext) {
+  const contentType = ctx.request.type;
+
+  const rawBody = ctx.request.body;
+
+  if (contentType === "multipart/form-data") {
+    return rawBody;
   }
-};
 
-export const validateAndParseBody = async <T extends object, U>(
-  validationClass: ClassType<T>,
-  ctx: ParameterizedContext,
-  parse: (data: T) => U,
-  options?: TransformValidationOptions,
-) => {
-  try {
-    if (!options) options = {};
-    options.validator = options?.validator ?? {};
-    options.validator.whitelist = options?.validator?.whitelist ?? false;
-    options.validator.skipMissingProperties =
-      options?.validator?.skipMissingProperties ?? true;
-
-    return await validateAndParse<T, U>(
-      validationClass,
-      ctx.request.body,
-      parse,
-      options,
-    );
-  } catch (err) {
-    if (Array.isArray(err) && err.every(isValidationError)) {
-      throw new ValidationMiddlewareError(err);
-    } else if (err instanceof ValidationError) {
-      throw new ValidationMiddlewareError([err]);
-    } else {
-      throw err;
-    }
+  if (!rawBody || !isDataContainer(rawBody)) {
+    return rawBody;
   }
-};
+
+  try {
+    return JSON.parse(rawBody.data);
+  } catch (e) {
+    ctx.throw(400, "Invalid JSON in multipart 'data' field.");
+  }
+}

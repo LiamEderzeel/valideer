@@ -30,13 +30,17 @@
     "bson": "catalog:",
     "class-transformer": "catalog:",
     "class-transformer-validator": "catalog:",
-    "class-validator": "catalog:"
+    "class-validator": "catalog:",
+    "qs": "catalog:"
   },
   "devDependencies": {
+    "@standard-schema/spec": "catalog:",
     "@types/express": "^5.0.0",
+    "@types/qs": "catalog:",
     "@types/supertest": "catalog:",
     "express": "catalog:",
     "supertest": "catalog:",
+    "valibot": "catalog:",
     "vitest": "catalog:"
   }
 }

@@ -8,23 +8,28 @@ catalog:
   "@lerna-lite/cli": ^4.9.3
   "@lerna-lite/publish": ^4.9.3
   "@lerna-lite/version": ^4.9.3
+  "@standard-schema/spec": 1.0.0
   "@types/koa": ^3.0.0
+  "@types/koa-bodyparser": ^4.3.13
   "@types/koa__router": ^12.0.4
   "@types/node": ^22.18.11
+  "@types/qs": ^6.14.0
   "@types/supertest": 6.0.3
   bson: ^6.2.0
   class-transformer: ^0.5.1
   class-transformer-validator: ^0.9.1
   class-validator: ^0.14.0
   express: ^5.1.0
-  koa: ^3.0.2
+  koa: ^3.1.1
   oxlint: ^1.23.0
   oxlint-tsgolint: ^0.2.0
   prettier: ^3.6.2
+  qs: ^6.14.0
   reflect-metadata: 0.2.2
   supertest: ^7.1.4
   ts-node: ^10.9.2
   typescript: ^5.9.3
+  valibot: 1.1.0
   vitepress: ^1.6.4
   vitest: 2.1.9
 

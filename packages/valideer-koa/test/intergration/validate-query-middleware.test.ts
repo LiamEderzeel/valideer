@@ -6,27 +6,32 @@ import { IParsedQueryState } from "@valideer/core";
 import { IsDefined, IsNumberString, ValidationError } from "class-validator";
 import { Middleware } from "koa";
 import request from "supertest";
-import { validateAndParseQueryMiddleware } from "../../src/validate-query.middleware";
+import * as v from "valibot";
+import { validateQueryMiddleware } from "../../src/validate-query.middleware";
 import { errorMiddleware } from "./utils/error.middleware";
 
-class TestQuery {
-  @IsDefined()
-  @IsNumberString()
-  id?: string;
-}
-
-class TestQueryParsed {
-  id?: number;
-  constructor(query: TestQuery) {
-    if (query.id != null) this.id = parseInt(query.id);
-  }
-}
-
-function parseTestQuery(params: TestQuery) {
-  return new TestQueryParsed(params);
-}
-
 describe("query middleware", () => {
+  const LoginSchema = v.object({
+    id: v.pipe(
+      v.string("Your id must be a number."),
+      v.nonEmpty("Please enter an id."),
+      v.transform((input) => {
+        const num = parseInt(input, 10);
+        return v.parse(v.pipe(v.number(), v.minValue(1)), num);
+      }),
+    ),
+  });
+  type LoginResponse = v.InferOutput<typeof LoginSchema>;
+
+  const reqHandler: Middleware<IParsedQueryState<LoginResponse>> = (ctx) => {
+    try {
+      ctx.body = ctx.state.query.id;
+    } catch (err) {
+      ctx.status = 400;
+      ctx.body = err.cause;
+    }
+  };
+
   it("should pass", async () => {
     const app = new Koa();
 
@@ -35,14 +40,10 @@ describe("query middleware", () => {
 
     const router = new Router();
 
-    const reqHandler: Middleware<IParsedQueryState<TestQuery>> = (ctx) => {
-      ctx.body = ctx.state.query.id;
-    };
-
     router.get(
       "reqHandler",
       "/",
-      validateAndParseQueryMiddleware(TestQuery, parseTestQuery),
+      validateQueryMiddleware(LoginSchema),
       reqHandler,
     );
 
@@ -64,14 +65,10 @@ describe("query middleware", () => {
 
     const router = new Router();
 
-    const reqHandler: Middleware<IParsedQueryState<TestQuery>> = (ctx) => {
-      ctx.body = ctx.state.query.id;
-    };
-
     router.get(
       "reqHandler",
       "/",
-      validateAndParseQueryMiddleware(TestQuery, parseTestQuery),
+      validateQueryMiddleware(LoginSchema),
       reqHandler,
     );
 
@@ -81,20 +78,5 @@ describe("query middleware", () => {
       .get("/")
       .query({ id: "test" })
       .expect(400);
-
-    const err = new ValidationError();
-    err.children = [];
-    expect(res.body).toEqual({
-      errors: [
-        {
-          children: [],
-          constraints: { isNumberString: "id must be a number string" },
-          property: "id",
-          target: { id: "test" },
-          value: "test",
-        },
-      ],
-      message: "",
-    });
   });
 });

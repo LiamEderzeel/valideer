@@ -1,30 +1,31 @@
-import { ClassType } from "class-transformer-validator";
-import { Middleware } from "koa";
-import { IParsedParamsState, TransformValidationOptions } from "@valideer/core";
-import { validateAndParseParams, validateParams } from "./validate-params";
+import { Middleware, ParameterizedContext } from "koa";
+import { IParsedParamsState, ValidateResult } from "@valideer/core";
+import { validateParams } from "./validate-params";
+import { StandardSchemaV1 } from "@standard-schema/spec";
+import { InferKoaInput } from "./context";
 
-export const validateParamsMiddleware = <T extends object>(
-  validateionClass: ClassType<T>,
-  options?: TransformValidationOptions,
-): Middleware<IParsedParamsState<T>> => {
+export function validateParamsMiddleware<
+  Context extends ParameterizedContext,
+  S extends StandardSchemaV1,
+>(validate: S): Middleware<IParsedParamsState<StandardSchemaV1.InferOutput<S>>>;
+export function validateParamsMiddleware<
+  Context extends ParameterizedContext,
+  OutputT,
+  InputT = InferKoaInput<"params", Context, OutputT>,
+>(
+  validate: (
+    data: InputT,
+  ) => ValidateResult<OutputT> | Promise<ValidateResult<OutputT>>,
+): Middleware<IParsedParamsState<OutputT>>;
+export function validateParamsMiddleware(
+  validate: any,
+): Middleware<IParsedParamsState<any>> {
   return async (ctx, next) => {
-    ctx.state.params = await validateParams(validateionClass, ctx, options);
-    await next();
+    try {
+      ctx.state.params = await validateParams(ctx, validate);
+      await next();
+    } catch (err) {
+      throw err;
+    }
   };
-};
-
-export const validateAndParseParamsMiddleware = <T extends object, U>(
-  validateionClass: ClassType<T>,
-  parse: (data: T) => U,
-  options?: TransformValidationOptions,
-): Middleware<IParsedParamsState<U>> => {
-  return async (ctx, next) => {
-    ctx.state.params = await validateAndParseParams(
-      validateionClass,
-      ctx,
-      parse,
-      options,
-    );
-    await next();
-  };
-};
+}
