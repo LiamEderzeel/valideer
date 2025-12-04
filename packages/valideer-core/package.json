@@ -29,6 +29,7 @@
   "author": "Liam Ederzeel",
   "license": "MIT",
   "dependencies": {
+    "@standard-schema/spec": "catalog:",
     "bson": "catalog:",
     "class-transformer": "catalog:",
     "class-transformer-validator": "catalog:",
@@ -36,7 +37,6 @@
     "reflect-metadata": "catalog:"
   },
   "devDependencies": {
-    "@standard-schema/spec": "catalog:",
     "valibot": "catalog:"
   }
 }

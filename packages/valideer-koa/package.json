@@ -28,6 +28,7 @@
   "author": "Liam Ederzeel",
   "license": "MIT",
   "dependencies": {
+    "@standard-schema/spec": "catalog:",
     "@valideer/core": "workspace:*",
     "bson": "catalog:",
     "class-transformer": "catalog:",
@@ -37,7 +38,6 @@
   "devDependencies": {
     "@koa/bodyparser": "catalog:",
     "@koa/router": "catalog:",
-    "@standard-schema/spec": "catalog:",
     "@types/koa": "catalog:",
     "@types/koa-bodyparser": "catalog:",
     "@types/koa__router": "catalog:",

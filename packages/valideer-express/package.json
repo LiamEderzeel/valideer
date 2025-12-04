@@ -26,6 +26,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/express-serve-static-core": "^5.1.0",
+    "@standard-schema/spec": "catalog:",
     "@valideer/core": "workspace:*",
     "bson": "catalog:",
     "class-transformer": "catalog:",
@@ -34,7 +35,6 @@
     "qs": "catalog:"
   },
   "devDependencies": {
-    "@standard-schema/spec": "catalog:",
     "@types/express": "^5.0.0",
     "@types/qs": "catalog:",
     "@types/supertest": "catalog:",
