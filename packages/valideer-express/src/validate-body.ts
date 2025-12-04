@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { ValidateResult, validateData } from "@valideer/core";
+import { ValidateResult, isDataContainer, validateData } from "@valideer/core";
 import { StandardSchemaV1 } from "@standard-schema/spec";
 import { ExpressRequest, InferExpressInput } from "./request";
 
@@ -18,6 +18,25 @@ export async function validateBody<
   ) => ValidateResult<OutputT> | Promise<ValidateResult<OutputT>>,
 ): Promise<OutputT>;
 export async function validateBody(req: Request, validate: any): Promise<any> {
-  const t = await validateData(req.body, validate);
+  const t = await validateData(getBodyFromRequest(req), validate);
   return t;
+}
+
+function getBodyFromRequest(req: Request) {
+  const contentType = req.headers["content-type"] || "";
+
+  const rawBody = req.body;
+
+  if (contentType.includes("multipart/form-data")) {
+    return rawBody;
+  }
+
+  if (!rawBody || !isDataContainer(rawBody)) {
+    return rawBody;
+  }
+  try {
+    return JSON.parse(rawBody.data);
+  } catch (e) {
+    throw new Error("Invalid JSON in 'data' field of request body.");
+  }
 }

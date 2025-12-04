@@ -95,3 +95,15 @@ export const validate = async <T extends object>(
     ),
   );
 };
+
+export function isDataContainer(item: unknown): item is { data: string } {
+  if (typeof item !== "object" || item === null) {
+    return false;
+  }
+
+  if (!("data" in (item as { [key: string]: unknown }))) {
+    return false;
+  }
+
+  return true;
+}
