@@ -1,6 +1,6 @@
 {
   "name": "@valideer/express",
-  "version": "0.1.0-alpha.32",
+  "version": "0.1.0-alpha.33",
   "description": "",
   "main": "./lib/cjs/index.js",
   "module": "./lib/ems.index.js",
@@ -25,8 +25,8 @@
   "author": "Liam Ederzeel",
   "license": "MIT",
   "dependencies": {
-    "@types/express-serve-static-core": "^5.1.0",
     "@standard-schema/spec": "catalog:",
+    "@types/express-serve-static-core": "^5.1.0",
     "@valideer/core": "workspace:*",
     "bson": "catalog:",
     "class-transformer": "catalog:",

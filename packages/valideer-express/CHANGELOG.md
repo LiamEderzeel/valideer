@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.33 (2025-12-04)
+
+### Bug Fixes
+
+* standard-schema dep ([fb11138](https://github.com/LiamEderzeel/valideer/commit/fb1113864c3cfadb4af4ee16492e67a14068259a))
+
 # 0.1.0-alpha.32 (2025-12-04)
 
 ### Bug Fixes
