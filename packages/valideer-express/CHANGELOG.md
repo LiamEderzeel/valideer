@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.32 (2025-12-04)
+
+### Bug Fixes
+
+* ValidatedResult import ([d4b1225](https://github.com/LiamEderzeel/valideer/commit/d4b122585f5b47f1eb30e793d1545f7db48f043d))
+
 # 0.1.0-alpha.31 (2025-12-04)
 
 ### Features
