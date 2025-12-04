@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.31 (2025-12-04)
+
+### Features
+
+* use standard schema ([#166](https://github.com/LiamEderzeel/valideer/issues/166)) ([63427e8](https://github.com/LiamEderzeel/valideer/commit/63427e8f1018be9a3a3a6797d3a75b91ecf47ddd))
+
 # 0.1.0-alpha.30 (2025-11-26)
 
 ### Features
