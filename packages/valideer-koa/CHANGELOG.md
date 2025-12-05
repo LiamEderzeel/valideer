@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.34 (2025-12-05)
+
+### Bug Fixes
+
+* multipart form ([f09547b](https://github.com/LiamEderzeel/valideer/commit/f09547b88aaddd9d7fd98f2ff7e68ea2a90b530f))
+
 # 0.1.0-alpha.33 (2025-12-04)
 
 ### Bug Fixes
