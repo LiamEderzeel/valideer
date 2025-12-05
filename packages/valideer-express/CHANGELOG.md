@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.35 (2025-12-05)
+
+### Features
+
+* add ClassValidator test ([a890711](https://github.com/LiamEderzeel/valideer/commit/a8907110706433387e08a0db94627b8402763a5c))
+
 # 0.1.0-alpha.34 (2025-12-05)
 
 ### Bug Fixes
