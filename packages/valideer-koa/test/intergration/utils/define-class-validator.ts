@@ -5,11 +5,11 @@ function isObjectValue(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === "object";
 }
 
-export const defineClassValidator = <T extends object, U>(
+export function defineClassValidator<T extends object, U>(
   classType: ClassType<T>,
   parse?: (data: T) => U,
-): ((data: unknown) => ValidateResult<U> | Promise<ValidateResult<U>>) => {
-  const validate = async (data: unknown) => {
+): (data: unknown) => ValidateResult<U> | Promise<ValidateResult<U>> {
+  return async function (data: unknown) {
     if (!isObjectValue(data)) throw new Error("expect object");
 
     const validatedBody = await transformAndValidate(classType, data);
@@ -18,5 +18,4 @@ export const defineClassValidator = <T extends object, U>(
 
     return res as U;
   };
-  return validate;
-};
+}
