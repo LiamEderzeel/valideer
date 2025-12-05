@@ -31,7 +31,7 @@ function getBodyFromContext(ctx: ParameterizedContext) {
 
   const rawBody = ctx.request.body;
 
-  if (contentType === "multipart/form-data") {
+  if (contentType !== "multipart/form-data") {
     return rawBody;
   }
 
