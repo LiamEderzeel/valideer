@@ -6,6 +6,8 @@ import Router from "@koa/router";
 import { Middleware } from "koa";
 import request from "supertest";
 import { errorMiddleware } from "./utils/error.middleware";
+import { defineClassValidator } from "./utils/define-class-validator";
+
 import { validateBody } from "../../src/validate-body";
 import * as v from "valibot";
 import { ValidateFunction } from "@valideer/core";
@@ -16,7 +18,7 @@ import { IsDefined, IsNumber } from "class-validator";
 class TestParams {
   @IsDefined()
   @IsNumber()
-  id?: number;
+  id: number;
 }
 
 const REGEX_NUMBER_STRING = /^-?(?:\d+(?:\.\d+)?|\.\d+)$/;
@@ -116,7 +118,7 @@ describe("body middleware", () => {
 
     app.use(router.routes());
 
-    const res: request.Response = await request(app.listen())
+    const _res: request.Response = await request(app.listen())
       .post("/")
       .send(data)
       .expect(400);
@@ -141,6 +143,44 @@ describe("body middleware", () => {
     const validate: ValidateFunction<LoginData> = async (data: any) => {
       return (await transformAndValidate(TestParams, data)) as LoginData;
     };
+
+    const reqHandler: Middleware = async (ctx) => {
+      try {
+        const body = await validateBody(ctx, validate);
+        ctx.body = body;
+      } catch (err) {
+        ctx.body = err;
+      }
+    };
+
+    router.post("reqHandler", "/", reqHandler);
+
+    app.use(router.routes());
+
+    const res: request.Response = await request(app.listen())
+      .post("/")
+      .send(data)
+      .expect(200);
+
+    expect(res.body).toEqual({ id: 1 });
+  });
+
+  it("validate with class-validator helper function and should pass", async () => {
+    type LoginData = {
+      id: number;
+    };
+
+    const data: LoginData = { id: 1 };
+
+    const app = new Koa();
+
+    app.use(errorMiddleware);
+    app.use(bodyParsesr());
+
+    const router = new Router();
+
+    const validate: ValidateFunction<TestParams> =
+      defineClassValidator(TestParams);
 
     const reqHandler: Middleware = async (ctx) => {
       try {
