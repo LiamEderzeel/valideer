@@ -26,7 +26,6 @@ class TestParams {
 
 describe("params middleware", () => {
   it("validate with validation function and should pass", async () => {
-    // TypeScript
     type LoginData = {
       id: string;
     };
@@ -76,7 +75,6 @@ describe("params middleware", () => {
   });
 
   it("validate with validation function and should fail", async () => {
-    // TypeScript
     type LoginData = {
       id: number;
     };
@@ -128,7 +126,6 @@ describe("params middleware", () => {
   });
 
   it("validate with class-validator function and should pass", async () => {
-    // TypeScript
     type LoginData = {
       id: number;
     };
@@ -167,7 +164,6 @@ describe("params middleware", () => {
   });
 
   it("validate with class-validator function and should fail", async () => {
-    // TypeScript
     type LoginData = {
       id: string;
     };

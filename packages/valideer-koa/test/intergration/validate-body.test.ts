@@ -23,7 +23,6 @@ const REGEX_NUMBER_STRING = /^-?(?:\d+(?:\.\d+)?|\.\d+)$/;
 
 describe("body middleware", () => {
   it("validate with validation function and should pass", async () => {
-    // TypeScript
     type LoginData = {
       id: string;
     };
@@ -74,7 +73,6 @@ describe("body middleware", () => {
   });
 
   it("validate with validation function and should fail", async () => {
-    // TypeScript
     type LoginData = {
       id: number;
     };
@@ -127,7 +125,6 @@ describe("body middleware", () => {
   });
 
   it("validate with class-validator function and should pass", async () => {
-    // TypeScript
     type LoginData = {
       id: number;
     };
@@ -167,7 +164,6 @@ describe("body middleware", () => {
   });
 
   it("validate with class-validator function and should fail", async () => {
-    // TypeScript
     type LoginData = {
       id: string;
     };
@@ -237,7 +233,7 @@ describe("body middleware", () => {
       id: v.pipe(v.number("Your id must be a number.")),
     });
 
-    const reqHandler: Middleware = async (ctx, next) => {
+    const reqHandler: Middleware = async (ctx) => {
       try {
         const body = await validateBody(ctx, LoginSchema);
         ctx.body = body;

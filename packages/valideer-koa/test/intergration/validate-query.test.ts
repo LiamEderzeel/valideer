@@ -10,7 +10,6 @@ import request from "supertest";
 import { errorMiddleware } from "./utils/error.middleware";
 import * as v from "valibot";
 import { ValidateFunction } from "@valideer/core";
-import { validateParams } from "../../src/validate-params";
 import { transformAndValidate } from "class-transformer-validator";
 import { validateQuery } from "../../src/validate-query";
 
@@ -27,7 +26,6 @@ class TestParams {
 
 describe("query middleware", () => {
   it("validate with validation function and should pass", async () => {
-    // TypeScript
     type LoginData = {
       id: string;
     };
@@ -75,7 +73,6 @@ describe("query middleware", () => {
   });
 
   it("validate with validation function and should fail", async () => {
-    // TypeScript
     type LoginData = {
       id: number;
     };
@@ -125,7 +122,6 @@ describe("query middleware", () => {
   });
 
   it("validate with class-validator function and should pass", async () => {
-    // TypeScript
     type LoginData = {
       id: number;
     };
@@ -165,7 +161,6 @@ describe("query middleware", () => {
   });
 
   it("validate with class-validator function and should fail", async () => {
-    // TypeScript
     type LoginData = {
       id: string;
     };
