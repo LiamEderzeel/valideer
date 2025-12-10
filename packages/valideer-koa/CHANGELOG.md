@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.1.0-alpha.36 (2025-12-10)
+
+### Bug Fixes
+
+* linting warnings ([e7caff8](https://github.com/LiamEderzeel/valideer/commit/e7caff8915d2aa03a685506e7ee07c3aeb5efb6b))
+
 # 0.1.0-alpha.35 (2025-12-05)
 
 ### Features
