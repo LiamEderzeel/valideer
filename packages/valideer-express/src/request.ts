@@ -3,11 +3,10 @@ import {
   ParamsDictionary,
   Query as ExpressQuery,
 } from "express-serve-static-core";
-import { ParsedQs } from "qs";
 
 type ExpressInputMap = {
   params: ParamsDictionary;
-  query: ExpressQuery & ParsedQs;
+  query: ExpressQuery;
   body: any;
 };
 
@@ -24,7 +23,7 @@ export type ExpressRequest<
   E["params"] extends ParamsDictionary ? E["params"] : ParamsDictionary,
   any,
   E["body"] extends any ? E["body"] : any,
-  E["query"] extends ExpressQuery ? E["query"] : ExpressQuery & ParsedQs
+  E["query"] extends ExpressQuery ? E["query"] : ExpressQuery
 >;
 
 export type InferExpressInput<
@@ -33,6 +32,6 @@ export type InferExpressInput<
   T = void,
 > = void extends T
   ? Req extends ExpressRequest<infer E>
-    ? E[Key]
-    : ExpressInputMap[Key]
+  ? E[Key]
+  : ExpressInputMap[Key]
   : T;

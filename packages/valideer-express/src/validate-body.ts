@@ -37,6 +37,8 @@ function getBodyFromRequest(req: Request) {
   try {
     return JSON.parse(rawBody.data);
   } catch (e) {
-    throw new Error("Invalid JSON in 'data' field of request body.");
+    const error = new Error("Invalid JSON in 'data' field of request body.");
+    error.cause = e;
+    throw error;
   }
 }

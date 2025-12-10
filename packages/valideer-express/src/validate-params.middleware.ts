@@ -5,7 +5,7 @@ import { StandardSchemaV1 } from "@standard-schema/spec";
 import { validateParams } from "./validate-params";
 
 export function validateParamsMiddleware<
-  Req extends ExpressRequest,
+  _Req extends ExpressRequest,
   S extends StandardSchemaV1,
 >(validate: S): ReqHandler<IParsedParamsState<StandardSchemaV1.InferOutput<S>>>;
 export function validateParamsMiddleware<

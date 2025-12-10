@@ -5,7 +5,7 @@ import { ExpressRequest, InferExpressInput } from "./request";
 import { StandardSchemaV1 } from "@standard-schema/spec";
 
 export function validateBodyMiddleware<
-  Req extends ExpressRequest,
+  _Req extends ExpressRequest,
   S extends StandardSchemaV1,
 >(validate: S): ReqHandler<IParsedBodyState<StandardSchemaV1.InferOutput<S>>>;
 export function validateBodyMiddleware<

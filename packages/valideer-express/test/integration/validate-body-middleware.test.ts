@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import express, { json, RequestHandler, Router } from "express";
 import { IParsedBodyState } from "@valideer/core";
-import { ValidationError } from "class-validator";
 import request from "supertest";
 import * as v from "valibot";
 import { validateBodyMiddleware } from "../../src/validate-body.middleware";
@@ -63,9 +62,6 @@ describe("body", () => {
     app.use("/", router);
     app.use(errorMiddleware);
 
-    const res: request.Response = await request(app.listen())
-      .post("/")
-      .send({ id: "test" })
-      .expect(400);
+    await request(app.listen()).post("/").send({ id: "test" }).expect(400);
   });
 });

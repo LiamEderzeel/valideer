@@ -59,9 +59,6 @@ describe("query", () => {
     app.use("/", router);
     app.use(errorMiddleware);
 
-    const res: request.Response = await request(app.listen())
-      .get("/")
-      .query({ id: "test" })
-      .expect(400);
+    await request(app.listen()).get("/").query({ id: "test" }).expect(400);
   });
 });

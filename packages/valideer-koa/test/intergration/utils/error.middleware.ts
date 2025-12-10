@@ -10,19 +10,19 @@ const logError = (err: ValidationError) => {
   }
 };
 
-const formatValideerErrors = (err: ValideerError) => {
-  console.log(err);
-  if (err.issues) {
-    err.issues.forEach((err) => ({ path: err.path.join(".") }));
-  }
-};
+// const formatValideerErrors = (err: ValideerError) => {
+//   console.log(err);
+//   if (err.issues) {
+//     err.issues.forEach((err) => ({ path: err.path.join(".") }));
+//   }
+// };
 
 export const errorMiddleware: Middleware = async (ctx, next) => {
   try {
     await next();
   } catch (err) {
     if (err instanceof ValiError) {
-      const { cause, message } = err;
+      // const { cause, message } = err;
 
       ctx.status = 400;
       return;

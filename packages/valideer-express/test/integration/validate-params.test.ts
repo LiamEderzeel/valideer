@@ -49,8 +49,6 @@ describe("params", () => {
     app.use("/", router);
     app.use(errorMiddleware);
 
-    const res: request.Response = await request(app.listen())
-      .get("/test")
-      .expect(400);
+    await request(app.listen()).get("/test").expect(400);
   });
 });

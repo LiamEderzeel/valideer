@@ -5,7 +5,7 @@ import { StandardSchemaV1 } from "@standard-schema/spec";
 import { validateQuery } from "./validate-query";
 
 export function validateQueryMiddleware<
-  Req extends ExpressRequest,
+  _Req extends ExpressRequest,
   S extends StandardSchemaV1,
 >(validate: S): ReqHandler<IParsedQueryState<StandardSchemaV1.InferOutput<S>>>;
 export function validateQueryMiddleware<

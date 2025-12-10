@@ -5,7 +5,7 @@ import { StandardSchemaV1 } from "@standard-schema/spec";
 import { InferKoaInput } from "./context";
 
 export function validateQueryMiddleware<
-  Context extends ParameterizedContext,
+  _Context extends ParameterizedContext,
   S extends StandardSchemaV1,
 >(validate: S): Middleware<IParsedQueryState<StandardSchemaV1.InferOutput<S>>>;
 export function validateQueryMiddleware<
@@ -22,11 +22,7 @@ export function validateQueryMiddleware(
   validate: any,
 ): Middleware<IParsedQueryState<any>> {
   return async (ctx, next) => {
-    try {
-      ctx.state.query = await validateQuery(ctx, validate);
-      await next();
-    } catch (err) {
-      throw err;
-    }
+    ctx.state.query = await validateQuery(ctx, validate);
+    await next();
   };
 }

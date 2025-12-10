@@ -5,7 +5,7 @@ import { StandardSchemaV1 } from "@standard-schema/spec";
 import { InferKoaInput } from "./context";
 
 export function validateBodyMiddleware<
-  Context extends ParameterizedContext,
+  _Context extends ParameterizedContext,
   S extends StandardSchemaV1,
 >(validate: S): Middleware<IParsedBodyState<StandardSchemaV1.InferOutput<S>>>;
 export function validateBodyMiddleware<
@@ -21,11 +21,7 @@ export function validateBodyMiddleware(
   validate: any,
 ): Middleware<IParsedBodyState<any>> {
   return async (ctx, next) => {
-    try {
-      ctx.state.body = await validateBody(ctx, validate);
-      await next();
-    } catch (err) {
-      throw err;
-    }
+    ctx.state.body = await validateBody(ctx, validate);
+    await next();
   };
 }

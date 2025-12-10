@@ -26,12 +26,6 @@ class TestParams {
 
 describe("params middleware", () => {
   it("validate with validation function and should pass", async () => {
-    type LoginData = {
-      id: string;
-    };
-
-    const data: LoginData = { id: "1" };
-
     const app = new Koa();
 
     app.use(errorMiddleware);
@@ -75,12 +69,6 @@ describe("params middleware", () => {
   });
 
   it("validate with validation function and should fail", async () => {
-    type LoginData = {
-      id: number;
-    };
-
-    const data: LoginData = { id: 1 };
-
     const app = new Koa();
 
     app.use(errorMiddleware);
@@ -118,9 +106,7 @@ describe("params middleware", () => {
 
     app.use(router.routes());
 
-    const res: request.Response = await request(app.listen())
-      .get("/test")
-      .expect(400);
+    await request(app.listen()).get("/test").expect(400);
 
     // expect(res.body).toEqual(data);
   });
@@ -129,8 +115,6 @@ describe("params middleware", () => {
     type LoginData = {
       id: number;
     };
-
-    const data: LoginData = { id: 1 };
 
     const app = new Koa();
 
@@ -164,12 +148,6 @@ describe("params middleware", () => {
   });
 
   it("validate with class-validator function and should fail", async () => {
-    type LoginData = {
-      id: string;
-    };
-
-    const data: LoginData = { id: "test" };
-
     const app = new Koa();
 
     app.use(errorMiddleware);
@@ -281,8 +259,6 @@ describe("params middleware", () => {
     });
 
     it("validate with valibot and should fail", async () => {
-      const data = { id: "test" };
-
       const app = new Koa();
 
       app.use(errorMiddleware);

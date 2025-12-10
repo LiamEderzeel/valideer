@@ -26,10 +26,6 @@ class TestParams {
 
 describe("query middleware", () => {
   it("validate with validation function and should pass", async () => {
-    type LoginData = {
-      id: string;
-    };
-
     const app = new Koa();
 
     app.use(errorMiddleware);
@@ -73,10 +69,6 @@ describe("query middleware", () => {
   });
 
   it("validate with validation function and should fail", async () => {
-    type LoginData = {
-      id: number;
-    };
-
     const app = new Koa();
 
     app.use(errorMiddleware);
@@ -114,9 +106,7 @@ describe("query middleware", () => {
 
     app.use(router.routes());
 
-    const res: request.Response = await request(app.listen())
-      .get("/?id=test")
-      .expect(400);
+    await request(app.listen()).get("/?id=test").expect(400);
 
     // expect(res.body).toEqual(data);
   });
@@ -161,12 +151,6 @@ describe("query middleware", () => {
   });
 
   it("validate with class-validator function and should fail", async () => {
-    type LoginData = {
-      id: string;
-    };
-
-    const data: LoginData = { id: "test" };
-
     const app = new Koa();
 
     app.use(errorMiddleware);

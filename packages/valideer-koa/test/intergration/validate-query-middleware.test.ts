@@ -73,9 +73,6 @@ describe("query middleware", () => {
 
     app.use(router.routes());
 
-    const res: request.Response = await request(app.listen())
-      .get("/")
-      .query({ id: "test" })
-      .expect(400);
+    await request(app.listen()).get("/").query({ id: "test" }).expect(400);
   });
 });

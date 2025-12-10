@@ -43,9 +43,6 @@ describe("body", () => {
     app.use("/", router);
     app.use(errorMiddleware);
 
-    const res: request.Response = await request(app.listen())
-      .post("/")
-      .send({ id: "test" })
-      .expect(400);
+    await request(app.listen()).post("/").send({ id: "test" }).expect(400);
   });
 });

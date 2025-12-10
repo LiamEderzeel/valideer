@@ -42,6 +42,7 @@ function getBodyFromContext(ctx: ParameterizedContext) {
   try {
     return JSON.parse(rawBody.data);
   } catch (e) {
+    console.log(e);
     ctx.throw(400, "Invalid JSON in multipart 'data' field.");
   }
 }

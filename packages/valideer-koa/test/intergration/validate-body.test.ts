@@ -118,10 +118,7 @@ describe("body middleware", () => {
 
     app.use(router.routes());
 
-    const _res: request.Response = await request(app.listen())
-      .post("/")
-      .send(data)
-      .expect(400);
+    await request(app.listen()).post("/").send(data).expect(400);
 
     // expect(res.body).toEqual(data);
   });

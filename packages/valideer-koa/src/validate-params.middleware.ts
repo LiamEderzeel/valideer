@@ -5,7 +5,7 @@ import { StandardSchemaV1 } from "@standard-schema/spec";
 import { InferKoaInput } from "./context";
 
 export function validateParamsMiddleware<
-  Context extends ParameterizedContext,
+  _Context extends ParameterizedContext,
   S extends StandardSchemaV1,
 >(validate: S): Middleware<IParsedParamsState<StandardSchemaV1.InferOutput<S>>>;
 export function validateParamsMiddleware<
@@ -21,11 +21,11 @@ export function validateParamsMiddleware(
   validate: any,
 ): Middleware<IParsedParamsState<any>> {
   return async (ctx, next) => {
-    try {
-      ctx.state.params = await validateParams(ctx, validate);
-      await next();
-    } catch (err) {
-      throw err;
-    }
+    // try {
+    ctx.state.params = await validateParams(ctx, validate);
+    await next();
+    // } catch (err) {
+    //   throw err;
+    // }
   };
 }
