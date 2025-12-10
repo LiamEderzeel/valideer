@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseBoolean, parseBooleanList } from "./boolean-list";
+import { parseBoolean, parseBooleanList } from "./boolean-list.js";
 
 describe("Boolean parser tests", () => {
   describe("parseBoolean tests", () => {

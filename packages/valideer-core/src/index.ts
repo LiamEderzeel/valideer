@@ -9,12 +9,12 @@ import {
   ValidatorOptions as ClassValidatorOptions,
 } from "class-validator";
 
-export * from "./parsed-query-state";
-export * from "./parsed-params-state";
-export * from "./parsed-body-state";
-export * from "./is-validation-error";
-export * from "./validation";
-export * from "./standart-schema";
+export * from "./parsed-query-state.js";
+export * from "./parsed-params-state.js";
+export * from "./parsed-body-state.js";
+export * from "./is-validation-error.js";
+export * from "./validation/index.js";
+export * from "./standart-schema.js";
 
 export class ValidationMiddlewareError extends Error {
   errors: ValidationError[];
@@ -30,9 +30,9 @@ export class ValidationMiddlewareError extends Error {
 
 export type ValidatorOptions = Omit<ClassValidatorOptions, "groups"> & {
   groups?:
-  | ((data: string[] | Record<string, string> | object) => string[])
-  | string[]
-  | undefined;
+    | ((data: string[] | Record<string, string> | object) => string[])
+    | string[]
+    | undefined;
 };
 
 export type TransformValidationOptions = {

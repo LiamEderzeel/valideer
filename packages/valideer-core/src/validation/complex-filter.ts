@@ -1,10 +1,10 @@
 import { registerDecorator } from "class-validator";
-import { parseBooleanList } from "./boolean-list";
-import { parseIntList } from "./int-list";
-import { parseStringList } from "./string-list";
-import { parseDateList } from "./date-list";
-import { parseObjectIdList } from "./object-id-list";
-import { parseEnumList } from "./enum-list";
+import { parseBooleanList } from "./boolean-list.js";
+import { parseIntList } from "./int-list.js";
+import { parseStringList } from "./string-list.js";
+import { parseDateList } from "./date-list.js";
+import { parseObjectIdList } from "./object-id-list.js";
+import { parseEnumList } from "./enum-list.js";
 
 export const parseComplexFilter = (
   value: Record<string, string | string[]> | string | string[],

@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { parseSortByConstraint, SortByConstraint } from "./sort-by-constraint";
+import {
+  parseSortByConstraint,
+  SortByConstraint,
+} from "./sort-by-constraint.js";
 
 describe("parseSortByConstraint tests", () => {
   it("should parse array of strings to array of sort filter", () => {

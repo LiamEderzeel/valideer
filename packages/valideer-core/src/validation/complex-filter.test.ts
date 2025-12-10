@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseComplexFilter } from "./complex-filter";
+import { parseComplexFilter } from "./complex-filter.js";
 
 describe("parseComplexFilter tests", () => {
   describe("parse int", () => {

@@ -5,6 +5,7 @@
   "author": "Liam Ederzeel",
   "license": "MIT",
   "repository": "https://github.com/LiamEderzeel/valideer",
+  "type": "module",
   "workspaces": [
     "packages/*"
   ],

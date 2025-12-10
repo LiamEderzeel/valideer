@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isStringArray } from "./is-string-array";
+import { isStringArray } from "./is-string-array.js";
 
 describe("parseStringArray tests", () => {
   it("should return true if array of strings", () => {

@@ -2,6 +2,7 @@
   "name": "@valideer/koa",
   "version": "0.1.0-alpha.37",
   "description": "",
+  "type": "module",
   "main": "./lib/cjs/index.js",
   "module": "./lib/ems.index.js",
   "types": "./lib/esm/index.d.ts",

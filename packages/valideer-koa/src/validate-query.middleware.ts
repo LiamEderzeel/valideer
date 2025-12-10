@@ -1,8 +1,8 @@
 import { Middleware, ParameterizedContext } from "koa";
 import { IParsedQueryState, ValidateResult } from "@valideer/core";
-import { validateQuery } from "./validate-query";
+import { validateQuery } from "./validate-query.js";
 import { StandardSchemaV1 } from "@standard-schema/spec";
-import { InferKoaInput } from "./context";
+import { InferKoaInput } from "./context.js";
 
 export function validateQueryMiddleware<
   _Context extends ParameterizedContext,

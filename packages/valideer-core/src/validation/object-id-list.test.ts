@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { parseDateList } from "./date-list";
-import { parseObjectIdList } from "./object-id-list";
+import { parseDateList } from "./date-list.js";
+import { parseObjectIdList } from "./object-id-list.js";
 
 describe("parseObjectIdList tests", () => {
   it("should parse array of strings to array of ObjectIds", () => {

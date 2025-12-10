@@ -1,8 +1,8 @@
 import { Middleware, ParameterizedContext } from "koa";
 import { IParsedParamsState, ValidateResult } from "@valideer/core";
-import { validateParams } from "./validate-params";
+import { validateParams } from "./validate-params.js";
 import { StandardSchemaV1 } from "@standard-schema/spec";
-import { InferKoaInput } from "./context";
+import { InferKoaInput } from "./context.js";
 
 export function validateParamsMiddleware<
   _Context extends ParameterizedContext,

@@ -1,7 +1,7 @@
-import { ReqHandler } from "./req-handler";
+import { ReqHandler } from "./req-handler.js";
 import { IParsedBodyState, ValidateResult } from "@valideer/core";
-import { validateBody } from "./validate-body";
-import { ExpressRequest, InferExpressInput } from "./request";
+import { validateBody } from "./validate-body.js";
+import { ExpressRequest, InferExpressInput } from "./request.js";
 import { StandardSchemaV1 } from "@standard-schema/spec";
 
 export function validateBodyMiddleware<

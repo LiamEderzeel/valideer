@@ -1,8 +1,8 @@
-import { ReqHandler } from "./req-handler";
+import { ReqHandler } from "./req-handler.js";
 import { IParsedParamsState, ValidateResult } from "@valideer/core";
-import { ExpressRequest, InferExpressInput } from "./request";
+import { ExpressRequest, InferExpressInput } from "./request.js";
 import { StandardSchemaV1 } from "@standard-schema/spec";
-import { validateParams } from "./validate-params";
+import { validateParams } from "./validate-params.js";
 
 export function validateParamsMiddleware<
   _Req extends ExpressRequest,

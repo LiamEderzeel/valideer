@@ -1,7 +1,7 @@
 import { isDataContainer, validateData } from "@valideer/core";
 import { StandardSchemaV1 } from "@standard-schema/spec";
 import { ParameterizedContext } from "koa";
-import { InferKoaInput } from "./context";
+import { InferKoaInput } from "./context.js";
 import type { ValidateResult } from "@valideer/core";
 
 export async function validateBody<

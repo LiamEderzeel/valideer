@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isEnumList, parseEnumList } from "./enum-list";
+import { isEnumList, parseEnumList } from "./enum-list.js";
 
 enum Color {
   Red = "red",

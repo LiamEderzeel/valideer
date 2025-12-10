@@ -5,9 +5,9 @@
     "declarationMap": true, // Optional but recommended
     "incremental": true,
     "target": "es2022",
-    "module": "es6",
+    "module": "NodeNext",
     "strict": true,
-    "moduleResolution": "node",
+    "moduleResolution": "NodeNext",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,

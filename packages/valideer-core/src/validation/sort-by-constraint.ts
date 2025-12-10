@@ -1,5 +1,5 @@
 import { registerDecorator } from "class-validator";
-import { parseStringList } from "./string-list";
+import { parseStringList } from "./string-list.js";
 
 export class SortByConstraint {
   key: string;
@@ -11,7 +11,9 @@ export class SortByConstraint {
   }
 }
 
-export const parseSortByConstraint = (value: string | string[]): SortByConstraint[] => {
+export const parseSortByConstraint = (
+  value: string | string[],
+): SortByConstraint[] => {
   const entries = parseStringList(value);
 
   return entries.map((x) => {

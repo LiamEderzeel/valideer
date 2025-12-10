@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isValidLocale, locales } from "./is-valid-locale";
+import { isValidLocale, locales } from "./is-valid-locale.js";
 
 describe("parseStringArray tests", () => {
   it("should return true if array of strings", () => {

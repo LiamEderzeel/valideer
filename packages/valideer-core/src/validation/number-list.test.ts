@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseNumberList } from "./number-list";
+import { parseNumberList } from "./number-list.js";
 
 describe("parseNumberList tests", () => {
   it("should parse array of strings to array of numbers", () => {

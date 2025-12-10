@@ -1,6 +1,6 @@
 import { registerDecorator, ValidationOptions } from "class-validator";
 import { ObjectId } from "bson";
-import { parseStringList } from "./string-list";
+import { parseStringList } from "./string-list.js";
 
 export const parseObjectIdList = (value: string | string[]): string[] => {
   const res = parseStringList(value);

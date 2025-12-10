@@ -1,5 +1,5 @@
 import { registerDecorator } from "class-validator";
-import { parseStringList } from "./string-list";
+import { parseStringList } from "./string-list.js";
 
 export const parseNumberList = (value: string | string[]): number[] => {
   return parseStringList(value)
@@ -14,7 +14,9 @@ export const IsNumberList = () => {
       target: object.constructor,
       propertyName,
       constraints: [],
-      options: { message: `${propertyName} is not a comma separated list of numbers` },
+      options: {
+        message: `${propertyName} is not a comma separated list of numbers`,
+      },
       validator: {
         validate: (value: any) => {
           if (typeof value === "string" || Array.isArray(value)) {

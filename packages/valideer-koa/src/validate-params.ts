@@ -1,7 +1,7 @@
 import { ParameterizedContext } from "koa";
 import { ValidateResult, validateData } from "@valideer/core";
 import { StandardSchemaV1 } from "@standard-schema/spec";
-import { InferKoaInput } from "./context";
+import { InferKoaInput } from "./context.js";
 
 export async function validateParams<
   Context extends ParameterizedContext,

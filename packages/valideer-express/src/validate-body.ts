@@ -1,7 +1,7 @@
 import { Request } from "express";
 import { ValidateResult, isDataContainer, validateData } from "@valideer/core";
 import { StandardSchemaV1 } from "@standard-schema/spec";
-import { ExpressRequest, InferExpressInput } from "./request";
+import { ExpressRequest, InferExpressInput } from "./request.js";
 
 export async function validateBody<
   Req extends ExpressRequest,

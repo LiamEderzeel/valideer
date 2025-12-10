@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseDateList } from "./date-list";
+import { parseDateList } from "./date-list.js";
 
 describe("parseDateList tests", () => {
   it("should parse array of strings to array of dates", () => {
