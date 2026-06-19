@@ -1,5 +1,0 @@
-import type { Readable } from 'node:stream';
-export declare function tempWrite(fileContent: any, filePath?: string): Promise<string>;
-export declare namespace tempWrite {
-    var sync: (fileContent: (DataView & Readable) | string, filePath?: string) => string;
-}

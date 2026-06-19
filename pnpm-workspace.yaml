@@ -4,7 +4,7 @@ packages:
 catalog:
   "@changesets/cli": ^2.29.7
   "@koa/bodyparser": ^6.1.0
-  "@koa/routerd": ^15.6.0
+  "@koa/router": ^15.6.0
   "@lerna-lite/cli": ^4.9.3
   "@lerna-lite/publish": ^4.9.3
   "@lerna-lite/version": ^4.9.3

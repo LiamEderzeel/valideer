@@ -1,6 +1,0 @@
-import type { FetchConfig } from '@lerna-lite/core';
-interface WhoIAm {
-    username: string;
-}
-export declare function getWhoAmI(opts: FetchConfig): Promise<WhoIAm>;
-export {};

@@ -1,4 +1,0 @@
-export declare function deleteComplexObjectProp(object: any, path: string, sourceName?: string): any;
-export declare function getComplexObjectValue<T>(object: any, path: string): T;
-export declare function isEmpty(obj: object): boolean;
-export declare function looselyJsonParse(content: string, filepath?: string): any;

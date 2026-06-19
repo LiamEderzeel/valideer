@@ -1,2 +1,0 @@
-import type { ExecOpts, PackageGraph } from '@lerna-lite/core';
-export declare function getTaggedPackages(packageGraph: PackageGraph, rootPath: string, execOpts: ExecOpts, dryRun?: boolean): Promise<import("@lerna-lite/core").PackageGraphNode[]>;

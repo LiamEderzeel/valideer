@@ -1,7 +1,0 @@
-import type { ChangelogConfig, ChangelogPresetConfig } from '../interfaces.js';
-export declare class GetChangelogConfig {
-    static cfgCache: Map<string, any>;
-    static isFunction(config: ChangelogConfig): boolean;
-    static resolveConfigPromise(presetPackageName: string, presetConfig: ChangelogPresetConfig): Promise<Omit<ChangelogConfig, 'conventionalChangelog'>>;
-    static getChangelogConfig(changelogPreset?: ChangelogPresetConfig, rootPath?: string): Promise<ChangelogConfig>;
-}

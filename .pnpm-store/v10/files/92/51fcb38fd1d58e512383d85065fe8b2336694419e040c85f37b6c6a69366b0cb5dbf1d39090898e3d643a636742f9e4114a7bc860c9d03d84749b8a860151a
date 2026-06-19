@@ -1,2 +1,0 @@
-import type { FetchConfig } from '@lerna-lite/core';
-export declare function getTwoFactorAuthRequired(options?: FetchConfig): Promise<boolean>;

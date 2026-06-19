@@ -1,1 +1,0 @@
-{"version":3,"file":"tracker-base.js","sourceRoot":"","sources":["../../src/are-we-there-yet/tracker-base.ts"],"names":[],"mappings":"AAAA,OAAO,YAAY,MAAM,aAAa,CAAC;AAEvC,IAAI,SAAS,GAAG,CAAC,CAAC;AAElB,MAAM,OAAO,WAAY,SAAQ,YAAY;IAI3C,YAAY,IAAI,GAAG,EAAE;QACnB,KAAK,EAAE,CAAC;QACR,IAAI,CAAC,EAAE,GAAG,EAAE,SAAS,CAAC;QACtB,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;IACnB,CAAC;CACF"}

@@ -1,2 +1,0 @@
-import type { ExecOpts } from '@lerna-lite/core';
-export declare function isAnythingCommitted(opts: ExecOpts, dryRun?: boolean): boolean;

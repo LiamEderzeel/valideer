@@ -1,2 +1,0 @@
-import type { RawManifest } from '@lerna-lite/core';
-export declare function overridePublishConfig(manifest: RawManifest): void;

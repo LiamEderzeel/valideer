@@ -1,4 +1,0 @@
-import type { ExecOpts, UpdateCollectorOptions } from '../../models/interfaces.js';
-import type { PackageGraph } from '../../package-graph/package-graph.js';
-import type { Package } from '../../package.js';
-export declare function collectUpdates(filteredPackages: Package[], packageGraph: PackageGraph, execOpts: ExecOpts, commandOptions: UpdateCollectorOptions): import("../../index.js").PackageGraphNode[];

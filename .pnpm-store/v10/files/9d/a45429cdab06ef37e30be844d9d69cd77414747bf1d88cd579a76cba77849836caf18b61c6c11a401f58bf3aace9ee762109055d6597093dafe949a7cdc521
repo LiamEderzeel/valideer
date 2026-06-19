@@ -1,5 +1,0 @@
-import type { ExecOpts } from '../../models/interfaces.js';
-import type { PackageGraph } from '../../package-graph/package-graph.js';
-import type { Package } from '../../package.js';
-import type { FilterOptions } from './interfaces.js';
-export declare function getFilteredPackages(packageGraph: PackageGraph, execOpts: ExecOpts, opts: FilterOptions): Promise<Package[]>;

@@ -1,3 +1,0 @@
-import type { ExecOpts } from '@lerna-lite/core';
-export declare function gitPush(remote: string, branch: string, opts: ExecOpts, dryRun?: boolean): Promise<void>;
-export declare function gitPushSingleTag(remote: string, branch: string, tag: string, opts: ExecOpts, dryRun?: boolean): Promise<void>;

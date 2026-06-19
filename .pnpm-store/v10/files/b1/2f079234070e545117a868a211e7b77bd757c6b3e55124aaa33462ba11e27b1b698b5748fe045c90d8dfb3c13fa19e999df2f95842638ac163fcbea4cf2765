@@ -1,8 +1,0 @@
-import { exec } from '@lerna-lite/core';
-import { log } from '@lerna-lite/npmlog';
-export function gitCheckout(stagedFiles, gitOpts, execOpts, dryRun = false) {
-    const files = (gitOpts.granularPathspec ? stagedFiles : '.');
-    log.silly('gitCheckout', files);
-    return exec('git', ['checkout', '--'].concat(files), execOpts, dryRun);
-}
-//# sourceMappingURL=git-checkout.js.map

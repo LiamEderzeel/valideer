@@ -1,3 +1,0 @@
-import type { ExecOpts } from '@lerna-lite/core';
-import type { GitTagOption } from '../interfaces.js';
-export declare function gitTag(tag: string, { forceGitTag, signGitTag }: GitTagOption, opts: ExecOpts, command?: string, dryRun?: boolean): Promise<any>;

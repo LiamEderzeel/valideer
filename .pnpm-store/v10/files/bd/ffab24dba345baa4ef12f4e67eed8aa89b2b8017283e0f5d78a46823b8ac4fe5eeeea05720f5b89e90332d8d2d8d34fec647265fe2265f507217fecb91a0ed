@@ -1,4 +1,0 @@
-import type { FetchConfig } from '@lerna-lite/core';
-export declare function getFetchConfig(options?: {
-    [key: string]: any;
-}, extra?: Partial<FetchConfig>): FetchConfig;

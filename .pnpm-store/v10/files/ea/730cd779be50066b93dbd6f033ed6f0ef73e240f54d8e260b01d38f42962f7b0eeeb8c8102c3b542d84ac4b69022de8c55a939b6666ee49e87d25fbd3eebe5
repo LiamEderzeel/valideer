@@ -1,7 +1,0 @@
-import type { Logger } from '@lerna-lite/npmlog';
-export interface UncommittedConfig {
-    cwd: string;
-    log?: Logger;
-}
-export declare function collectUncommitted({ cwd, log }: UncommittedConfig, dryRun?: boolean): Promise<string[]>;
-export declare function collectUncommittedSync({ cwd, log }: UncommittedConfig, dryRun?: boolean): string[];

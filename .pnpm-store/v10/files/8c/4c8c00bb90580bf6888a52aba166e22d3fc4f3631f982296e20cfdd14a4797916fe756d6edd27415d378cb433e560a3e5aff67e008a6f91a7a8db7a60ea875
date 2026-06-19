@@ -1,2 +1,0 @@
-import type { ExecOpts } from '@lerna-lite/core';
-export declare function getCurrentTags(execOpts: ExecOpts, matchingPattern: string, dryRun?: boolean): Promise<string[]>;

@@ -1,8 +1,0 @@
-import type { PackageGraphNode } from '../../../package-graph/lib/package-graph-node.js';
-interface PackageCollectorOptions {
-    isCandidate?: (node: PackageGraphNode, name: string) => boolean;
-    onInclude?: (name: string) => void;
-    excludeDependents?: boolean;
-}
-export declare function collectPackages(packages: any, { isCandidate, onInclude, excludeDependents }?: PackageCollectorOptions): PackageGraphNode[];
-export {};

@@ -1,3 +1,0 @@
-import type { TopologicalConfig } from '../models/interfaces.js';
-import type { Package } from '../package.js';
-export declare function runTopologically<T = any>(packages: Package[], runner: (pkg: Package) => Promise<T>, { concurrency, graphType, rejectCycles, npmClient }?: TopologicalConfig): Promise<unknown>;

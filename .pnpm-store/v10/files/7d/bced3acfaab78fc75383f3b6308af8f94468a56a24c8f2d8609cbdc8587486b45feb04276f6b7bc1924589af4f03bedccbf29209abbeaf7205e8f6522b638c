@@ -1,4 +1,0 @@
-import { type SyncOptions } from 'execa';
-import parseGitUrl from 'git-url-parse';
-export declare function createGitHubClient(): Promise<any>;
-export declare function parseGitRepo(remote?: string, opts?: SyncOptions): parseGitUrl.GitUrl;

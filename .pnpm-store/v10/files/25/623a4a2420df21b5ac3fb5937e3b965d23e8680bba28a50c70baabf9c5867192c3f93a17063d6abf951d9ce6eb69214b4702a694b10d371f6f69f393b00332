@@ -1,9 +1,0 @@
-import type { Conf } from '@lerna-lite/core';
-interface OidcOptions {
-    packageName: string;
-    registry: string;
-    opts: any;
-    config: Conf;
-}
-export declare function oidc({ packageName, registry, opts, config }: OidcOptions): Promise<undefined>;
-export {};
