@@ -1,6 +1,6 @@
 {
   "name": "@valideer/koa",
-  "version": "0.1.0-alpha.38",
+  "version": "0.1.0-alpha.39",
   "description": "",
   "type": "module",
   "main": "./lib/cjs/index.js",
