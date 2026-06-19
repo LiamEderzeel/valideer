@@ -10,11 +10,11 @@ catalogs:
       specifier: ^2.29.7
       version: 2.29.7
     '@koa/bodyparser':
-      specifier: ^6.0.0
-      version: 6.0.0
+      specifier: ^6.1.0
+      version: 6.1.0
     '@koa/router':
-      specifier: ^14.0.0
-      version: 14.0.0
+      specifier: ^15.6.0
+      version: 15.6.0
     '@lerna-lite/cli':
       specifier: ^4.9.3
       version: 4.9.3
@@ -34,8 +34,8 @@ catalogs:
       specifier: ^4.3.13
       version: 4.3.13
     '@types/koa__router':
-      specifier: ^12.0.4
-      version: 12.0.4
+      specifier: ^12.0.5
+      version: 12.0.5
     '@types/node':
       specifier: ^22.18.11
       version: 22.18.11
@@ -61,8 +61,8 @@ catalogs:
       specifier: ^5.1.0
       version: 5.1.0
     koa:
-      specifier: ^3.1.1
-      version: 3.1.1
+      specifier: ^3.2.1
+      version: 3.2.1
     oxlint:
       specifier: ^1.23.0
       version: 1.23.0
@@ -100,22 +100,6 @@ catalogs:
 importers:
 
   .:
-    dependencies:
-      '@koa/bodyparser':
-        specifier: ^6.1.0
-        version: 6.1.0(koa@3.2.1)
-      '@koa/router':
-        specifier: ^15.6.0
-        version: 15.6.0(koa@3.2.1)
-      '@types/koa-bodyparser':
-        specifier: 'catalog:'
-        version: 4.3.13
-      '@types/koa__router':
-        specifier: ^12.0.5
-        version: 12.0.5
-      koa:
-        specifier: ^3.2.1
-        version: 3.2.1
     devDependencies:
       '@changesets/cli':
         specifier: 'catalog:'
@@ -130,8 +114,8 @@ importers:
         specifier: 'catalog:'
         version: 4.9.3(@lerna-lite/publish@4.9.3(@types/node@22.18.11)(conventional-commits-filter@5.0.0))(@types/node@22.18.11)(conventional-commits-filter@5.0.0)
       '@types/koa':
-        specifier: ^3.0.3
-        version: 3.0.3
+        specifier: 'catalog:'
+        version: 3.0.0
       '@types/node':
         specifier: 'catalog:'
         version: 22.18.11
@@ -257,10 +241,10 @@ importers:
     devDependencies:
       '@koa/bodyparser':
         specifier: 'catalog:'
-        version: 6.0.0(koa@3.1.1)
+        version: 6.1.0(koa@3.2.1)
       '@koa/router':
         specifier: 'catalog:'
-        version: 14.0.0
+        version: 15.6.0(koa@3.2.1)
       '@types/koa':
         specifier: 'catalog:'
         version: 3.0.0
@@ -269,13 +253,13 @@ importers:
         version: 4.3.13
       '@types/koa__router':
         specifier: 'catalog:'
-        version: 12.0.4
+        version: 12.0.5
       '@types/supertest':
         specifier: 'catalog:'
         version: 6.0.3
       koa:
         specifier: 'catalog:'
-        version: 3.1.1
+        version: 3.2.1
       supertest:
         specifier: 'catalog:'
         version: 7.1.4
@@ -726,22 +710,11 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@koa/bodyparser@6.0.0':
-    resolution: {integrity: sha512-CjM/tiisZHBA9iVkOOyj/ocLCNJTbpLsIUjCbVkrx5rkUOZlsFf/qSbXzAbY2SNJTMl0VtKgVen6SZdjaCfVhA==}
-    engines: {node: '>= 18'}
-    peerDependencies:
-      koa: '>=2'
-
   '@koa/bodyparser@6.1.0':
     resolution: {integrity: sha512-thVG/Utbz9+dB4Nl8EBJKoaOI1DzO74dJqeDFILbAVhUq6C+4rmmrKFwxiDE63ScywOs0CHypx1IUrSRMueFTw==}
     engines: {node: '>= 18'}
     peerDependencies:
       koa: '>=2'
-
-  '@koa/router@14.0.0':
-    resolution: {integrity: sha512-LBSu5K0qAaaQcXX/0WIB9PGDevyCxxpnc1uq13vV/CgObaVxuis5hKl3Eboq/8gcb6ebnkAStW9NB/Em2eYyFA==}
-    engines: {node: '>= 20'}
-    deprecated: Please upgrade to v15 or higher. All reported bugs in this version are fixed in newer releases, dependencies have been updated, and security has been improved.
 
   '@koa/router@15.6.0':
     resolution: {integrity: sha512-iEOXlvGIBqSNkGXrg0XtMARAOm5zA24oedXxiTGEkrD4JgwVjfRDddCQvW1s4WEcwDYvyecRbf8BikXsuEEj8w==}
@@ -1252,9 +1225,6 @@ packages:
   '@types/koa@3.0.3':
     resolution: {integrity: sha512-TdtNEJ7sYSrFQcVuS2ySsVqnq5EyE3oJbnfFJvkC9UtGP4Kpem5KE7r+ivHIbIAQAofSqnlB5D3vkfYO69TQpg==}
 
-  '@types/koa__router@12.0.4':
-    resolution: {integrity: sha512-Y7YBbSmfXZpa/m5UGGzb7XadJIRBRnwNY9cdAojZGp65Cpe5MAP3mOZE7e3bImt8dfKS4UFcR16SLH8L/z7PBw==}
-
   '@types/koa__router@12.0.5':
     resolution: {integrity: sha512-1HeLxuDn4n5it1yZYCSyOYXo++73zT0ffoviXnPxbwbxLbvDFEvWD9ZzpRiIpK4oKR0pi+K+Mk/ZjyROjW3HSw==}
 
@@ -1685,10 +1655,6 @@ packages:
 
   config-chain@1.1.13:
     resolution: {integrity: sha512-qj+f8APARXHrM0hraqXYb2/bOVSV4PvJQlNZ/DVj0QrmNM2q2euizkeuVckQ57J+W0mRH6Hvi+k50M4Jul2VRQ==}
-
-  content-disposition@0.5.4:
-    resolution: {integrity: sha512-FveZTNuGw04cxlAiWbzi6zTAL/lhehaWbTtgluJh4/E95DqMwTmha3KZN1aAWA8cFIhHzMZUvLevkw5Rqk+tSQ==}
-    engines: {node: '>= 0.6'}
 
   content-disposition@1.0.0:
     resolution: {integrity: sha512-Au9nRL8VNUut/XSzbQA38+M78dzP4D+eqg3gfJHMIHHYa3bg067xj1KxMUWj+VULbiZMowKngFFbKczUrNJ1mg==}
@@ -2348,10 +2314,6 @@ packages:
   koa-compose@4.1.0:
     resolution: {integrity: sha512-8ODW8TrDuMYvXRwra/Kh7/rJo9BtOfPc6qO8eAfC80CnCvSjSl0bkRM24X6/XBBEyj0v1nRUQ1LyOy3dbqOWXw==}
 
-  koa@3.1.1:
-    resolution: {integrity: sha512-KDDuvpfqSK0ZKEO2gCPedNjl5wYpfj+HNiuVRlbhd1A88S3M0ySkdf2V/EJ4NWt5dwh5PXCdcenrKK2IQJAxsg==}
-    engines: {node: '>= 18'}
-
   koa@3.2.1:
     resolution: {integrity: sha512-e7IpWJrnanNUroVK2taAgMxoEZvHLXdQiNjeExSu/DEIWm83jaKGBgb7tLmu2rMYpA027qFB3iLR/k3AVpFRnA==}
     engines: {node: '>= 18'}
@@ -2734,9 +2696,6 @@ packages:
   path-scurry@2.0.1:
     resolution: {integrity: sha512-oWyT4gICAu+kaA7QWk/jvCHWarMKNs6pXOGWKDTr7cw4IGcUbW+PeTfbaQiLGheFRpjo6O9J0PmyMfQPjH71oA==}
     engines: {node: 20 || >=22}
-
-  path-to-regexp@8.3.0:
-    resolution: {integrity: sha512-7jdwVIRtsP8MYpdXSwOS0YdD0Du+qOoF/AEPIt88PcCFrZCzx41oxku1jD88hZBwbNUIEfpqvuhjFaMAqMTWnA==}
 
   path-to-regexp@8.4.2:
     resolution: {integrity: sha512-qRcuIdP69NPm4qbACK+aDogI5CBDMi1jKe0ry5rSQJz8JVLsC7jV8XpiJjGRLLol3N+R5ihGYcrPLTno6pAdBA==}
@@ -3978,14 +3937,6 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@koa/bodyparser@6.0.0(koa@3.1.1)':
-    dependencies:
-      '@types/co-body': 6.1.3
-      co-body: 6.2.0
-      koa: 3.1.1
-      lodash.merge: 4.6.2
-      type-is: 2.0.1
-
   '@koa/bodyparser@6.1.0(koa@3.2.1)':
     dependencies:
       '@types/co-body': 6.1.3
@@ -3993,15 +3944,6 @@ snapshots:
       koa: 3.2.1
       lodash.merge: 4.6.2
       type-is: 2.0.1
-
-  '@koa/router@14.0.0':
-    dependencies:
-      debug: 4.4.3
-      http-errors: 2.0.0
-      koa-compose: 4.1.0
-      path-to-regexp: 8.3.0
-    transitivePeerDependencies:
-      - supports-color
 
   '@koa/router@15.6.0(koa@3.2.1)':
     dependencies:
@@ -4677,10 +4619,6 @@ snapshots:
       '@types/koa-compose': 3.2.8
       '@types/node': 22.18.11
 
-  '@types/koa__router@12.0.4':
-    dependencies:
-      '@types/koa': 3.0.3
-
   '@types/koa__router@12.0.5':
     dependencies:
       '@types/koa': 3.0.3
@@ -5139,10 +5077,6 @@ snapshots:
     dependencies:
       ini: 1.3.8
       proto-list: 1.2.4
-
-  content-disposition@0.5.4:
-    dependencies:
-      safe-buffer: 5.2.1
 
   content-disposition@1.0.0:
     dependencies:
@@ -5805,27 +5739,6 @@ snapshots:
 
   koa-compose@4.1.0: {}
 
-  koa@3.1.1:
-    dependencies:
-      accepts: 1.3.8
-      content-disposition: 0.5.4
-      content-type: 1.0.5
-      cookies: 0.9.1
-      delegates: 1.0.0
-      destroy: 1.2.0
-      encodeurl: 2.0.0
-      escape-html: 1.0.3
-      fresh: 0.5.2
-      http-assert: 1.5.0
-      http-errors: 2.0.0
-      koa-compose: 4.1.0
-      mime-types: 3.0.1
-      on-finished: 2.4.1
-      parseurl: 1.3.3
-      statuses: 2.0.1
-      type-is: 2.0.1
-      vary: 1.1.2
-
   koa@3.2.1:
     dependencies:
       accepts: 1.3.8
@@ -6252,8 +6165,6 @@ snapshots:
     dependencies:
       lru-cache: 11.2.2
       minipass: 7.1.2
-
-  path-to-regexp@8.3.0: {}
 
   path-to-regexp@8.4.2: {}
 
