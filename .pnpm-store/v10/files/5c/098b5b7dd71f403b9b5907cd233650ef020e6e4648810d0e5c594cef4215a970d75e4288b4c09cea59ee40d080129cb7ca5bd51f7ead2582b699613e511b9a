@@ -1,0 +1,4 @@
+import { type Conf, type Package } from '@lerna-lite/core';
+import { type OneTimePasswordCache } from '@lerna-lite/version';
+import type { LibNpmPublishOptions } from '../interfaces.js';
+export declare function npmPublish(pkg: Package, tarFilePath: string, options: Omit<LibNpmPublishOptions, "defaultTag"> | undefined, conf: Conf, otpCache?: OneTimePasswordCache): Promise<void | Response>;

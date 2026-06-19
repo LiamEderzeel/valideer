@@ -1,0 +1,82 @@
+import { ConventionalChangelog } from 'conventional-changelog';
+import { writeFile } from 'fs/promises';
+import { packagePrefix } from '@conventional-changelog/git-client';
+import { EOL } from '@lerna-lite/core';
+import { log } from '@lerna-lite/npmlog';
+import { BLANK_LINE, CHANGELOG_HEADER } from './constants.js';
+import { GetChangelogConfig } from './get-changelog-config.js';
+import { makeBumpOnlyFilter } from './make-bump-only-filter.js';
+import { readExistingChangelog } from './read-existing-changelog.js';
+import { setConfigChangelogCommitClientLogin, setConfigChangelogCommitGitAuthor } from './writer-opts-transform.js';
+export async function updateChangelog(pkg, type, updateOptions) {
+    log.silly(type, 'for %s at %s', pkg.name, pkg.location);
+    const { changelogPreset, changelogIncludeCommitsGitAuthor, changelogIncludeCommitsClientLogin, changelogHeaderMessage = '', commitsSinceLastRelease, rootPath, tagPrefix = 'v', version, } = updateOptions;
+    const config = await GetChangelogConfig.getChangelogConfig(changelogPreset, rootPath);
+    const ccOptions = {};
+    const tagOptions = {};
+    const writerContext = {};
+    const writerOpts = {};
+    let changelogConfig = {};
+    changelogConfig = Object.assign({}, config);
+    const gitRawCommitsOpts = {};
+    if (changelogIncludeCommitsGitAuthor || changelogIncludeCommitsGitAuthor === '') {
+        setConfigChangelogCommitGitAuthor(config, gitRawCommitsOpts, writerOpts, changelogIncludeCommitsGitAuthor);
+    }
+    else if ((changelogIncludeCommitsClientLogin || changelogIncludeCommitsClientLogin === '') && commitsSinceLastRelease) {
+        setConfigChangelogCommitClientLogin(config, gitRawCommitsOpts, writerOpts, commitsSinceLastRelease, changelogIncludeCommitsClientLogin);
+    }
+    let pkgPath = '';
+    if (type === 'root') {
+        writerContext.version = version;
+        tagOptions.prefix = tagPrefix;
+    }
+    else {
+        gitRawCommitsOpts.path = pkg.location;
+        pkgPath = pkg.manifestLocation;
+        if (type === 'independent') {
+            tagOptions.prefix = packagePrefix(pkg.name);
+        }
+        else {
+            tagOptions.prefix = tagPrefix;
+            writerContext.version = pkg.version;
+        }
+    }
+    const changelogStream = new ConventionalChangelog()
+        .readPackage(pkgPath)
+        .config(changelogConfig)
+        .options(ccOptions)
+        .commits(gitRawCommitsOpts)
+        .tags(tagOptions)
+        .context(writerContext)
+        .writer(writerOpts)
+        .write();
+    const inputEntryPromise = (async () => {
+        let entry = '';
+        for await (const chunk of changelogStream) {
+            entry += chunk;
+        }
+        return makeBumpOnlyFilter(pkg, entry);
+    })();
+    return Promise.all([
+        inputEntryPromise,
+        readExistingChangelog(pkg),
+    ]).then(([inputEntry, [changelogFileLoc, changelogContents]]) => {
+        const newEntry = inputEntry;
+        log.silly(type, 'writing new entry: %j', newEntry);
+        const changelogHeader = changelogPreset?.header ??
+            CHANGELOG_HEADER.replace(/%s/g, changelogHeaderMessage?.length > 0 ? changelogHeaderMessage + EOL : '');
+        const content = [changelogHeader, newEntry, changelogContents]
+            .join(BLANK_LINE)
+            .trim()
+            .replace(/[\r\n]{2,}/gm, '\n\n');
+        return writeFile(changelogFileLoc, content + EOL).then(() => {
+            log.verbose(type, 'wrote', changelogFileLoc);
+            return {
+                logPath: changelogFileLoc,
+                content,
+                newEntry,
+            };
+        });
+    });
+}
+//# sourceMappingURL=update-changelog.js.map

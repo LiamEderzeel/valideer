@@ -1,0 +1,1 @@
+{"version":3,"file":"set-immediate.js","sourceRoot":"","sources":["../../src/gauge/set-immediate.ts"],"names":[],"mappings":"AACA,MAAM,UAAU,cAAc,CAAC,GAAG,IAAS;IACzC,IAAI,CAAC;QACH,OAAO,MAAM,CAAC,YAAY,CAAC,IAAI,CAAC,CAAC;IACnC,CAAC;IAAC,OAAO,CAAC,EAAE,CAAC;QACX,OAAO,OAAO,CAAC,QAAQ,CAAC,IAAI,CAAC,CAAC;IAChC,CAAC;AACH,CAAC"}

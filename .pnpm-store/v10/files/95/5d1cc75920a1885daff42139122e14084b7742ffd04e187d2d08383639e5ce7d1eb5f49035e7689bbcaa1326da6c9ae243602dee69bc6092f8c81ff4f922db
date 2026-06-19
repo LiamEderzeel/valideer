@@ -1,0 +1,6 @@
+import type { ExecOpts, NpmClient } from '../../../models/interfaces.js';
+import { type PackageGraphNode } from '../../../package-graph/lib/package-graph-node.js';
+export declare function makeDiffPredicate(committish: string, execOpts: ExecOpts, ignorePatterns: string[] | undefined, changedCatalogDeps: string[] | undefined, diffOpts: {
+    independentSubpackages?: boolean;
+}): (node: PackageGraphNode) => boolean;
+export declare function diffWorkspaceCatalog(prevTag: string, npmClient: NpmClient): string[];

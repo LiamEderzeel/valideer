@@ -1,0 +1,3 @@
+import type { ExecOpts } from '@lerna-lite/core';
+import type { RemoteCommit } from '../interfaces.js';
+export declare function getGithubCommits(gitRemote: string, branchName: string, sinceDate: string, execOpts?: ExecOpts): Promise<RemoteCommit[]>;

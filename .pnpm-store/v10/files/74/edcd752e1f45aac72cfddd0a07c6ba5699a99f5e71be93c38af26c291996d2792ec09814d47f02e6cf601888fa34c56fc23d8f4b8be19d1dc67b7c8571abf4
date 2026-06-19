@@ -1,0 +1,14 @@
+export declare class Plumbing {
+    showing: boolean;
+    template: any;
+    theme: any;
+    width: number;
+    constructor(theme: any, template: any, width?: number);
+    setTheme(theme: any): void;
+    setTemplate(template: any): void;
+    setWidth(width: any): void;
+    hideCursor(): string;
+    showCursor(): string;
+    hide(): string;
+    show(status: any): string;
+}

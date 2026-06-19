@@ -1,0 +1,4 @@
+import type { LifecycleConfig } from '../models/interfaces.js';
+import type { Package } from '../package.js';
+export declare function runLifecycle(pkg: Package, stage: string, options: LifecycleConfig): Promise<void>;
+export declare function createRunner(commandOptions: any): (pkg: Package, stage: string) => Promise<void>;

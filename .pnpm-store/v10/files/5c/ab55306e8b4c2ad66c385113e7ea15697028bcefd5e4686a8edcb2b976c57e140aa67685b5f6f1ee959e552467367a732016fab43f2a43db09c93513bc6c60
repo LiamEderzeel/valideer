@@ -1,0 +1,4 @@
+import type { DescribeRefDetailedResult, DescribeRefFallbackResult, DescribeRefOptions } from '../models/interfaces.js';
+declare function describeRef(options?: DescribeRefOptions, includeMergedTags?: boolean, dryRun?: boolean): Promise<DescribeRefFallbackResult | DescribeRefDetailedResult>;
+declare function describeRefSync(options?: DescribeRefOptions, includeMergedTags?: boolean, dryRun?: boolean): DescribeRefFallbackResult | DescribeRefDetailedResult;
+export { describeRef, describeRefSync };

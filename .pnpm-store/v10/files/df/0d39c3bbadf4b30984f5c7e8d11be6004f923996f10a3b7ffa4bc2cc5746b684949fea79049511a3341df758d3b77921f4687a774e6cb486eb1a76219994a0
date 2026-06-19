@@ -1,0 +1,29 @@
+export async function fetchWithRetry(url, options = {}) {
+    const { retry = 3, retryDelay = 1000, retryCondition = (response) => !response.ok, ...fetchOptions } = options;
+    for (let attempt = 0; attempt < retry + 1; attempt++) {
+        try {
+            const response = await fetch(url, {
+                ...fetchOptions,
+            });
+            if (retryCondition(response)) {
+                if (fetchOptions.method?.toUpperCase() === 'POST') {
+                    throw new Error(`Failed after 1 attempt (POST requests are not retried)`);
+                }
+                if (attempt < retry) {
+                    await new Promise((resolve) => setTimeout(resolve, retryDelay * Math.pow(2, attempt)));
+                    continue;
+                }
+                throw new Error(`Failed after ${retry + 1} attempts`);
+            }
+            return response;
+        }
+        catch (error) {
+            if (fetchOptions.method?.toUpperCase() === 'POST' || attempt === retry) {
+                throw error;
+            }
+            await new Promise((resolve) => setTimeout(resolve, retryDelay * Math.pow(2, attempt)));
+        }
+    }
+    throw new Error('Unexpected fetch failure');
+}
+//# sourceMappingURL=fetch-retry.js.map

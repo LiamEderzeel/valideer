@@ -1,0 +1,15 @@
+import type { QueryGraphConfig } from '../models/interfaces.js';
+import type { PackageGraphNode } from '../package-graph/lib/package-graph-node.js';
+import type { Package } from '../package.js';
+import { PackageGraph } from '../package-graph/package-graph.js';
+export declare class QueryGraph {
+    graph: PackageGraph;
+    cycles: Set<any>;
+    static toposort(packages: Package[], options?: QueryGraphConfig): Package[];
+    constructor(packages: Package[], { graphType, localDependencies, rejectCycles, npmClient }?: QueryGraphConfig);
+    _getNextLeaf(): PackageGraphNode[];
+    _getNextCycle(): any;
+    getAvailablePackages(): PackageGraphNode[];
+    markAsTaken(name: string): void;
+    markAsDone(candidateNode: PackageGraphNode): void;
+}

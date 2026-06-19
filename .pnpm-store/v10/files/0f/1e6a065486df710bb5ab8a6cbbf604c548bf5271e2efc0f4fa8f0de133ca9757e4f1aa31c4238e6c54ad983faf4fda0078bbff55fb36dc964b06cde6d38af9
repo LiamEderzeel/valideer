@@ -1,0 +1,35 @@
+import { isStream } from 'is-stream';
+import { createWriteStream, mkdirSync, realpathSync, writeFile, writeFileSync } from 'node:fs';
+import { mkdir } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { dirname, join } from 'node:path';
+import { promisify } from 'node:util';
+import { v4 as uuidv4 } from 'uuid';
+const writeFileP = promisify(writeFile);
+const tempfileSync = (filePath) => join(realpathSync(tmpdir()), `lerna-${uuidv4()}`, filePath || '');
+const writeStream = async (filePath, fileContent) => new Promise((resolve, reject) => {
+    const writable = createWriteStream(filePath);
+    fileContent
+        .on('error', (error) => {
+        reject(error);
+        fileContent.unpipe(writable);
+        writable.end();
+    })
+        .pipe(writable)
+        .on('error', reject)
+        .on('finish', resolve);
+});
+export async function tempWrite(fileContent, filePath) {
+    const tempPath = tempfileSync(filePath);
+    const write = isStream(fileContent) ? writeStream : writeFileP;
+    await mkdir(dirname(tempPath), { recursive: true });
+    await write(tempPath, fileContent);
+    return tempPath;
+}
+tempWrite.sync = (fileContent, filePath) => {
+    const tempPath = tempfileSync(filePath);
+    mkdirSync(dirname(tempPath), { recursive: true });
+    writeFileSync(tempPath, fileContent);
+    return tempPath;
+};
+//# sourceMappingURL=temp-write.js.map

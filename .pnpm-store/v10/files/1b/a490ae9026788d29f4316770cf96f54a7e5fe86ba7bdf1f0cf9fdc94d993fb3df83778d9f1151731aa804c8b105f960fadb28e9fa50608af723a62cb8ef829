@@ -1,0 +1,3 @@
+import type { ExecOpts } from '@lerna-lite/core';
+import type { GitCommitOption } from '../interfaces.js';
+export declare function gitCommit(message: string, { amend, commitHooks, overrideMessage, signGitCommit, signoffGitCommit }: GitCommitOption, opts: ExecOpts, dryRun?: boolean): Promise<any>;

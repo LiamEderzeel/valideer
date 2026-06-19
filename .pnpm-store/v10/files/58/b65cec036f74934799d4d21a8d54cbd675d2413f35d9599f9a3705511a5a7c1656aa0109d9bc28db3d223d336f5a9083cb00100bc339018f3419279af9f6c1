@@ -1,0 +1,3 @@
+import type { Package } from '@lerna-lite/core';
+import type { Tarball } from '../interfaces.js';
+export declare function getPacked(pkg: Package, tarFilePath: string): Promise<Tarball>;

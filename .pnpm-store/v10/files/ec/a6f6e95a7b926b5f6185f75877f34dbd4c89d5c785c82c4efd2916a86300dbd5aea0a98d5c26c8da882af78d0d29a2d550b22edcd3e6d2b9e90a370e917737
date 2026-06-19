@@ -1,0 +1,7 @@
+interface FetchRetryOptions extends RequestInit {
+    retry?: number;
+    retryDelay?: number;
+    retryCondition?: (response: Response) => boolean;
+}
+export declare function fetchWithRetry(url: string | URL, options?: FetchRetryOptions): Promise<Response>;
+export {};

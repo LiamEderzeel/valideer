@@ -1,0 +1,7 @@
+import type { Package } from '@lerna-lite/core';
+import type { ChangelogType, UpdateChangelogOption } from '../interfaces.js';
+export declare function updateChangelog(pkg: Package, type: ChangelogType, updateOptions: UpdateChangelogOption): Promise<{
+    logPath: string;
+    content: string;
+    newEntry: string;
+}>;

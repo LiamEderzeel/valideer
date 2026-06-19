@@ -1,0 +1,17 @@
+import type { NpmClient } from '../models/interfaces.js';
+import type { Package } from '../package.js';
+import { CyclicPackageGraphNode } from './lib/cyclic-package-graph-node.js';
+import { PackageGraphNode } from './lib/package-graph-node.js';
+export declare const YARN_PATCH_PROTOCOL_REG_EXP: RegExp;
+export declare class PackageGraph extends Map<string, PackageGraphNode> {
+    hasWorkspaceCatalog: boolean;
+    npmClient: NpmClient;
+    constructor(packages: Package[], graphType?: 'allDependencies' | 'dependencies', localDependencies?: boolean | 'auto' | 'force' | 'explicit' | 'forceLocal', client?: NpmClient);
+    get rawPackageList(): Package[];
+    addDependencies(filteredPackages: Package[]): Package[];
+    addDependents(filteredPackages: Package[]): Package[];
+    extendList(packageList: Package[], nodeProp: 'localDependencies' | 'localDependents'): Package[];
+    collapseCycles(rejectCycles?: boolean): Set<CyclicPackageGraphNode>;
+    prune(...candidates: PackageGraphNode[]): void;
+    remove(candidateNode: PackageGraphNode): void;
+}

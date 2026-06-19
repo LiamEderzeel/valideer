@@ -1,0 +1,2 @@
+import type { GitCreateReleaseClientOutput } from '../interfaces.js';
+export declare function createGitLabClient(): GitCreateReleaseClientOutput;

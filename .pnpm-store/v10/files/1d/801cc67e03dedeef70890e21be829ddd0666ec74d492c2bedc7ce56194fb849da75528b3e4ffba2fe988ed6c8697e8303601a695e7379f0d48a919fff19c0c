@@ -1,0 +1,59 @@
+{
+  "name": "@lerna-lite/publish",
+  "description": "Publish packages in the current workspace",
+  "version": "4.9.3",
+  "files": [
+    "/dist"
+  ],
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.js"
+  },
+  "license": "MIT",
+  "author": "Ghislain B.",
+  "homepage": "https://github.com/lerna-lite/lerna-lite",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lerna-lite/lerna-lite.git",
+    "directory": "packages/publish"
+  },
+  "bugs": {
+    "url": "https://github.com/lerna-lite/lerna-lite/issues"
+  },
+  "engines": {
+    "node": "^20.17.0 || >=22.9.0"
+  },
+  "dependencies": {
+    "@lerna-lite/cli": "4.9.3",
+    "@lerna-lite/core": "4.9.3",
+    "@lerna-lite/npmlog": "4.9.3",
+    "@lerna-lite/version": "4.9.3",
+    "@npmcli/arborist": "^9.1.7",
+    "@npmcli/package-json": "^7.0.3",
+    "byte-size": "^9.0.1",
+    "ci-info": "^4.3.1",
+    "columnify": "^1.6.0",
+    "fs-extra": "^11.3.2",
+    "has-unicode": "^2.0.1",
+    "libnpmaccess": "^10.0.3",
+    "libnpmpublish": "^11.1.3",
+    "normalize-path": "^3.0.0",
+    "npm-package-arg": "^13.0.2",
+    "npm-packlist": "^10.0.3",
+    "npm-registry-fetch": "^19.1.1",
+    "p-map": "^7.0.4",
+    "p-pipe": "^4.0.0",
+    "pacote": "^21.0.4",
+    "semver": "^7.7.3",
+    "ssri": "^13.0.0",
+    "tar": "^7.5.2",
+    "tinyglobby": "^0.2.15",
+    "tinyrainbow": "^3.0.3"
+  },
+  "gitHead": "2022e14677c09ccfc3d5de5ea534741d8bbf8ce1"
+}

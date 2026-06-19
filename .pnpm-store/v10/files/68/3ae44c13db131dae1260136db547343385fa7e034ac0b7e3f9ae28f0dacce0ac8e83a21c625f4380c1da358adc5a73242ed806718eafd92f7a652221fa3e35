@@ -1,0 +1,13 @@
+import { readFile } from 'fs/promises';
+import { join } from 'node:path';
+import { BLANK_LINE, COMMIT_GUIDELINE } from './constants.js';
+export async function readExistingChangelog(pkg) {
+    const changelogFileLoc = join(pkg.location, 'CHANGELOG.md');
+    let changelogContents = await readFile(changelogFileLoc, 'utf8').catch(() => '');
+    const headerIndex = changelogContents.indexOf(COMMIT_GUIDELINE);
+    if (headerIndex !== -1) {
+        changelogContents = changelogContents.substring(headerIndex + COMMIT_GUIDELINE.length + BLANK_LINE.length);
+    }
+    return [changelogFileLoc, changelogContents];
+}
+//# sourceMappingURL=read-existing-changelog.js.map

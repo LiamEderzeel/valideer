@@ -1,0 +1,13 @@
+import type { PackageGraphNode } from '../../package-graph/lib/package-graph-node.js';
+export declare class CyclicPackageGraphNode extends Map<string, PackageGraphNode | CyclicPackageGraphNode> {
+    name: string;
+    localDependencies: Map<string, any>;
+    localDependents: Map<string, any>;
+    constructor();
+    get isCycle(): boolean;
+    toString(): string;
+    flatten(): PackageGraphNode[];
+    contains(name: string): boolean;
+    insert(node: PackageGraphNode | CyclicPackageGraphNode): void;
+    unlink(candidateNode: PackageGraphNode | CyclicPackageGraphNode): void;
+}

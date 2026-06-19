@@ -1,0 +1,27 @@
+import { readJsonSync } from 'fs-extra/esm';
+import { createRequire } from 'node:module';
+import { dirname } from 'node:path';
+import { ValidationError } from '../../validation-error.js';
+import { shallowExtend } from './shallow-extend.js';
+export function applyExtends(config, cwd, seen = new Set()) {
+    let defaultConfig = {};
+    if ('extends' in config) {
+        let pathToDefault;
+        try {
+            const requireFrom = createRequire(cwd + '/');
+            pathToDefault = requireFrom.resolve(config.extends);
+        }
+        catch (err) {
+            throw new ValidationError('ERESOLVED', 'Config .extends must be locally-resolvable', err);
+        }
+        if (seen.has(pathToDefault)) {
+            throw new ValidationError('ECIRCULAR', 'Config .extends cannot be circular', seen);
+        }
+        seen.add(pathToDefault);
+        defaultConfig = readJsonSync(pathToDefault, { throws: false });
+        delete config.extends;
+        defaultConfig = applyExtends(defaultConfig, dirname(pathToDefault), seen);
+    }
+    return shallowExtend(config, defaultConfig);
+}
+//# sourceMappingURL=apply-extends.js.map

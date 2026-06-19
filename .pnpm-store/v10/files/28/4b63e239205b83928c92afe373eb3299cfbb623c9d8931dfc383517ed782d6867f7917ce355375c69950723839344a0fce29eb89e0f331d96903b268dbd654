@@ -1,0 +1,2 @@
+import { Transform } from 'node:stream';
+export declare function addPrefixTransformer(options?: any): Transform;

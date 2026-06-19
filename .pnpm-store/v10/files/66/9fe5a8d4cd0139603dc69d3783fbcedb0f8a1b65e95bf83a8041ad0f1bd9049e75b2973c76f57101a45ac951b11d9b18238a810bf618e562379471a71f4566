@@ -1,0 +1,72 @@
+import util from 'node:util';
+import zeptomatch from 'zeptomatch';
+import { ValidationError } from '@lerna-lite/core';
+import { log } from '@lerna-lite/npmlog';
+export function filterPackages(packagesToFilter, include = [], exclude = [], showPrivate, continueIfNoMatch) {
+    const filtered = new Set(packagesToFilter);
+    const patterns = [].concat(arrify(include), negate(exclude));
+    if (showPrivate === false) {
+        for (const pkg of filtered) {
+            if (pkg.private) {
+                filtered.delete(pkg);
+            }
+        }
+    }
+    if (patterns.length) {
+        log.info('filter', JSON.stringify(patterns));
+        if (!include.length) {
+            patterns.unshift('**');
+        }
+        const pnames = Array.from(filtered).map((pkg) => pkg?.name ?? '');
+        const chosen = new Set();
+        for (const pattern of patterns) {
+            const isNegation = pattern[0] === '!';
+            const raw = isNegation ? pattern.slice(1) : pattern;
+            const expanded = expandExtglobs(raw);
+            for (const pat of expanded) {
+                for (const name of pnames) {
+                    const matched = pat === '**' ? true : zeptomatch(pat, name);
+                    if (matched) {
+                        if (isNegation) {
+                            chosen.delete(name);
+                        }
+                        else {
+                            chosen.add(name);
+                        }
+                    }
+                }
+            }
+        }
+        for (const pkg of filtered) {
+            if (!chosen.has(pkg?.name ?? '')) {
+                filtered.delete(pkg);
+            }
+        }
+        if (!filtered.size && !continueIfNoMatch) {
+            throw new ValidationError('EFILTER', util.format('No packages remain after filtering', patterns));
+        }
+    }
+    return Array.from(filtered);
+}
+function arrify(thing) {
+    if (!thing) {
+        return [];
+    }
+    if (!Array.isArray(thing)) {
+        return [thing];
+    }
+    return thing;
+}
+function negate(patterns) {
+    return arrify(patterns).map((pattern) => `!${pattern}`);
+}
+function expandExtglobs(pattern) {
+    const extglobMatch = pattern.match(/^(.*)@\(([^)]+)\)(.*)$/);
+    if (!extglobMatch) {
+        return [pattern];
+    }
+    const [, prefix, inner, suffix] = extglobMatch;
+    const parts = inner.split('|');
+    return parts.map((p) => `${prefix}${p}${suffix}`);
+}
+//# sourceMappingURL=filter-packages.js.map
